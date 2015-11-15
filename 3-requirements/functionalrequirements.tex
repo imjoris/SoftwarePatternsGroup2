@@ -1,4 +1,76 @@
-%!TEX root = ../report.tex
+% !TEX root = ../report.tex
 \newpage
 \section{Functional requirements}
 \label{sec:functional-requirements}
+
+This section lists the functional requirements of the system.
+
+
+\begin{longtable}{L{0.1\textwidth} L{0.12\textwidth} L{0.78\textwidth}}
+	\textbf{Nr.} & \textbf{Prio} & \textbf{Description} \\ \toprule \endhead
+			    
+	\frReqRowNoRule{receive-usage}{Must}
+	{ The system must be able to receive electricity usage data from devices. }
+			    
+	\frReqRow{store-usage}{Must}
+	{ The system must be able to store electricity usage data. }
+	
+	\frReqRow{retrieve-usage}{Must}
+	{ The system must be able to retrieve previously stored electricity usage data. }
+	
+	\frReqRow{compute-total}{Must}
+	{ The system must be able to compute the total electricity consumption for a given time period for a particular house. }
+	
+	\frReqRow{compute-timeperiod}{Must}
+	{ The system must be able to compute the electricity consumption per device for a given time period. }
+	
+	\frReqRow{compute-bill}{Must}
+	{ The system must be able to compute an estimated electricity bill for the current month based on the electricity consumption to that point. }
+	
+	\frReqRow{interface-selectstats}{Must}
+	{ A user of the system must be able to select which statistics to compute in a web interface. }
+	
+	\frReqRow{web-interface}{Must}
+	{ The system must be able to show the computed statistics in a web interface. }
+	
+	\frReqRow{interface-register}{Must}
+	{ The system must allow users to register an account on the web interface. }
+	
+	\frReqRow{interface-login}{Must}
+	{ The system must require users to be logged in, before the user can view electricity usage information about his/her house. }
+	
+	\frReqRow{add-house}{Must}
+	{ A user of the system must be able to register a new house using the web interface. }
+	
+	\frReqRow{add-device}{Must}
+	{ A user of the system must be able to register a new device for his house using the web interface. }
+	
+	\frReqRow{configure-price}{Must}
+	{ A user of the system must be able to configure the price of a kWH in the web interface. }
+	
+	\frReqRow{feedback}{Must}
+	{ The system must be able to send feedback to registered devices about the current electricity usage. }
+	
+	\frReqRow{show-accuracy}{Must}
+	{ The system must be able to estimate the accuracy of the computations, such that when data might be inaccurate, the user will be informed about this. }
+	
+	\frReqRow{show-history}{Must}
+	{ The system must be able to display the history of electricity usage. }
+	
+	\frReqRow{choose-alerts}{Should}
+	{ Users of the system should be able to subscribe to alerts in the web interface, alerting them about sudden energy increases or when they are using more energy than in previous months/weeks. }
+	
+	\frReqRow{compare}{Should}
+	{ The web interface of the system should allow the user to compare the energy usage of different months. }
+	
+	\frReqRow{alerts}{Should}
+	{ The system should send alerts to users by mail when the user is subscribed for this alert and the condition for the alert is met. }
+	
+	\frReqRow{interface-graph}{Should}
+	{ The system should be able to show the computed statistics in a graph. }
+	
+	
+	\bottomrule
+	\caption{Functional Requirements}
+	\label{table:functional-requirements}
+\end{longtable}
