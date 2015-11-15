@@ -37,30 +37,39 @@ The tables below explain the meaning of the definition for probability and conse
 
 
 \subsection{Technical}
-\risk{T}
-{The energy measurements provided by the data center are wrong.} 
-{Low}
-{}
-{}
-{}
-{risk:wrong-measurement}
- % who provides the data ? 
+%\risk{T}
+%{The energy measurements provided by the data center are wrong.} 
+%{Low}
+%{}
+%{}
+%{}
+%{risk:wrong-measurement}
+ % AF: who provides the data ? 
+ %  WM: i think the devices in the house provide the data
 
 \risk{T}
-{The statitics provided by Spark (or another framework for data processing) are wrong}
+{The statistics provided by the data processing framework are wrong}
 {Low}
-{}
-{}
-{}
+{Moderate. If the statistics computed by the system are not accurate, this will lead to loss of thrust of the end user in the system.}
+{Make sure the algorithms used to compute the statistics are correct.}
+{Correct the algorithm, if the change is significant also inform end users about the error.}
 {risk:wrong-statistics}
 
 \risk{T}
-{The data center providing the energy measurements become unavailable}
+{The data center storing the energy measurements becomes unavailable}
 {Low}
-{}
-{}
-{}
+{Significant}
+{Store the data in a redundant way, preferably in multiple data centers, so that one data center going offline does not lead to downtime of the system.}
+{If the data storage does become unavailable, new incoming data should be cached so it is not lost and users should be informed in the web interface that viewing the statistics is temporarily unavailable.}
 {risk:unavailability}
+
+\risk{T}
+{Somebody gains unauthorized access to someone else's data}
+{Low}
+{Significant. Data about electricity usage can be used, e.g. to derive when people are home. Unauthorized data access will lead to a loss of thrust in the system by consumers.}
+{Make sure access to the data requires authentication using a password at all time. Enforce users to use a strong password.}
+{Make sure the unauthorized access is removed. Inform end users about which data was accessed by the unauthorized party.}
+{risk:unauthorized-access}
 
 \subsection{Business}
 \risk{B}
