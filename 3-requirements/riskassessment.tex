@@ -2,3 +2,90 @@
 \newpage
 \section{Risk assessment}
 \label{sec:risk-assesment}
+
+The system is confronted by several risks which are determined and mitigated in this section.
+Taking those risks into account allows to avoid them or at least reduce their impact. 
+The risk management involves the identification of the risks, their probability and potential impact or consequences.
+
+The tables below explain the meaning of the definition for probability and consequence.
+\begin{figure}[H]
+	\centering
+	\begin{tabular}{|c|c|}
+		\hline \textbf{Probability} & \textbf{Likelihood of occurrence} \\ 
+		\hline High                 & 0.65 - 1.00                       \\ 
+		\hline Medium               & 0.35 - 0.65                       \\ 
+		\hline Low                  & 0.00 - 0.35                       \\ 
+		\hline
+	\end{tabular} 
+	\caption{The different probabilities used to classify risks}
+	\label{table:risk-probability}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\begin{tabular}{|l|p{15.5cm}|}
+		\hline \textbf{Severity} & \textbf{Explanation}                                                                                                                        \\ 
+		\hline Severe            & A risk that can lead to loss of live or casualties.                                                                                         \\ 
+		\hline Significant       & A risk that can lead to damages, can delay the project more than 3 months or causes one of the high-level requirements not to be fulfilled. \\ 
+		\hline Moderate          & A risk that can lead to one of the high-level requirements not to be fulfilled to an acceptable level.                                      \\ 
+		\hline Minor             & A risk that can lead to one of the high-level requirements not being fully fulfilled, but still fulfilled in an acceptable level.           \\
+		\hline
+	\end{tabular} 
+	\caption{The different severities used to classify risks}
+	\label{table:risk-severity}
+\end{figure}
+
+
+\subsection{Technical}
+\risk{T}
+{The energy measurements provided by the data center are wrong.} 
+{Low}
+{}
+{}
+{}
+{risk:wrong-measurement}
+ % who provides the data ? 
+
+\risk{T}
+{The statitics provided by Spark (or another framework for data processing) are wrong}
+{Low}
+{}
+{}
+{}
+{risk:wrong-statistics}
+
+\risk{T}
+{The data center providing the energy measurements become unavailable}
+{Low}
+{}
+{}
+{}
+{risk:unavailability}
+
+\subsection{Business}
+\risk{B}
+{Wrong estimation of the budget}
+{Medium}
+{Significant. The final product does not have the features expected.}
+{The team needs an accountant or at least someone taking care of the follow-up of the money. Make sure there are regular evaluations to keep track of the money flow.}
+{Remove some requirements or features of the product, or change the hardware components used.}
+{risk:budget}
+
+\risk{B}
+{Wrong estimation of the budget: the money invested in the fabrication and achievement of the product/system is not covered by the sales (shortfall/deficit)}
+{Medium}
+{Moderate. Stopping the sale}
+{The team needs an accountant or at least someone taking care of the follow-up of the money.}
+{Adding more features to the product in order to make it more competitive in the market.}
+{risk:shortfall}
+
+\subsection{Schedule}
+
+
+\risk{S}
+{The project is not finished at the deadline}
+{Low}
+{Significant. Pressure for all the team members, loss of credibility regarding the customers, selling a product with less features than expected.}
+{ SRA , Schedule Risk analysis : Estimation of the duration of the project by its manager ( with the use of probability and statistics ) . Meeting for the team members every week to keep track of the timing and take decisions according to the deadline. }
+{ Postpone the deadline or remove some features when the deadline can't be postponed. }
+{risk:schedule}
