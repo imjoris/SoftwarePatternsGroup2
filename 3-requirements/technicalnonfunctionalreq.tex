@@ -4,40 +4,57 @@
 \subsection{Usability}
 The sytem will be hopefully use by a lot of people who don't necessarly have knowledge in the technology field so the Usability is an important requirement so the end-user can acces all the information he needs. \\
 
-US-1 An application is available for tablets and phone with those OS Windows Phone,Android, and Iphone. \\ % is it fonctionnal or non fonctionnal ?
-US-2  The end-user needs maximum ten minutes to get a basic understanding of system features through the UI. \\
-US-3  The UI has a FAQ and a help section. \\
-US-4  Every feature/major option of the system can be accessed through the home page(Single Page Application). \\
+ 	\pgfplotstabletypeset[%
+ 		UCTable
+ 	]{%
+ 		value & description \\
+ 		\req{US} & An application is available for tablets and phone with those OS Windows Phone,Android, and Iphone. \\
+ 		\req{US} & The end-user needs maximum ten minutes to get a basic understanding of system features through the UI. \\
+ 		\req{US} & The UI has a FAQ and a help section. \\
+ 		\req{US} & Every feature/major option of the system can be accessed through the home page(Single Page Application). \\
+ 	}
 
 % Email The user can receive an email with the information he aked (for example etimate bill) once a month.
 %Error message
 
-
 \subsection{Reliability}
-RE-1 A margin of error of $5\%$ in the energy measurements is tolerated. \\
- % from where do we get the energy data ?
- 
+ 	\pgfplotstabletypeset[%
+ 		UCTable
+ 	]{%
+ 		value & description \\
+ 		\req{RE} & A margin of error of $5\%$ in the energy measurements is tolerated. \\
+ 	}
+ 	
 \subsection{Security}
 Ensuring the security for the system is a major issue so all the data needed for its good functioning remain protected and consistent. \\
 
-S-1 Each user is identified and get acess to his "Home Energy Monitor" account with a login. \\
-S-2 The data of the database is encrypted. \\ % developp , which database ?
-% password hidden
+ 	\pgfplotstabletypeset[%
+ 		UCTable
+ 	]{%
+ 		value & description \\
+ 		\req{SEC} & Each user is identified and has to log in in order to view his "Home Energy Monitor" account. \\
+ 		\req{SEC} & The data in the database is encrypted. \\ % developp , which database ?
+ 		\req{SEC} & Passwords of the users are stored and transmitted as a hash\\
+ 	}
 
 
 \subsection{Availability}
-
-AVA-1 The sytem should be available $99.9\%$. of the time. \\
-
+ 	\pgfplotstabletypeset[%
+ 		UCTable
+ 	]{%
+ 		value & description \\
+ 		\req{AVA} & The sytem should be available $99.9\%$. of the time. \\
+ 		\req{AVA} & The system should be down for maximum ten minutes when the user installs a new release(version). \\
+ 	}
 %$AV = \frac{\text{MTTF}}{\text{MTTF} + \text{MTTR}} = \frac{\text{6 months}}{\text{6 months }+\text{ 12 hours}} = \frac{4380 \text{ hours}}{4380 + 12 \text{ hours}} = 99.7 \%$
 % computation 
 
-
-AVA-2 The system should be down for maximum ten minutes when the user install a new release(version). \\
-
 \subsection{Scalability} 
-
 The system should make the increase of workload, resources and users easy that's why the scalability is an important Key driver.\\
-% support for "other kind" of energy
-SCA-1 The sytem must be able to monitor everal kind of energy consumption for example: gas ,solar, temperature. \\ % increase in the number of resources
-SCA-2 The system should function as efficienly even if the number of users increase \\% increase in the number of users
+ 	\pgfplotstabletypeset[%
+ 		UCTable
+ 	]{%
+ 		value & description \\
+ 		\req{SCA} & The system must be able to monitor several kind of energy consumption for example: gas ,solar, temperature. \\
+ 	\req{SCA} & The system should function as efficiently even if the number of users increase \\% increase in the number of users \\
+ 	}
