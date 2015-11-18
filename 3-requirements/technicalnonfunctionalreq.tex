@@ -2,7 +2,7 @@
 \section{Technical non-functional requirements}
 
 \subsection{Usability}
-The sytem will be hopefully use by a lot of people who don't necessarly have knowledge in the technology field so the Usability is an important requirement so the end-user can acces all the information he needs. \\
+The sytem will be hopefully used by a lot of people who don't necessarily have knowledge in the technology field so the Usability is an important requirement so the end-user can acces all the information he needs. \\
 
  	\pgfplotstabletypeset[%
  		UCTable
@@ -10,7 +10,6 @@ The sytem will be hopefully use by a lot of people who don't necessarly have kno
  		value & description \\
  		\req{US} & An application is available for tablets and phone with those OS Windows Phone,Android, and Iphone. \\
  		\req{US} & The end-user needs maximum ten minutes to get a basic understanding of system features through the UI. \\
- 		\req{US} & The UI has a FAQ and a help section. \\
  		\req{US} & Every feature/major option of the system can be accessed through the home page(Single Page Application). \\
  	}
 
@@ -25,6 +24,17 @@ The sytem will be hopefully use by a lot of people who don't necessarly have kno
  		\req{RE} & A margin of error of $5\%$ in the energy measurements is tolerated. \\
  	}
  	
+ 	\subparagraph{Availability}
+ 	\pgfplotstabletypeset[%
+ 		UCTable
+ 	]{%
+ 		value & description \\
+ 		\req{AVA} & The sytem should be available $99.9\%$. of the time which means down for 44 minutes. \\
+ 		\req{AVA} & The system should be down for maximum ten minutes when the user installs a new release(version). \\
+ 	}
+%$AV = \frac{\text{MTTF}}{\text{MTTF} + \text{MTTR}} = \frac{\text{6 months}}{\text{6 months }+\text{ 12 hours}} = \frac{4380 \text{ hours}}{4380 + 12 \text{ hours}} = 99.7 \%$
+% computation
+ 	
 \subsection{Security}
 Ensuring the security for the system is a major issue so all the data needed for its good functioning remain protected and consistent. \\
 
@@ -33,21 +43,11 @@ Ensuring the security for the system is a major issue so all the data needed for
  	]{%
  		value & description \\
  		\req{SEC} & Each user is identified and has to log in in order to view his "Home Energy Monitor" account. \\
- 		\req{SEC} & The data in the database is encrypted. \\ % developp , which database ?
+ 		\req{SEC} & The data is encrypted. \\ % developp , which database ?
  		\req{SEC} & Passwords of the users are stored and transmitted as a hash\\
  	}
 
-
-\subsection{Availability}
- 	\pgfplotstabletypeset[%
- 		UCTable
- 	]{%
- 		value & description \\
- 		\req{AVA} & The sytem should be available $99.9\%$. of the time. \\
- 		\req{AVA} & The system should be down for maximum ten minutes when the user installs a new release(version). \\
- 	}
-%$AV = \frac{\text{MTTF}}{\text{MTTF} + \text{MTTR}} = \frac{\text{6 months}}{\text{6 months }+\text{ 12 hours}} = \frac{4380 \text{ hours}}{4380 + 12 \text{ hours}} = 99.7 \%$
-% computation 
+ 
 
 \subsection{Scalability} 
 The system should make the increase of workload, resources and users easy that's why the scalability is an important Key driver.\\
@@ -55,6 +55,6 @@ The system should make the increase of workload, resources and users easy that's
  		UCTable
  	]{%
  		value & description \\
- 		\req{SCA} & The system must be able to monitor several kind of energy consumption for example: gas ,solar, temperature. \\
- 	\req{SCA} & The system should function as efficiently even if the number of users increase \\% increase in the number of users \\
+ 		%\req{SCA} & The system must be able to monitor several kind of energy consumption for example: gas ,solar, temperature. \\
+ 	\req{SCA} & The system should function as efficiently even if the number of users increases. \\% increase in the number of users \\
  	}
