@@ -5,12 +5,14 @@
 myBuild/*
 build/*
 
+*.latexmkrc
+#dolphin
+*.directory
+
 *.glsdefs
 #swap files:
 *.swp
 *.kate-swp
-#dolphin
-.directory
 #meld
 *.orig
 # For Mac
