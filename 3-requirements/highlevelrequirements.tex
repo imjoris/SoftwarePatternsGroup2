@@ -1,10 +1,11 @@
-%!TEX root = ../report.tex
+% !TEX root = ../report.tex
 
 \clearpage
 \section{High-level requirements}
-The high-level requirements describe the high-level functionality of the system. The high-level requirements are used to derive the functional requirements in section~\ref{sec:functional-requirements}. The high-level requirements are also used to classify the severity of the risks in section~\ref{sec:risk-assesment}. 
+The high-level requirements describe the high-level functionality of the system. The high-level requirements are used to derive the functional requirements in Section~\ref{sec:functional-requirements}. The high-level requirements are also used to classify the severity of the risks in Section~\ref{sec:risk-assesment}. 
 
-This table uses different priorities. First there is the `must' priority, this requirement is an absolute must. The system could not function without the `must' requirement. Besides `must' there is the `should' priority. This priority is highly desirable for the system, but the system could function without this requirement. The last priority is `could', these requirements are nice to have but not really necessary for the core functionality of the system. These different priorities are used through the rest of the document.
+This table uses different priorities according to RFC-2119\cite{RFC2119}. First there is the `must' (`required') priority, this requirement is an absolute must. The system could not function without the `must' requirement. Besides `must' there is the `should' (`recommended') priority. This priority is highly desirable for the system, but the system could function without this requirement. The last priority is `may' (`optional'), these requirements are nice to have but not really necessary for the functionality of the system. These different priorities are used through the rest of the document.
+
 
 \begin{longtable}{L{0.1\textwidth} L{0.12\textwidth} L{0.78\textwidth}}
 	\textbf{Nr.} & \textbf{Prio} & \textbf{Description} \\
@@ -15,11 +16,14 @@ This table uses different priorities. First there is the `must' priority, this r
 	\hlReqRow{analyzing}{Must}{Computing usage statistics}
 	{ The system must be capable of computing statistics about the energy usage, like total usage per month, but also periods of peak energy usage. It has to be able to compute such statistics not only per house, but also for individual devices. }
 	
-	\hlReqRow{analyzing}{Must}{Displaying usage data / statistics}
+	\hlReqRow{analyzing}{Must}{Displaying statistics}
 	{ Data which has been gathered and statistics that have been computed must be displayed to the user in an understandable way. One of the main goals of the system is to make users of the system aware about their energy usage. The data and statistics should be displayed in a way that is intuitive and easy to understand for average consumers. }
 	
 	\hlReqRow{configuration}{Must}{Configuring the system}
-	{ The users of the system must be able to configure the system, i.e. register their house/add new devices/subscribe to alerts etc., using the web interface. This web interface should be user-friendly and intuitive, such that an average consumer is able to use it. }
+	{ The users of the system must be able to configure the system, i.e. register their house/add new devices/subscribe to alerts etc., using the web interface. }
+	
+	\hlReqRow{userfriendly-interface}{Must}{User-friendly interface}
+	{ The web interface of the system should be user-friendly and intuitive, such that an average consumer is able to use it. }
 			    
 	\bottomrule
 
