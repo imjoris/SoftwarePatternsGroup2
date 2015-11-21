@@ -158,3 +158,30 @@ The template view will be used, because it is used a lot more then the transform
 Communication with the model: p100:
 Preference: Having everything run in one process if you can. Else Remote Facade (p388) and DTO (p 401).
 }
+
+\myworries{
+\section{Notes only}
+\subsection{Model-View View-Model}
+}
+This section will describe how the Model updates the view and how the view updates the model.
+\myworries{View update model using page controller as is already described}
+
+Observer Synchronization
+Synchronize multiple screens by having them all be observers to a shared area of domain data.
+\url{http://www.martinfowler.com/eaaDev/uiArchs.html}
+While Observer Synchronization is nice it does have a downside. The problem with Observer Synchronization is the core problem of the observer pattern itself - you can't tell what is happening by reading the code. I was reminded of this very forcefully when trying to figure out how some Smalltalk 80 screens worked. I could get so far by reading the code, but once the observer mechanism kicked in the only way I could see what was going on was via a debugger and trace statements. Observer behavior is hard to understand and debug because it's implicit behavior.
+
+SeparatedPresentation:
+\url{http://martinfowler.com/eaaDev/SeparatedPresentation.html}
+Ensure that any code that manipulates presentation only manipulates presentation, pushing all domain and data source logic into clearly separated areas of the program.
+Most of examples you'll see from me follow Separated Presentation, simply because I find it such a fundamental design technique
+
+Presentation model:
+\url{http://www.martinfowler.com/eaaDev/PresentationModel.html}
+Represent the state and behavior of the presentation independently of the GUI controls used in the interface
+
+Supervising controller
+Factor the UI into a view and controller where the view handles simple mapping to the underlying model and the the controller handles input response and complex view logic.
+
+MVP potel:
+\url{Potel: http://www.wildcrest.com/Potel/Portfolio/mvp.pdf}

@@ -203,8 +203,7 @@
       Alternatives: Transaction Script and table module
     </p>
   </body>
-</html>
-</richcontent>
+</html></richcontent>
 <font NAME="SansSerif" SIZE="14"/>
 </node>
 <node COLOR="#990000" CREATED="1447955148167" ID="ID_1887780093" MODIFIED="1448035652128" TEXT="Unit of work">
@@ -321,8 +320,7 @@
       Using a record set (504) turning into a unit of work (184)? P98
     </p>
   </body>
-</html>
-</richcontent>
+</html></richcontent>
 <icon BUILTIN="messagebox_warning"/>
 </node>
 </node>
@@ -395,8 +393,7 @@
       Using the Repository pattern, these changes can be made fast. The repository also allows for multiple configurations to exist. So an extra repository could be created for testing purposes, only using an in-memory database to increase the test execution speed.
     </p>
   </body>
-</html>
-</richcontent>
+</html></richcontent>
 <font NAME="SansSerif" SIZE="14"/>
 </node>
 </node>
@@ -463,8 +460,7 @@
       This pattern will be used in every layer
     </p>
   </body>
-</html>
-</richcontent>
+</html></richcontent>
 <edge STYLE="sharp_bezier" WIDTH="8"/>
 <font NAME="SansSerif" SIZE="18"/>
 <node COLOR="#00b439" CREATED="1447940795488" ID="ID_179004626" MODIFIED="1447940981585" TEXT="Service layer">
@@ -519,7 +515,7 @@
 <font NAME="SansSerif" SIZE="16"/>
 </node>
 </node>
-<node COLOR="#0033ff" CREATED="1448003883181" ID="ID_861546644" MODIFIED="1448031509485" POSITION="left" TEXT="ClientUI">
+<node COLOR="#0033ff" CREATED="1448003883181" ID="ID_861546644" MODIFIED="1448087156232" POSITION="left" TEXT="ClientUI">
 <richcontent TYPE="NOTE"><html>
   <head>
     
@@ -531,12 +527,21 @@
     <p>
       because when using a rich cliient, &quot;you need a certain amount of control and deployment of the clients.&quot;
     </p>
+    <p>
+      
+    </p>
+    <p>
+      _______________
+    </p>
+    <p>
+      
+    </p>
   </body>
 </html>
 </richcontent>
 <edge STYLE="sharp_bezier" WIDTH="8"/>
 <font NAME="SansSerif" SIZE="18"/>
-<node COLOR="#00b439" CREATED="1448004243623" ID="ID_932785085" MODIFIED="1448033276088" TEXT="Controller">
+<node COLOR="#00b439" CREATED="1448004243623" ID="ID_932785085" MODIFIED="1448086809496" TEXT="Controller">
 <richcontent TYPE="NOTE"><html>
   <head>
     
@@ -568,6 +573,15 @@
       </li>
     </ul>
     <p>
+      Front page controller explain link:
+    </p>
+    <p>
+      https://msdn.microsoft.com/en-us/library/ff648617.aspx
+    </p>
+    <p>
+      
+    </p>
+    <p>
       Front page controller:
     </p>
     <p>
@@ -581,9 +595,6 @@
     </p>
     <p>
       The front page will be used, because it profides more functionality to the system. The only advantage of a page controller compared to the front controller is that it has a more natural structure.
-    </p>
-    <p>
-      
     </p>
   </body>
 </html>
@@ -637,8 +648,7 @@
       Transform view can be tested without having a web server up.
     </p>
   </body>
-</html>
-</richcontent>
+</html></richcontent>
 <edge STYLE="bezier" WIDTH="thin"/>
 <font NAME="SansSerif" SIZE="16"/>
 </node>
@@ -658,6 +668,90 @@
 </html></richcontent>
 <edge STYLE="bezier" WIDTH="thin"/>
 <font NAME="SansSerif" SIZE="16"/>
+</node>
+<node COLOR="#00b439" CREATED="1448086816617" ID="ID_1847707718" MODIFIED="1448087478383" TEXT="ModelToView">
+<richcontent TYPE="NOTE"><html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      Observer Synchronization
+    </p>
+    <p>
+      Synchronize multiple screens by having them all be observers to a shared area of domain data.
+    </p>
+    <p>
+      http://www.martinfowler.com/eaaDev/uiArchs.html
+    </p>
+    <p>
+      While Observer Synchronization is nice it does have a downside. The problem with Observer Synchronization is the core problem of the observer pattern itself - you can't tell what is happening by reading the code. I was reminded of this very forcefully when trying to figure out how some Smalltalk 80 screens worked. I could get so far by reading the code, but once the observer mechanism kicked in the only way I could see what was going on was via a debugger and trace statements. Observer behavior is hard to understand and debug because it's implicit behavior.
+    </p>
+    <p>
+      
+    </p>
+    <p>
+      SeparatedPresentation:
+    </p>
+    <p>
+      http://martinfowler.com/eaaDev/SeparatedPresentation.html
+    </p>
+    <p>
+      Ensure that any code that manipulates presentation only manipulates presentation, pushing all domain and data source logic into clearly separated areas of the program.
+    </p>
+    <p>
+      Most of examples you'll see from me follow Separated Presentation, simply because I find it such a fundamental design technique
+    </p>
+    <p>
+      
+    </p>
+    <p>
+      Presentation model:
+    </p>
+    <p>
+      http://www.martinfowler.com/eaaDev/PresentationModel.html
+    </p>
+    <p>
+      Represent the state and behavior of the presentation independently of the GUI controls used in the interface
+    </p>
+    <p>
+      
+    </p>
+    <p>
+      Supervising controller
+    </p>
+    <p>
+      Factor the UI into a view and controller where the view handles simple mapping to the underlying model and the the controller handles input response and complex view logic.
+    </p>
+    <p>
+      
+    </p>
+    <p>
+      MVP potel:
+    </p>
+    <p>
+      Potel: http://www.wildcrest.com/Potel/Portfolio/mvp.pdf
+    </p>
+  </body>
+</html>
+</richcontent>
+<edge STYLE="bezier" WIDTH="thin"/>
+<font NAME="SansSerif" SIZE="16"/>
+<node COLOR="#990000" CREATED="1448087541107" ID="ID_638610831" MODIFIED="1448087552987" TEXT="Used sites">
+<richcontent TYPE="NOTE"><html>
+  <head>
+    
+  </head>
+  <body>
+    <h3 http-equiv="content-type" content="text/html; charset=utf-8" style="color: rgb(0, 0, 0); font-family: DejaVu Sans, Arial, sans-serif; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px">
+      URL list from Saturday, Nov. 21 2015 7:32 AM
+    </h3>
+    <font color="rgb(0, 0, 0)" face="DejaVu Sans, Arial, sans-serif" size="12px">To copy this list, type [Ctrl] A, then type [Ctrl] C.&#160;<br align="start" style="font-variant: normal; letter-spacing: normal; line-height: normal; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px" /><br align="start" style="font-variant: normal; letter-spacing: normal; line-height: normal; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px" /><b style="color: rgb(0, 0, 0); font-family: DejaVu Sans, Arial, sans-serif; font-size: 12px; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px">Prevent browser close tab</b><br align="start" style="font-variant: normal; letter-spacing: normal; line-height: normal; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px" /></font><a href="http://www.maki-chan.de/preventclose.htm" style="font-family: DejaVu Sans, Arial, sans-serif; font-size: 12px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px"><font face="DejaVu Sans, Arial, sans-serif" size="12px">http://www.maki-chan.de/preventclose.htm</font></a><font color="rgb(0, 0, 0)" face="DejaVu Sans, Arial, sans-serif" size="12px"><br align="start" style="font-variant: normal; letter-spacing: normal; line-height: normal; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px" /><br align="start" style="font-variant: normal; letter-spacing: normal; line-height: normal; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px" /><b style="color: rgb(0, 0, 0); font-family: DejaVu Sans, Arial, sans-serif; font-size: 12px; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px">GUI Architectures</b><br align="start" style="font-variant: normal; letter-spacing: normal; line-height: normal; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px" /></font><a href="http://martinfowler.com/eaaDev/uiArchs.html" style="font-family: DejaVu Sans, Arial, sans-serif; font-size: 12px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px"><font face="DejaVu Sans, Arial, sans-serif" size="12px">http://martinfowler.com/eaaDev/uiArchs.html</font></a><font color="rgb(0, 0, 0)" face="DejaVu Sans, Arial, sans-serif" size="12px"><br align="start" style="font-variant: normal; letter-spacing: normal; line-height: normal; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px" /><br align="start" style="font-variant: normal; letter-spacing: normal; line-height: normal; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px" /><b style="color: rgb(0, 0, 0); font-family: DejaVu Sans, Arial, sans-serif; font-size: 12px; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px">Separated Presentation</b><br align="start" style="font-variant: normal; letter-spacing: normal; line-height: normal; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px" /></font><a href="http://martinfowler.com/eaaDev/SeparatedPresentation.html" style="font-family: DejaVu Sans, Arial, sans-serif; font-size: 12px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px"><font face="DejaVu Sans, Arial, sans-serif" size="12px">http://martinfowler.com/eaaDev/SeparatedPresentation.html</font></a><font color="rgb(0, 0, 0)" face="DejaVu Sans, Arial, sans-serif" size="12px"><br align="start" style="font-variant: normal; letter-spacing: normal; line-height: normal; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px" /><br align="start" style="font-variant: normal; letter-spacing: normal; line-height: normal; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px" /><b style="color: rgb(0, 0, 0); font-family: DejaVu Sans, Arial, sans-serif; font-size: 12px; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px">GUI Architectures</b><br align="start" style="font-variant: normal; letter-spacing: normal; line-height: normal; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px" /></font><a href="http://www.martinfowler.com/eaaDev/uiArchs.html" style="font-family: DejaVu Sans, Arial, sans-serif; font-size: 12px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px"><font face="DejaVu Sans, Arial, sans-serif" size="12px">http://www.martinfowler.com/eaaDev/uiArchs.html</font></a><font color="rgb(0, 0, 0)" face="DejaVu Sans, Arial, sans-serif" size="12px"><br align="start" style="font-variant: normal; letter-spacing: normal; line-height: normal; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px" /><br align="start" style="font-variant: normal; letter-spacing: normal; line-height: normal; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px" /><b style="color: rgb(0, 0, 0); font-family: DejaVu Sans, Arial, sans-serif; font-size: 12px; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px">Presentation Model</b><br align="start" style="font-variant: normal; letter-spacing: normal; line-height: normal; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px" /></font><a href="http://www.martinfowler.com/eaaDev/PresentationModel.html" style="font-family: DejaVu Sans, Arial, sans-serif; font-size: 12px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px"><font face="DejaVu Sans, Arial, sans-serif" size="12px">http://www.martinfowler.com/eaaDev/PresentationModel.html</font></a><font color="rgb(0, 0, 0)" face="DejaVu Sans, Arial, sans-serif" size="12px"><br align="start" style="font-variant: normal; letter-spacing: normal; line-height: normal; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px" /><br align="start" style="font-variant: normal; letter-spacing: normal; line-height: normal; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px" /><b style="color: rgb(0, 0, 0); font-family: DejaVu Sans, Arial, sans-serif; font-size: 12px; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px">Martin Fowler - Wikipedia, the free encyclopedia</b><br align="start" style="font-variant: normal; letter-spacing: normal; line-height: normal; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px" /></font><a href="https://en.wikipedia.org/wiki/Martin_Fowler" style="font-family: DejaVu Sans, Arial, sans-serif; font-size: 12px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px"><font face="DejaVu Sans, Arial, sans-serif" size="12px">https://en.wikipedia.org/wiki/Martin_Fowler</font></a><font color="rgb(0, 0, 0)" face="DejaVu Sans, Arial, sans-serif" size="12px"><br align="start" style="font-variant: normal; letter-spacing: normal; line-height: normal; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px" /><br align="start" style="font-variant: normal; letter-spacing: normal; line-height: normal; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px" /><b style="color: rgb(0, 0, 0); font-family: DejaVu Sans, Arial, sans-serif; font-size: 12px; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px">Supervising Controller</b><br align="start" style="font-variant: normal; letter-spacing: normal; line-height: normal; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px" /></font><a href="http://www.martinfowler.com/eaaDev/SupervisingPresenter.html" style="font-family: DejaVu Sans, Arial, sans-serif; font-size: 12px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px"><font face="DejaVu Sans, Arial, sans-serif" size="12px">http://www.martinfowler.com/eaaDev/SupervisingPresenter.html</font></a><font color="rgb(0, 0, 0)" face="DejaVu Sans, Arial, sans-serif" size="12px"><br align="start" style="font-variant: normal; letter-spacing: normal; line-height: normal; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px" /><br align="start" style="font-variant: normal; letter-spacing: normal; line-height: normal; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px" /><b style="color: rgb(0, 0, 0); font-family: DejaVu Sans, Arial, sans-serif; font-size: 12px; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px">Observer Synchronization</b><br align="start" style="font-variant: normal; letter-spacing: normal; line-height: normal; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px" /></font><a href="http://www.martinfowler.com/eaaDev/MediatedSynchronization.html" style="font-family: DejaVu Sans, Arial, sans-serif; font-size: 12px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px"><font face="DejaVu Sans, Arial, sans-serif" size="12px">http://www.martinfowler.com/eaaDev/MediatedSynchronization.html</font></a><font color="rgb(0, 0, 0)" face="DejaVu Sans, Arial, sans-serif" size="12px"><br align="start" style="font-variant: normal; letter-spacing: normal; line-height: normal; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px" /><br align="start" style="font-variant: normal; letter-spacing: normal; line-height: normal; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px" /><b style="color: rgb(0, 0, 0); font-family: DejaVu Sans, Arial, sans-serif; font-size: 12px; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px">Model View Presenter - A Short Presentation - YouTube</b><br align="start" style="font-variant: normal; letter-spacing: normal; line-height: normal; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px" /></font><a href="https://www.youtube.com/watch?v=oiNfPjV72lg" style="font-family: DejaVu Sans, Arial, sans-serif; font-size: 12px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px"><font face="DejaVu Sans, Arial, sans-serif" size="12px">https://www.youtube.com/watch?v=oiNfPjV72lg</font></a><font color="rgb(0, 0, 0)" face="DejaVu Sans, Arial, sans-serif" size="12px"><br align="start" style="font-variant: normal; letter-spacing: normal; line-height: normal; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px" /><br align="start" style="font-variant: normal; letter-spacing: normal; line-height: normal; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px" /><b style="color: rgb(0, 0, 0); font-family: DejaVu Sans, Arial, sans-serif; font-size: 12px; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px">design patterns - What are MVP and MVC and what is the difference? - Stack Overflow</b><br align="start" style="font-variant: normal; letter-spacing: normal; line-height: normal; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px" /></font><a href="http://stackoverflow.com/questions/2056/what-are-mvp-and-mvc-and-what-is-the-difference" style="font-family: DejaVu Sans, Arial, sans-serif; font-size: 12px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px"><font face="DejaVu Sans, Arial, sans-serif" size="12px">http://stackoverflow.com/questions/2056/what-are-mvp-and-mvc-and-what-is-the-difference</font></a><font color="rgb(0, 0, 0)" face="DejaVu Sans, Arial, sans-serif" size="12px"><br align="start" style="font-variant: normal; letter-spacing: normal; line-height: normal; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px" /><br align="start" style="font-variant: normal; letter-spacing: normal; line-height: normal; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px" /><b style="color: rgb(0, 0, 0); font-family: DejaVu Sans, Arial, sans-serif; font-size: 12px; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px">Interactive Application Architecture Patterns</b><br align="start" style="font-variant: normal; letter-spacing: normal; line-height: normal; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px" /></font><a href="http://aspiringcraftsman.com/2007/08/25/interactive-application-architecture/" style="font-family: DejaVu Sans, Arial, sans-serif; font-size: 12px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px"><font face="DejaVu Sans, Arial, sans-serif" size="12px">http://aspiringcraftsman.com/2007/08/25/interactive-application-architecture/</font></a><font color="rgb(0, 0, 0)" face="DejaVu Sans, Arial, sans-serif" size="12px"><br align="start" style="font-variant: normal; letter-spacing: normal; line-height: normal; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px" /><br align="start" style="font-variant: normal; letter-spacing: normal; line-height: normal; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px" /><b style="color: rgb(0, 0, 0); font-family: DejaVu Sans, Arial, sans-serif; font-size: 12px; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px">How does the model update the view in MVC pattern? - Stack Overflow</b><br align="start" style="font-variant: normal; letter-spacing: normal; line-height: normal; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px" /></font><a href="http://stackoverflow.com/questions/14720127/how-does-the-model-update-the-view-in-mvc-pattern" style="font-family: DejaVu Sans, Arial, sans-serif; font-size: 12px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px"><font face="DejaVu Sans, Arial, sans-serif" size="12px">http://stackoverflow.com/questions/14720127/how-does-the-model-update-the-view-in-mvc-pattern</font></a><font color="rgb(0, 0, 0)" face="DejaVu Sans, Arial, sans-serif" size="12px"><br align="start" style="font-variant: normal; letter-spacing: normal; line-height: normal; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px" /><br align="start" style="font-variant: normal; letter-spacing: normal; line-height: normal; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px" /><b style="color: rgb(0, 0, 0); font-family: DejaVu Sans, Arial, sans-serif; font-size: 12px; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px">c# - MVVM: Modified model, how to correctly update ViewModel and View? - Stack Overflow</b><br align="start" style="font-variant: normal; letter-spacing: normal; line-height: normal; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px" /></font><a href="http://stackoverflow.com/questions/10324009/mvvm-modified-model-how-to-correctly-update-viewmodel-and-view" style="font-family: DejaVu Sans, Arial, sans-serif; font-size: 12px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px"><font face="DejaVu Sans, Arial, sans-serif" size="12px">http://stackoverflow.com/questions/10324009/mvvm-modified-model-how-to-correctly-update-viewmodel-and-view</font></a><font color="rgb(0, 0, 0)" face="DejaVu Sans, Arial, sans-serif" size="12px"><br align="start" style="font-variant: normal; letter-spacing: normal; line-height: normal; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px" /><br align="start" style="font-variant: normal; letter-spacing: normal; line-height: normal; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px" /><b style="color: rgb(0, 0, 0); font-family: DejaVu Sans, Arial, sans-serif; font-size: 12px; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px">Design Patterns MVC Pattern</b><br align="start" style="font-variant: normal; letter-spacing: normal; line-height: normal; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px" /></font><a href="http://www.tutorialspoint.com/design_pattern/mvc_pattern.htm" style="font-family: DejaVu Sans, Arial, sans-serif; font-size: 12px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px"><font face="DejaVu Sans, Arial, sans-serif" size="12px">http://www.tutorialspoint.com/design_pattern/mvc_pattern.htm</font></a><font color="rgb(0, 0, 0)" face="DejaVu Sans, Arial, sans-serif" size="12px"><br align="start" style="font-variant: normal; letter-spacing: normal; line-height: normal; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px" /></font>
+  </body>
+</html>
+</richcontent>
+<font NAME="SansSerif" SIZE="14"/>
+</node>
 </node>
 </node>
 </node>
