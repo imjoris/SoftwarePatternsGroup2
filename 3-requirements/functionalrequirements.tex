@@ -52,7 +52,7 @@ This section lists the functional requirements of the system.
 	{ The system must be able to send feedback to registered devices about the current electricity usage. }
 	
 	\frReqRow{show-accuracy}{Must}
-	{ The system must be able to estimate the accuracy of the computations, such that when data might be inaccurate, the user will be informed about this. }
+	{ The system must be able to receive a statement about the accuracy form the sensors, such that when data might be inaccurate, the user can be informed about this. }
 	
 	\frReqRow{show-history}{Must}
 	{ The system must be able to display the history of electricity usage. }
@@ -60,17 +60,18 @@ This section lists the functional requirements of the system.
 	\frReqRow{choose-alerts}{Should}
 	{ Users of the system should be able to subscribe to alerts in the web interface, alerting them about sudden energy increases or when they are using more energy than in previous months/weeks. }
 	
-	\frReqRow{compare}{Should}
-	{ The web interface of the system should allow the user to compare the energy usage of different months. }
-	
 	\frReqRow{alerts}{Should}
 	{ The system should send alerts to users by mail when the user is subscribed for this alert and the condition for the alert is met. }
 	
 	\frReqRow{interface-graph}{Should}
 	{ The system should be able to show the computed statistics in a graph. }
 	
+	\frReqRow{cache-data}{Should}
+	{ The system should cache received usage data when the data storage becomes unavailable, so it can be stored later. }
+	
 	
 	\bottomrule
 	\caption{Functional Requirements}
 	\label{table:functional-requirements}
 \end{longtable}
+\clearpage
