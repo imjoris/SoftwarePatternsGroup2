@@ -79,7 +79,7 @@
 \makeatletter
 
 %manually lable something
-%like \manuallabel{fr:01}{The first req}
+%like \manuallabel{fr:01}{The first }
 % \ref{fr:01} will then hold "The first req"
 \newcommand{\manuallabel}[2]{\def\@currentlabel{#2}\label{#1}}
 
@@ -94,10 +94,10 @@
     }%
 }
 \newcommand{\nextNrRef}[1]{%
-    \getNext{#1}
-    \manuallabel{#1:\arabic{#1}}
-        {\uppercase{#1}-\arabic{#1}}
-    \arabic{#1}
+\getNext{#1}
+\manuallabel{#1:\arabic{#1}}
+{\uppercase{#1}-\arabic{#1}}
+\arabic{#1}
 }
 
 

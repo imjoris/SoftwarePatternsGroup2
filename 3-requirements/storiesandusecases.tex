@@ -1,8 +1,8 @@
-%!TEX root = ../report.tex
+% !TEX root = ../report.tex
 \clearpage
 \section{Stories and use-cases}
 
-In this section the architectural significant ue-cae will be presented.
+In this section the architectural significant use-cases will be presented.
 
 % Installation ?
 % Collect and store energy consumption
@@ -11,87 +11,176 @@ In this section the architectural significant ue-cae will be presented.
 % Computation ? by Spark , Map/Reduce , DOES THE SYSTEM COMPUTE THE STATISTICS ONLY WHEN THE USER ASKS FOR PECIFIC STATITICS OR EVERYTIME ?
 
 
+\begin{table}[H]
+	\pgfplotstabletypeset[%
+		UCTable
+	]{%
+	value & description \\
+	\req{uc} & \textbf{The End user registration} \\
+	Goal & The user has to register on the website to create his account. \\
+	Stakeholders and interests &  \\
+	Primary actor & End-User\\
+	Level & User goal\\
+	Precondition & The website has the internal process to add an user to the database \\
+	Main success scenario & \compactList{enumerate}{%
+		 \item The user access the \ShortName URL 
+		 \item The user click on the `Sign up' Button 
+		 \item The website display a regitration form requests the Fullname, username, email adress and adress of the user.
+		 \item The system checks if the user isn't already in the database. 
+		 \item If not the user is added in the database. 
+		 \item The user receives a confirmation link on his email adress and clicks on it.  % or verification code ?
+		 \item The user is redirected to the HEMS webite. 
+		}\\
+	Postcondition & The account is created : the user get acces to his own Home Energy Monitor interface. \\
+	Extensions & \compactList{itemize}{%
+		\item[1a.] The user isn't added to the system database.
+		}\\
+	Related requirements & \\
+	}
+\caption{UC-\arabic{uc}: The End user registration}
+\label{table:uc-registration}
+\end{table}
 
-\textbf{The End user registration} \\
-\textit{Number} : UC-1 \\
-\textit{Goal} : The user has to register on the website to create his account.
-\textit{Primary Actor }:  End-User \\
-\textit{Precondition}: The website has the internal process to add an user to the database
-\textit{Main Success Scenario }: \\
- 1. The user acess the HEMS URL \\
- 2. The user click on the " Sign up " Button \\
- 3. The website display a regitration form requests the Fullname, Username, email adress and adress of the user.\\
- 4. The system checks if the user isn't already in the database. \\
- 5. If not the user is added in the database. \\
- 6. The user receives a confirmation link on his email adress and clicks on it. \\ % or verification code ?
- 7. The user is redirected to the HEMS webite. \\
-\textit{Extensions} 1. The user isn't added to the system database. \\
-1a. An error message is displayed " The regitration failed, do you want to try again Y/N? ".
-1a. If yes Go to step 3.
-%2. The user is already in the database.
-\textit{Postcondition} : The account is created : the user get acces to his own Home Energy Monitor interface. \\
+\begin{table}[H]
+	\pgfplotstabletypeset[%
+		UCTable
+	]{%
+	value & description \\
+	\req{uc} & \textbf{Receiving external energy usage data} \\
+	Goal & The sytem needs to receive energy data to make the analysis  \\
+	Stakeholders \& interests & \\
+	Primary actor & The energy usage sensors \\
+	Level & User goal\\
+	Precondition & The energy data is available \\
+	Main success scenario & \\  % what is the process ?
+	Postcondition &  \\
+	Extensions &  \\
+	Related requirements & \\
+	}
+\caption{UC-\arabic{uc}: Receiving external energy usage data}
+\label{table:uc-external-usage}
+\end{table}
 
-\textbf{Receive / Collect external energy data} \\% (out of scope ?) \\
-\textit{Number}: UC-2 \\
-\textit{Goal}: The sytem needs to receive energy data to make the analysis. \\
-\textit{Primary Actor} : The system \\
-\textit{Precondition}: The energy data is available. \\
-\textit{Main Success Scenario}: \\ % what is the process ?
-\textit{Extensions} \\
-\textit{Post condition}: \\
+\begin{table}[H]
+	\pgfplotstabletypeset[%
+		UCTable
+	]{%
+	value & description \\
+	\req{uc} & \textbf{Store energy consumption} \\
+	Goal & The system needs to store the energy data it just received. \\
+	Stakeholders \& interests & \\
+	Primary actor & The system \\
+	Scope & Monitoring part of the system \\
+	Level & Sub process\\
+	Precondition & The system has received the data. The database is available. \\
+	Main success scenario & \compactList{enumerate}{%
+		\item The data received is directly stored in the database.
+		} \\
+	Postcondition & The data is stored in the database. \\
+	Extensions & The data isn't stored. \\ % why \\
+	Related requirements & \\
+	}
+\caption{UC-\arabic{uc}: Store energy consumption}
+\label{table:uc-store-consumption}
+\end{table}
 
-\textbf{Store energy consumption}\\
-\textit{Number} : UC-3 \\
-\textit{Goal}: The system needs to store the energy data it just received. \\
-\textit{Primary Actor}: System \\
-\textit{Precondition} : 1. The system can receive the data. \\
-2.The sytem has a database \\
-\textit{Main Success Scenario} : 1. The data received is directly stored in the database. \\
-\textit{Extensions} : The data isn't stored. % why ? \\
-\textit{Post-condition}: The data is in the database.\\
 
-\textbf{Display the next bill}\\
-\textit{Number} : UC-4 \\
-\textit{Goal}: The End-Uer wants to display the estimation of his next bill \\ 
-\textit{Primary Actor}:  End-User \\
-\textit{Pre-condition}: The user is registered in the database of the system.\\
-\textit{Main Success scenario} : \\
-1. The user gets acess to his interface by clicking on "Sign in" Button\\ % sign up ?
-2. In the menu he clicks on the "Bill" button.\\
-3. In the bill section the user chooses the "Next bill". \\ % the previous ones are alo available
-\textit{Extensions} \\
-% Authentification failed
-\textit{Postcondition} : The bill is displayed.
+\begin{table}[H]
+	\pgfplotstabletypeset[%
+		UCTable
+	]{%
+	value & description \\
+	\req{uc} & \textbf{Display the estimated bill} \\
+	Goal & The End-User wants to see the estimation of his next bill \\
+	Stakeholders \& interests & \\
+	Primary actor & End-User \\
+	Level & User goal\\
+	Precondition & The user is registered in the system. \\
+	Main success scenario & \compactList{enumerate}{%
+		\item The user gets access to his interface by clicking on " Sign in " Button
+		\item In the menu he clicks on "Bill".
+		} \\
+	Postcondition &  The estimated bill is displayed \\
+	Extensions &  \\
+	Related requirements & \\
+	}
+\caption{UC-\arabic{uc}: Display the estimated bill}
+\label{table:uc-display-bill}
+\end{table}
 
-\textbf{Display analysis, daily/weekly/monthly report}\\ % too generic ?
-\textit{Number} : UC-5 \\
-\textit{Goal}: The End-Uer wants to display several kind of analysis about hi energy consumption \\ 
-\textit{Primary Actor}: End-User \\
-\textit{Pre-condition}: The user is registered in the system.
-\textit{Main Success scenario} : \\
-1. The user gets acess to his interface by clicking on " Sign in " Button \\
-2. In the menu he clicks on " Analyis- Chart " \\ 
-3. The system computes/make the analysis. \\
-\textit{Extensions} : The statistics aren't made. \\
-\textit{Postcondition} : Charts with different item are displayed.
+\begin{table}[H]
+	\pgfplotstabletypeset[%
+		UCTable
+	]{%
+	value & description \\
+	\req{uc} & \textbf{Display analysis, daily/weekly/monthly report} \\
+	Goal & The End-User wants to display several kind of analysis about hi energy consumption \\
+	Stakeholders \& interests & \\
+	Primary actor & End-User \\
+	Level & User goal\\
+	Precondition & The user is registered in the system. \\
+	Main success scenario & \compactList{enumerate}{%
+		\item The user gets access to his interface by clicking on " Sign in " Button 
+		\item In the menu he clicks on " Analysis- Chart " 
+		\item The system computes/make the analysis.
+		} \\
+	Postcondition &  Charts with different item are displayed. \\
+	Extensions & The statistics aren't made. \\
+	Related requirements & \\
+	}
+\caption{UC-\arabic{uc}: Display analysis, daily/weekly/monthly report}
+\label{table:uc-display-analysis}
+\end{table}
 
-\textbf{Update}\\
-\textit{Number}: UC-6 \\
-\textit{Goal}: The sytem needs to update itself. \\
-\textit{Primary Actor} : The system \\
-\textit{Precondition}: \\
-\textit{Main Success Scenario}: \\
-\textit{Extensions} \\
-\textit{Post condition}: \\
+\begin{table}[H]
+	\pgfplotstabletypeset[%
+		UCTable
+	]{%
+	value & description \\
+	\req{uc} & \textbf{The system needs to update itself.} \\
+	Goal &  \\
+	Stakeholders \& interests & \\
+	Primary actor & The System \\
+	Level & Sub process\\
+	Precondition & \\
+	Main success scenario & \compactList{enumerate}{%
+		 \item 
+		} \\
+	Postcondition &  \\
+	Extensions &  \\
+	Related requirements & \\
+	}
+\caption{UC-\arabic{uc}: The system needs to update itself.}
+\label{table:uc-update-system}
+\end{table}
 
-\textbf{Configuration} \\
-\textit{Number}: UC-7\\
-\textit{Goal}: The user must be able to configure the sytem with his own characteritics. \\
-\textit{Primary Actor} : The user \\
-\textit{Precondition}: The user is registered in the database of the system. \\
-\textit{Main Success Scenario}: 1. On the dashboard/website the user clicks on the " Settings " button. \\
-2. The user gets access to the Settings section with all the possibilities/internal sections for example :frequency of alert, adding new devices etc.\\
-\textit{Extensions}:1. The system didn't take into account the information the user just added. \\
-1a. An error mesage is displayed " Configuration failed, would you like to try again Y/N ? ". \\
-If yes Go to step1. \\
-\textit{Post condition}:The system is set with the user's characteritics of his home and preferences. \\
+\begin{table}[H]
+	\pgfplotstabletypeset[%
+		UCTable
+	]{%
+	value & description \\
+	\req{uc} & \textbf{Configuration} \\
+	Goal & The user must be able to configure the system with his own characteristics. \\
+	Stakeholders \& interests & \\
+	Primary actor & The user \\
+	Level & User goal\\
+	Precondition & The user is registered in the database of the system. \\
+	Main success scenario & \compactList{enumerate}{%
+		 \item On the dashboard/website the user clicks on the " Settings " button. 
+		 \item The user gets access to the Settings section with all the possibilities/internal sections for example :frequency of alert, adding new devices etc.
+		} \\
+	Postcondition &  \\
+	Extensions & \compactList{itemize}{ %
+		\item[2] The system didn't take into account the information the user just added.
+		\begin{itemize}
+		 \item[2a.] An error message is displayed " Configuration failed, would you like to try again Y/N ? ".
+		 \item[2b] If yes Go to step1.
+		\end{itemize}
+	} \\
+	Related requirements & \\
+	}
+\caption{UC-\arabic{uc}: Configuration}
+\label{table:uc-configuration}
+\end{table}
+
+
