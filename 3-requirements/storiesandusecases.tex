@@ -18,23 +18,26 @@ In this section the architectural significant use-cases will be presented.
 	value & description \\
 	\req{uc} & \textbf{The End user registration} \\
 	Goal & The user has to register on the website to create his account. \\
-	Stakeholders and interests &  \\
+	Stakeholders and interests & \textbf{End user} -- wants to be able to use the system to gain insight into his/her electricity usage \\
 	Primary actor & End-User\\
 	Level & User goal\\
 	Precondition & The website has the internal process to add an user to the database \\
 	Main success scenario & \compactList{enumerate}{%
-		 \item The user access the \ShortName URL 
+		 \item The user access the \ShortName~URL 
 		 \item The user click on the `Sign up' Button 
-		 \item The website display a regitration form requests the Fullname, username, email adress and adress of the user.
+		 \item The website display a registration form requests the full name, username, email address and address of the user.
 		 \item The system checks if the user isn't already in the database. 
 		 \item If not the user is added in the database. 
-		 \item The user receives a confirmation link on his email adress and clicks on it.  % or verification code ?
-		 \item The user is redirected to the HEMS webite. 
+		 \item The user receives a confirmation link on his email address and clicks on it.  % or verification code ?
+		 \item The user is redirected to the HEMS website. 
 		}\\
-	Postcondition & The account is created : the user get acces to his own Home Energy Monitor interface. \\
-	Extensions & \compactList{itemize}{%
-		\item[1a.] The user isn't added to the system database.
-		}\\
+	Postcondition & The account is created : the user get access to his own Home Energy Monitor interface. \\
+	Extensions & \compactList{itemize}{ %
+			\item[4a.] The user is already in the database.
+			\begin{itemize}
+			 \item[1.] The user gets to see a message telling him the user is already registered.
+			\end{itemize} ~\\[-1.0cm]
+		} \\
 	Related requirements & \\
 	}
 \caption{UC-\arabic{uc}: The End user registration}
@@ -68,7 +71,7 @@ In this section the architectural significant use-cases will be presented.
 	value & description \\
 	\req{uc} & \textbf{Store energy consumption} \\
 	Goal & The system needs to store the energy data it just received. \\
-	Stakeholders \& interests & \\
+	Stakeholders \& interests &  \\
 	Primary actor & The system \\
 	Scope & Monitoring part of the system \\
 	Level & Sub process\\
@@ -92,7 +95,7 @@ In this section the architectural significant use-cases will be presented.
 	value & description \\
 	\req{uc} & \textbf{Display the estimated bill} \\
 	Goal & The End-User wants to see the estimation of his next bill \\
-	Stakeholders \& interests & \\
+	Stakeholders \& interests & \textbf{End user} -- wants to know about estimated bill for that month \\ \\
 	Primary actor & End-User \\
 	Level & User goal\\
 	Precondition & The user is registered in the system. \\
@@ -115,7 +118,9 @@ In this section the architectural significant use-cases will be presented.
 	value & description \\
 	\req{uc} & \textbf{Display analysis, daily/weekly/monthly report} \\
 	Goal & The End-User wants to display several kind of analysis about hi energy consumption \\
-	Stakeholders \& interests & \\
+	Stakeholders \& interests & \compactCell{
+		\textbf{End user} -- wants to know about the electricity usage \\
+	} \\
 	Primary actor & End-User \\
 	Level & User goal\\
 	Precondition & The user is registered in the system. \\
@@ -132,27 +137,28 @@ In this section the architectural significant use-cases will be presented.
 \label{table:uc-display-analysis}
 \end{table}
 
-\begin{table}[H]
-	\pgfplotstabletypeset[%
-		UCTable
-	]{%
-	value & description \\
-	\req{uc} & \textbf{The system needs to update itself.} \\
-	Goal &  \\
-	Stakeholders \& interests & \\
-	Primary actor & The System \\
-	Level & Sub process\\
-	Precondition & \\
-	Main success scenario & \compactList{enumerate}{%
-		 \item 
-		} \\
-	Postcondition &  \\
-	Extensions &  \\
-	Related requirements & \\
-	}
-\caption{UC-\arabic{uc}: The system needs to update itself.}
-\label{table:uc-update-system}
-\end{table}
+%\begin{table}[H]
+%	\pgfplotstabletypeset[%
+%		UCTable
+%	]{%
+%	value & description \\
+%	\req{uc} & \textbf{The system is updated to a newer version} \\
+%	Goal &  \\
+%	Stakeholders \& interests & \\
+%	Primary actor & The maintainer \\
+%	Level & Sub process \\
+%	Precondition & There is a newer version of the system available \\
+%	Main success scenario & \compactList{enumerate}{%
+%		 \item 
+%		} \\
+%	Postcondition & The system is updated to the newer version \\
+%	Extensions &  \\
+%	Related requirements & \\
+%	}
+%\caption{UC-\arabic{uc}: The system needs to update itself.}
+%\label{table:uc-update-system}
+%\end{table}
+% WM: should we make this a use case? does the maintainer update or system automatically?
 
 \begin{table}[H]
 	\pgfplotstabletypeset[%
