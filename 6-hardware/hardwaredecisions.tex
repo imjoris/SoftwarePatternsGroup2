@@ -1,0 +1,68 @@
+%!TEX root = ../report.tex
+\section{Hardware Design Decisions}
+\label{sec:hardware-decisions}
+This section defines decisions made regarding the hardware selection. Tables will be used to make our justification in regard to hardware selection more clear.
+
+\begin{table}[H]
+	\begin{tabular}{L{0.2\textwidth} L{0.6\textwidth}}
+		\textbf{Name}           & \textbf{Compute cluster selection} \\ \toprule
+		\textbf{Decision}       & \textbf{\req{hw}}\\ \midrule
+		\textbf{Status}         & \textbf{Approved} \\ \midrule
+		\textbf{Problem/Issue}  & HEMS needs a reliable computers to do the analytical processing. \\ \midrule
+		\textbf{Decision}       & HEMS will use clustered Dell PowerEdge R530 to act as the main analytic cluster and to provide API to the actors.\\ \midrule
+		\textbf{Alternatives}   & \textit{HP ProLiant DL360 Gen9 Base}\\
+		% https://www.google.nl/shopping/product/12299869794181781707?biw=1346&bih=669&q=servers&bav=on.2,or.r_cp.&bvm=bv.104317490,d.d2s&ion=1&espv=2&tch=1&ech=1&psi=1FIQVpOAEoPlaK7Zn4AN.1443910356406.15#sgro=om
+		& This server rack has 16GB of memory and 2.4GHz of processor speed. As other server computer, this machine utilizes Intel Xeon E5 2600v3. This server is suitable for high dense computing, however the price is not so suitable for this kind of specification. It does not have LCD screen that will help technician to look the current status of the server.\\
+		& \textit{Lenovo System x3550 M4 7914}\\
+		% https://www.google.nl/shopping/product/8704926690761174474?q=servers&biw=1346&bih=669&bav=on.2,or.r_cp.&bvm=bv.104317490,d.d2s&ion=1&espv=2&tch=1&ech=1&psi=1FIQVpOAEoPlaK7Zn4AN.1443910356406.17
+		& This server rack has only 8GB of memory. However, the processor is a bit faster, it runs on 2.6GHz. As other server computer, this machine also utilizes Intel XEON E5-2600. The price is a little bit lower than the others but the memory limitation makes it not so valuable. It has LCD screen that will help technician to look the current status of the server. \\
+		& \textit{Dell PowerEdge R530} \\
+		% https://azerty.nl/0-3031-817940/dell-poweredge-r530-server-rack-uitvoering-2u-2-weg-1-x-xeon-e5-2620v3-2-4-ghz-ram-16-gb-sas-hot-swap-verwiss.html?channel_code=544&s2m_campaign=1CENT&s2m_product_id=817940
+		& This 2U server rack has 16GB of memory and 2.4GHz of processor speed. This machine utilizes Intel Xeon E5-2620V3 with 15MB of cache. This server is suitable for high dense computing. It has LCD screen that will help technician to look the current status of the server. \\
+		\midrule
+		\textbf{Arguments}      & \\
+		&   \begin{tabular}{l|llllll|l}
+		                                  & \rot{Reliability} & \rot{Performance} & \rot{Interoperability} & \rot{Security} & \rot{Scalability} & \rot{Cost} & \rot{\textbf{Score}} \\ \hline
+		%                                        rel res per int sec sca cost
+		Weights                         3 & 2 & 3 & 2 & 2 & 2 & 2 \\ \hline
+		Dell PowerEdge R530             5 & 3                 & 5                 & 4                      & 4              & 4                 & 5          & 70                   \\ 
+		Lenovo System x3550 M4 7914     4 & 3                 & 4                 & 4                      & 3              & 4                 & 4          & 60                   \\
+		HP ProLiant DL360 Gen9 Base     5 & 3                 & 5                 & 4                      & 3              & 4                 & 3          & 64                   \\
+	\end{tabular} \\
+	\\ \bottomrule
+	\end{tabular}
+	\caption{Decision -- Analytic cluster selection}
+	\label{table:server-selection}
+\end{table}
+
+\begin{table}[H]
+	\begin{tabular}{L{0.2\textwidth} L{0.6\textwidth}}
+		\textbf{Name}           & \textbf{Storage cluster selection} \\ \toprule
+		\textbf{Decision}       & \textbf{\req{hw}} \\ \midrule
+		\textbf{Status}         & \textbf{Approved} \\ \midrule
+		\textbf{Problem/Issue}  & The system needs reliable computers to store the data.\\ \midrule
+		\textbf{Decision}       & HEMS will utilize Synology RackStation RS814RP to store the data.\\ \midrule
+		\textbf{Alternatives}   & \textit{Synology RackStation RS814RP}\\
+		% https://www.google.nl/shopping/product/9793555443596138172?biw=1346&bih=669&q=storage+servers&bav=on.2,or.r_cp.&bvm=bv.104317490,d.d2s&ion=1&espv=2&tch=1&ech=1&psi=1FIQVpOAEoPlaK7Zn4AN.1443910356406.23&prds=paur:ClkAsKraX8aViW9QBHq_YeLbadvaW6lnMVQDuwzotG6gRVknHILZ_EDzrO8nQNS6N477UjRspRo17BmUoyZnQjMDnOrhflRLM5VXFQCOPDxn9wCZnGJxrWXfWxIZAFPVH73DWMclCanKIzQ68mJVd6ADLpvTfg&sa=X&ved=0CMkDEM1KMBJqFQoTCLid3qaqp8gCFYrZGgodX70Kow
+		& This storage machine has the fastest connection among the others. This machine will run at SATA with 6 Gbps connection.\\
+		& \textit{70BJ NAS-server}\\
+		% https://www.google.nl/shopping/product/15463250681911940369?q=storage+servers&biw=1346&bih=669&bav=on.2,or.r_cp.&bvm=bv.104317490,d.d2s&ion=1&espv=2&tch=1&ech=1&psi=1FIQVpOAEoPlaK7Zn4AN.1443910356406.25&prds=paur:ClkAsKraXy1_BVqi5aD5CGi7OmupTi3OwyL-j7nW7Ss2Qwo-W_81sjaidQU8J0Q3uu7RrSCCth3c9YuMEMNA3zO6TM9tfutSn6ksUeo1EGFdUDKUIlB4gt8wBBIZAFPVH70byN_Dqe5qhSCABb7sxVXYXAvfaw&sa=X&ved=0CIEDEM1KMAo4FGoVChMIpJb_tKqnyAIVQUwaCh0d6wGT
+		& This machine form factor is 1U which is suitable for saving space. However, the connection speed is limited to 3 Gbps.\\
+		& \textit{Thecus N8810U-G NAS-server} \\
+		% https://www.google.nl/shopping/product/464537487289413504?q=storage+servers&biw=1346&bih=669&bav=on.2,or.r_cp.&bvm=bv.104317490,d.d2s&ion=1&espv=2&tch=1&ech=1&psi=1FIQVpOAEoPlaK7Zn4AN.1443910356406.25&prds=paur:ClkAsKraXylXtQJRG2pDp_XW-OBbRHsXe6nrmcB3olgeJQi1FhG4T8bXQABWVbkevi6hzBMwfTk7qioWd88Cq3GWIt3hQlEi5oJEmR7vZvXtvtEinYYlhn3_bBIZAFPVH71qflxmS1BuYghV4B5tpcohhFU7vQ&sa=X&ved=0CNQCEM1KMAU4FGoVChMIpJb_tKqnyAIVQUwaCh0d6wGT
+		& This machine also runs in 3Gbps connection. However, the form factor is 2U which makes this machine takes more space in the rack.\\
+		\midrule
+		\textbf{Arguments}      & \\
+		&   \begin{tabular}{l|llllll|l}
+		                                  & \rot{Reliability} & \rot{Performance} & \rot{Interoperability} & \rot{Security} & \rot{Scalability} & \rot{Cost} & \rot{\textbf{Score}} \\ \hline
+		%                                rel res per int sec sca cost
+		Weights                         3 & 2 & 3 & 2 & 2 & 2 & 2 \\ \hline
+		Synology RackStation RS814RP    5 & 2                 & 4                 & 4                      & 4              & 4                 & 4          & 63                   \\ 
+		70BJ NAS-server                 4 & 2                 & 3                 & 4                      & 4              & 4                 & 3          & 55                   \\
+		Thecus N8810U-G NAS-server      4 & 2                 & 3                 & 4                      & 4              & 4                 & 3          & 55                   \\
+	\end{tabular} \\
+	\\ \bottomrule
+	\end{tabular}
+	\caption{Decision -- Choice of storage machine}
+	\label{table:database-selection}
+\end{table}

@@ -1,0 +1,21 @@
+%!TEX root = ../report.tex
+\section{Hardware Overview}
+\label{sec:hardware-overview}
+As mentioned in previous chapters, HEMS focuses on providing services to monitor electricity usages based on installed sensors on each customer's house. Thus, this system works on the cloud part, which is providing data storage, monitoring, and analysis, both in terms of application (software or service) and hardware. This system deals with no electricity collecting devices. Therefore, the electricity collection part is delegated to third party developers.
+
+According to chapter system architecture, the main part of the HEMS hardware consists of storage cluster and compute cluster. The storage cluster is responsible to handle incoming data from sensors through the exposed data acquisition API. This cluster is capable to store real-time data. The compute cluster mainly deals the data presentation of the stored usage data. Furthermore, compute cluster is also needed to perform analysis based on stored data.
+
+The detailed hardware selection to perform and build this system is explained in the following section.
+
+% The HEMS hardware components can be categorized into three main components: sensing part, data storing part, and analytics part. The data flow starts from wired and wireless sensors located across the Netherlands that collect information for monitoring. UAV will also fly to gather additional information if needed. The overview of the hardware and its application interfaces are depicted in \autoref{fig:hardware-archi-schema} below.
+
+% % \begin{figure}[H]
+% % 	\centering
+% % 	\includegraphics[scale=0.4]{6-hardware/images/hardwareoverview.png}
+% % 	\caption{Schematic overview of the hardware architecture of \ProjectName{}}
+% % 	\label{fig:hardware-archi-schema}
+% % \end{figure}
+
+% All incoming data will be handled by Data Collecting System in the data centers. This system is also responsible to check any incorrect data input or any faulty sensors. The next part of the hardware is the cluster for carrying out analysis. This will be a collection of servers that are coordinated using clusters. HEMS will use another cluster to store important data. This cluster will run Elasticsearch database on top if it.
+
+% The last part of the hardware architecture is the third party data gathering cluster. The third party data gathering cluster is responsible for collecting weather forecast and demographic information of the Netherlands. This cluster is also part of the main analytics clusters.
