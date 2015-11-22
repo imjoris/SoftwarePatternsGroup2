@@ -1,4 +1,4 @@
-%!TEX root = ../report.tex
+% !TEX root = ../report.tex
 \section{Elaborated Model}
 \label{sec:elaboratedmodel}
 
@@ -15,3 +15,16 @@ An end-user of the system can visit the web interface using a web browser on any
 	\caption{Elaborated model}
 	\label{fig:elaboratedmodel}
 \end{figure}
+
+\begin{description}
+	\item[Data receival API] ~\\ The `Data receival API' component exposes a REST interface, which is used by the homes to send electricity usage data to the system. The API is responsible for storing the data in the storage cluster or caching the data if the storage cluster is temporarily not available.
+	
+	\item[Storage cluster] ~\\ The storage cluster is a set of servers which will store all the data in a replicated way.
+	
+	\item[Web interface] ~\\ Users of the system (home owners) visit the web interface (presented as a website) through all kinds of devices. The web interface allows users to compute and view statistics from the collected usage data. The web interface also allows users to register new devices with the system.
+	
+	\item[Statistics] ~\\ The statistics part of the system is responsible for computing statistics from the collected usage data. It will receive commands to do so through the web interface.
+	
+	\item[Compute cluster] ~\\ The compute cluster is a cluster of servers, which are used to compute statistics from the raw collected electricity usage data.
+	
+\end{description}

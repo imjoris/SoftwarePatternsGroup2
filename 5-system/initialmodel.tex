@@ -1,4 +1,4 @@
-%!TEX root = ../report.tex
+% !TEX root = ../report.tex
 \section{System context}
 \label{sec:system-context}
 
@@ -10,3 +10,23 @@ The system context diagram in Figure~\ref{fig:system-context-diagram} gives an o
 	\caption{System context diagram}
 	\label{fig:system-context-diagram}
 \end{figure}
+
+\subsection{Users and roles}
+\begin{description}
+
+	\item[Home Owners] ~\\ The home owners are the main users of the system. They want to know about the electricity usage in their house. 
+	
+	They interact with the system by viewing statistics, configuring the system and they receive alerts if they configured the web interface to send them these. 
+	
+	\item[Maintainers] ~\\ The maintainers of the system will apply updates to the system and read errors that might have occurred in order to solve these.
+	
+\end{description}
+
+\subsection{External systems}
+\begin{description}
+
+	\item[Electricity Usage Sensors] ~\\ The electricity usage sensors are the sensors that measure the electricity usage of the devices. These sensors work by measuring the electricity passing through a power outlet. This means that they in fact measure the electricity usage of a power outlet and not that of a device. This is relevant if multiple devices are connected to the same power outlet .
+	
+	\item[Web Browsers] ~\\ The web interface of the system, where the system can be configured and statistics can be viewed, is presented as a web page. Users will use a range of different web browsers (on a range of different devices) to visit this web interface. It is important that the web interface works equally well in all these different web browser.
+	
+\end{description}
