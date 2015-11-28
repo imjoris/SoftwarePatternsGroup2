@@ -6,53 +6,82 @@
 
 \newcommand{\EAA}{Patterns of Enterprise Application Architecture}
 
-\section{Layers}
+%\section{Layers}
+%
+%\begin{description}
+%%
+%%Context – a recurring set of situations in which the
+%%pattern applies.
+%%Problem - a set of forces (goals and constraints)
+%%occurring in this context.
+%%• Forces are often competing
+%%Solution - a canonical design form or rule that
+%%someone can apply to resolve these forces.
+%%• The solution balances the forces.
+%
+%\item [Context]
+%The system has to handle different kinds of incoming request. The web interface of the client wants to receive a web page from the system. The energy data collectors will send the data to the system so it can be stored and analyzed.
+%
+%\item [Problem]
+%The system needs a structure to coordinate the external calls and requests.
+%
+%\item [Solution]
+%Our application exposes a web service to multiple clients and so a the Service Layer pattern will be used. Using this pattern, the system will be divided into the following layers.
+%
+%
+%
+%\item [Source] 
+%\EAA  \cite{Fowler:2002:PEA:579257}
+%\end{description}
+
+\section{Service Layer}
 
 \begin{description}
-%
-%Context – a recurring set of situations in which the
-%pattern applies.
-%Problem - a set of forces (goals and constraints)
-%occurring in this context.
-%• Forces are often competing
-%Solution - a canonical design form or rule that
-%someone can apply to resolve these forces.
-%• The solution balances the forces.
+\item [Source]~\\
+Patterns of Enterprise Application Architecture, P.133 \cite{Fowler:2002:PEA:579257}
 
-\item [Context]
-The system has to handle different kinds of incoming request. The web interface of the client wants to receive a web page from the system. The energy data collectors will send the data to the system so it can be stored and analyzed.
+\item [Issue]~\\
+The system will have different interfaces with different kinds of clients. For example, commands to compute statistics can come from the user interface, but also from the alerting module. These different interfaces have common interactions with the system to invoke the business logic. %TODO describe altering module in elaborated model
 
-\item [Problem]
-The system needs a structure to coordinate the external calls and requests.
-
-\item [Solution]
-Our application exposes a web service to multiple clients and so a the Service Layer pattern will be used. Using this pattern, the system will be divided into the following layers.
-
+\item [Assumptions/Constraints]~
 \begin{itemize}
-\item Service layer
-\item Domain layer
-\item Data source layer
+\item The application's business logic and/or data are accessed using several interfaces.
 \end{itemize}
+
+\item [Positions]~
+\begin{enumerate}
+\item Domain Model % just domain model not good enough
+\item Service Layer
+\end{enumerate}
+~\\[-1.5cm]
+
+\item [Decision] ~\\
+The system will use the Service Layer pattern to define the boundary of the application using a layer of services.
+
+The service layer exposes a set of services to be used by clients and for each service, there is a certain script that will be executed when the service is called. The service layer will be used with the "operation script" variation. This means that the Service Layer consists of thick classes that contain logic. %TODO Why do we want thick classes with logic?????
+
+\item [Argument]~
+\begin{enumerate}
+\item Using just the Domain Model pattern alone does not make a distinction between application logic and domain logic.
+
+\item The service layer does allow making a distinction between the application- and domain logic, which 
+\end{enumerate}
+
+\item [Implications]~\\
+There is a boundary between the application- and domain logic.
+
+\item [Related requirements/decisions]~\\
+\ref{fr:interface-selectstats}, \ref{fr:receive-usage}
 
 \begin{figure}[H]
 \caption{Service Layer}
 \centering
-\includegraphics[]{4-analysis/images/ServiceLayer.jpg}
+\includegraphics[scale=0.7]{4-analysis/images/ServiceLayer.jpg}
 \end{figure}
-
-The service layer exposes a set of services to be used by clients and for each service, there is a certain script that will be executed when the service is called. The service layer will be used with the "operation script" variation. This means that the Service Layer consists of thick classes that contain logic. 
-
-%\begin{quotation}
-%The easier question to answer is probably when not to use it. You probably don't need a Service Layer if your application's business logic will only have one kind of client - say, a user interface - and it's use case responses don't involve multiple transactional resources. [...]
-%But as soon as you envision a second kind of client, or a second transactional resource in use case responses, it pays to design in a Service Layer from the beginning.
-%\end{quotation}
-%
-
-\item [Source] 
-\EAA  \cite{Fowler:2002:PEA:579257}
 
 
 \end{description}
+
 
 \section{Layer Supertype}
 
@@ -146,6 +175,13 @@ Unit of Work pattern will be used to keep track of changes to objects and to coo
 With Active Record, every change to an in-memory object leads to a database call. This means that multiple consecutive changes to an object lead to multiple database calls. 
 
 The Unit of Work instead keeps track of these changes, to allow writing these changes to the database in a single call.
+
+\item [Implications]~\\
+Using Unit of Work will reduce the load on the database (the number of database calls). It does however introduce a delay before the change in the in-memory object is present in the representation in the database.
+
+\item [Related requirements/decisions]~\\
+--
+
 \end{description}
 
 \section{Data source layer}
