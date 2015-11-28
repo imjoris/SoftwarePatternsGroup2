@@ -1,4 +1,4 @@
-%!TEX root = ../report.tex
+% !TEX root = ../report.tex
 \chapter{Analysis}
 \label{ch:analysis}
 
@@ -123,21 +123,29 @@ This is the most advanced pattern, reducing code duplication and increasing flex
 
 \end{description}
 
-\subsection{Unit of work}
-%\myworries{Do we need this? The domain might not be doing any analysis at all, it just uses spark for that.}
+\section{Unit of work}
 
 \begin{description}
-\item [Context]
-The system does statistical analysis on the sensor data
+\item [Source]~\\
+Patterns of Enterprise Application Architecture, P.184 \cite{Fowler:2002:PEA:579257}
 
-\item [Problem]
-Concurrent analysis functions might use the same object and data.
+\item [Issue]~\\
+The system has several object stored in a database which can be edited and created. For example, new sensor data of devices becomes available and changes to the configuration (changing device names etc.) can be made. Updating database records on each change leads to a lot of database calls, which is bad for performance.
 
-\item [Solution]
-Analyzing the data can be computationally intensive, which is why multiple threads will be used do distribute the work. This requires coordination of the data that is being handled. This pattern provides concurrency control. The Unit of work pattern: ``Maintains a list of objects affected by a business transaction and coordinates the writing out of changes and the resolution of concurrency problems.''
+\item [Assumptions/Constraints]~\\
 
-\item [Source]
+\item [Positions]
+\begin{enumerate}
+\item Active Record
+\end{enumerate}
 
+\item [Decision] ~\\
+Unit of Work pattern will be used to keep track of changes to objects and to coordinate writing these changes to the database in one database call.
+
+\item [Argument]~\\
+With Active Record, every change to an in-memory object leads to a database call. This means that multiple consecutive changes to an object lead to multiple database calls. 
+
+The Unit of Work instead keeps track of these changes, to allow writing these changes to the database in a single call.
 \end{description}
 
 \section{Data source layer}
