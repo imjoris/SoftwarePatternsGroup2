@@ -184,6 +184,49 @@ Using Unit of Work will reduce the load on the database (the number of database 
 
 \end{description}
 
+\section{Broker}
+
+\begin{description}
+\item [Source]~\\
+Pattern-oriented Software Architecture - Volume 4 \cite{wiley-4}
+
+\item [Issue]~\\
+The system uses several servers to compute the statistics. This introduces a lot of challenges, like communication to these servers and dividing the work over these servers. The application code should not have to address these challenges.
+
+\item [Assumptions/Constraints]~\\
+
+\item [Positions]~
+\begin{enumerate}
+\item Publisher-Subscriber
+\item Broker
+\item Message Queuing
+\item Remote Procedure Call
+\end{enumerate}
+~\\[-1.5cm]
+
+\item [Decision] ~\\
+
+
+\item [Argument]~\\
+
+
+\item [Implications]~\\
+
+
+\item [Related requirements/decisions]~\\
+\ref{fr:compute-total}, \ref{fr:compute-bill}, \ref{fr:compute-bill}
+%Refer to layers
+%Most B ROKER realizations are based on a L AYERS (185) architecture
+%to manage complexity, such as CORBA [OMG04a] and Microsoft’s
+%.NET Remoting [Ram02]. These layers are further decomposed into
+%‘special-purpose’ components for specific networking and communi-
+%cation tasks. We illustrate this partitioning using the CORBA layering
+%[SC99]—other layering schemes and middleware may involve differ-
+%ent assignments [VKZ04].
+
+\end{description}
+
+
 \section{Data source layer}
 The main database will be quite simple and the database actions won't be very complicated. However, the tables needed for the statistics can become very complex.
 
