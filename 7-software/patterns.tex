@@ -35,10 +35,32 @@ The Data Source layer contains the Unit of Work, which keeps track of the change
   % explain this pattern somewhere
 
 
+\clearpage
 \subsection{Model-View-Controller}
 \label{sec:mvc}
+As mentioned in chapter \ref{ch:analysis}, MVC pattern is applied to decouple user-interface and the logic behind it. In this way, reusability is increased because the same models or controllers can be coupled with the same view. Modifiability is also increased because it becomes easier to modify a particular user interface or data model without interfering the logic, and vice-versa. Figure \ref{fig:mvc-architecture} depicts an example of MVC implementation in the HEMS.
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{7-software/images/mvc.pdf}
+	\caption{Model-view-controller pattern implementation}
+	\label{fig:mvc-architecture}
+\end{figure}
+
+Some models, views, and controllers are depicted in Figure \ref{fig:mvc-architecture}. Request handler handles incoming user request via HTTPS and routes it to the corresponding controller. Required data is then obtained through the models. Suitable views are used to provide user interface to the user. Some models, views, and controllers are presented in Figure \ref{fig:mvc-architecture}. However, there are more models, views, and controllers than those which are represented in the Figure \ref{fig:mvc-architecture}.
+
+\clearpage
 \subsection{Template View}
 \label{sec:template-view}
+Template view is implemented in this system to make the HTML code reusable in different pages. This will also make the view structure more simple. Code duplication can be prevented because instead of duplicating the code, the HTML will use a certain template.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth]{7-software/images/template-view.pdf}
+	\caption{Template view pattern implementation}
+	\label{fig:template-view-architecture}
+\end{figure}
+
+Figure \ref{fig:template-view-architecture} shows an example of implementation of the template view pattern. Each page of the system (presented in green color) will combine several HTML code snippets (presented in blue color) together. \texttt{TopMenuBarSnippet} and \texttt{SideMenuBarSnippet} are used several times, as each page contains top menu bar and side menu bar. This is also good for expandability because the new page may just combine existing page template to create new web page.
 
 % etc...
