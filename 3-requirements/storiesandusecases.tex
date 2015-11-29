@@ -4,6 +4,7 @@
 
 In this section the architectural significant use-cases will be presented.
 
+% Alert
 % Installation ?
 % Collect and store energy consumption
 % The End-Uer wants to display his bill ( to specific ? ) / his energy conumption
@@ -24,7 +25,7 @@ In this section the architectural significant use-cases will be presented.
 	Precondition & The website has the internal process to add an user to the database \\
 	Main success scenario & \compactList{enumerate}{%
 		 \item The user access the \ShortName~URL 
-		 \item The user click on the `Sign up' Button 
+		 %\item The user click on the `Sign up' Button 
 		 \item The website display a registration form requests the full name, username, email address and address of the user.
 		 \item The system checks if the user isn't already in the database. 
 		 \item If not the user is added in the database. 
@@ -38,7 +39,7 @@ In this section the architectural significant use-cases will be presented.
 			 \item[1.] The user gets to see a message telling him the user is already registered.
 			\end{itemize} ~\\[-1.0cm]
 		} \\
-	Related requirements & \\
+	Related requirements & FR-9\\
 	}
 \caption{UC-\arabic{uc}: The End user registration}
 \label{table:uc-registration}
@@ -49,42 +50,19 @@ In this section the architectural significant use-cases will be presented.
 		UCTable
 	]{%
 	value & description \\
-	\req{uc} & \textbf{Receiving external energy usage data} \\
-	Goal & The sytem needs to receive energy data to make the analysis  \\
-	Stakeholders \& interests & \\
+	\req{uc} & \textbf{Receiving, collecting and store external energy usage data} \\
+	Goal & The sytem needs to receive energy data and store it. \\
+	%Stakeholders \& interests & \\
 	Primary actor & The energy usage sensors \\
-	Level & User goal\\
+	%Level & User goal\\
 	Precondition & The energy data is available \\
 	Main success scenario & \\  % what is the process ?
-	Postcondition &  \\
-	Extensions &  \\
-	Related requirements & \\
-	}
-\caption{UC-\arabic{uc}: Receiving external energy usage data}
-\label{table:uc-external-usage}
-\end{table}
-
-\begin{table}[H]
-	\pgfplotstabletypeset[%
-		UCTable
-	]{%
-	value & description \\
-	\req{uc} & \textbf{Store energy consumption} \\
-	Goal & The system needs to store the energy data it just received. \\
-	Stakeholders \& interests &  \\
-	Primary actor & The system \\
-	Scope & Monitoring part of the system \\
-	Level & Sub process\\
-	Precondition & The system has received the data. The database is available. \\
-	Main success scenario & \compactList{enumerate}{%
-		\item The data received is directly stored in the database.
-		} \\
 	Postcondition & The data is stored in the database. \\
-	Extensions & The data isn't stored. \\ % why \\
-	Related requirements & \\
+	Extensions & The data isn't stored. \\
+	Related requirements & FR-1 FR-2 FR-3 \\
 	}
-\caption{UC-\arabic{uc}: Store energy consumption}
-\label{table:uc-store-consumption}
+\caption{UC-\arabic{uc}: Receiving and store external energy usage data}
+\label{table:uc-external-usage}
 \end{table}
 
 
@@ -100,12 +78,13 @@ In this section the architectural significant use-cases will be presented.
 	Level & User goal\\
 	Precondition & The user is registered in the system. \\
 	Main success scenario & \compactList{enumerate}{%
-		\item The user gets access to his interface by clicking on " Sign in " Button
+		\item The user gets access to his interface.
 		\item In the menu he clicks on "Bill".
+		\item The computation (see the z"Compuatation/statistics"use-case) is made by the system.
 		} \\
 	Postcondition &  The estimated bill is displayed \\
 	Extensions &  \\
-	Related requirements & \\
+	Related requirements & FR-6\\
 	}
 \caption{UC-\arabic{uc}: Display the estimated bill}
 \label{table:uc-display-bill}
@@ -117,7 +96,7 @@ In this section the architectural significant use-cases will be presented.
 	]{%
 	value & description \\
 	\req{uc} & \textbf{Display analysis, daily/weekly/monthly report} \\
-	Goal & The End-User wants to display several kind of analysis about hi energy consumption \\
+	Goal & The End-User wants to display several kind of analysis about his energy consumption \\
 	Stakeholders \& interests & \compactCell{
 		\textbf{End user} -- wants to know about the electricity usage \\
 	} \\
@@ -131,7 +110,7 @@ In this section the architectural significant use-cases will be presented.
 		} \\
 	Postcondition &  Charts with different item are displayed. \\
 	Extensions & The statistics aren't made. \\
-	Related requirements & \\
+	Related requirements & FR-10\\
 	}
 \caption{UC-\arabic{uc}: Display analysis, daily/weekly/monthly report}
 \label{table:uc-display-analysis}
@@ -165,17 +144,18 @@ In this section the architectural significant use-cases will be presented.
 		UCTable
 	]{%
 	value & description \\
-	\req{uc} & \textbf{Configuration} \\
-	Goal & The user must be able to configure the system with his own characteristics. \\
-	Stakeholders \& interests & \\
+	\req{uc} & \textbf{Configuration : adding new devices} \\ % adding new devices
+	Goal & The user must be able to configure the system with his home devices' characteristics. \\
+	%Stakeholders \& interests & \\
 	Primary actor & The user \\
 	Level & User goal\\
 	Precondition & The user is registered in the database of the system. \\
 	Main success scenario & \compactList{enumerate}{%
-		 \item On the dashboard/website the user clicks on the " Settings " button. 
-		 \item The user gets access to the Settings section with all the possibilities/internal sections for example :frequency of alert, adding new devices etc.
+		 \item After logging in on the dashboard/website the user clicks on the " Settings" button. 
+		 \item The user gets access to the Settings section with all the internal sections and choooses "Adding new devices".
+		 \item The user enters the new device' characteristics and submits.
 		} \\
-	Postcondition &  \\
+	Postcondition & The new device and its related information are added in the database. \\
 	Extensions & \compactList{itemize}{ %
 		\item[2] The system didn't take into account the information the user just added.
 		\begin{itemize}
@@ -183,10 +163,33 @@ In this section the architectural significant use-cases will be presented.
 		 \item[2b] If yes Go to step1.
 		\end{itemize}
 	} \\
-	Related requirements & \\
+	Related requirements & FR-10 FR-11 FR-12\\
 	}
-\caption{UC-\arabic{uc}: Configuration}
+\caption{UC-\arabic{uc}: Configuration- adding new devices}
 \label{table:uc-configuration}
 \end{table}
 
+\begin{table}[H]
+	\pgfplotstabletypeset[%
+		UCTable
+	]{%
+	value & description \\
+	\req{uc} & \textbf{Computation / Statistics} \\
+	Goal & The system performs several kind of statistics. \\
+	%Stakeholders and interests & \\
+	Primary actor & System\\
+	%Level & User goal\\
+	Precondition & The database of the system has the necessary data. \\
+	Main success scenario & \compactList{enumerate}{%
+		 \item The data needed for the selected computation is filtered
+		 \item The system invoks Map/Reduce Functions or Spark and computes
+		}\\
+	Postcondition & The analysis is made and the result available/displayed.  \\
+	Extensions & The system can't compute the statistics.\\
+	% The statistics are incorrect.
+	Related requirements & FR-4 FR-5 FR-6 FR-7 FR-8 FR-10 FR-16 FR-19\\
+	}
+\caption{UC-\arabic{uc}: Computation-statistics}
+\label{table:uc-registration}
+\end{table}
 

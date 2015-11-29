@@ -117,7 +117,7 @@ This pattern will be used in every layer.
 
 \item[Domain layer] In this layer, the sypertype will contain common features and functions for handling storage.
 %\myworries{From book:
-%-  "Common features, such as the storage and handling of 'Identity Fields (216), can go there."}
+%-  "Common features, such as the storage and handling of 'Identity Fields (216), can go there."
 
 \item[Data source layer]
 The data mapper in the data source pattern can use a layer super type that handles all the common behavior, which can greatly reduce the extra work of coding. 
@@ -258,6 +258,8 @@ A gateway of any kind leads to performance overhead, because for each call comin
 %
 %%Using a record set (504) turning into a unit of work (184)? P98 (lost the page:()
 
+
+
 \subsection{Repository}
 %\myworries{
 %P322:
@@ -283,6 +285,30 @@ The repository gives a lot more control over how the data is handled. The benefi
 
 Performing analysis on the data also consists of executing complex queries on the data source. The database that executes these queries, however, might change. Or the system might decide to use multiple databases and data sources.
 Using the Repository pattern, these changes can be made fast. The repository also allows for multiple configurations to exist. So an extra repository could be created for testing purposes, only using an in-memory database to increase the test execution speed.
+
+The Shared Repository pattern will be applied and the Architectural decisions documented according to the template presented in \textit{Using Patterns to Capture Architectural Decisions} \\
+ "In the SHARED REPOSITORY pattern one component of the system is used as a central data store, accessed by all other independent components."\\
+Source : \textit{Architectural Pattern Revisited- A Pattern Language} \\
+% Forces ?
+ \textit{Name:} Shared Repository (or also called Repository) \\
+ \textit{Issue:} The external data must be stored, updaded, accessed by multiple clients simultaneously and analyzed.\\
+ \textit{Assumptions/Contrainsts :} \\
+ \textit{Position:} \\
+ \textit{Decision}\\
+ \textit{Arguments} \\
+ \textit{Implication} \\
+ \textit{Related Decisions} \\
+ \textit{Related Requirements} \\
+ \textit{Quality attributes:} Reusability, Changeability, Maintainability \\
+ 
+ % Active repository
+ 
+ Ths system, uses the Shared repository pattern.\\
+ One database will be accessed by all the clients . The security in ensured by the logging through the UI.
+ 
+ %WHAT NOW ?
+ 
+
 
 \section{Client user interface}
 

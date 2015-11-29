@@ -22,15 +22,8 @@ The sytem will be hopefully used by a lot of people who don't necessarily have k
  	]{%
  		value & description \\
  		\req{RE} & A margin of error of $5\%$ in the energy measurements is tolerated. \\
- 	}
- 	
- 	\subparagraph{Availability}
- 	\pgfplotstabletypeset[%
- 		UCTable
- 	]{%
- 		value & description \\
- 		\req{AVA} & The sytem should be available $99.9\%$. of the time which means down for 44 minutes. \\
- 		\req{AVA} & The system should be down for maximum ten minutes when the user installs a new release(version). \\
+ 		\req{RE} & The sytem should be available $99.9\%$. of the time which means down for 44 minutes. \\
+ 		\req{RE} & The system should be down for maximum ten minutes when the user installs a new release(version). \\
  	}
 %$AV = \frac{\text{MTTF}}{\text{MTTF} + \text{MTTR}} = \frac{\text{6 months}}{\text{6 months }+\text{ 12 hours}} = \frac{4380 \text{ hours}}{4380 + 12 \text{ hours}} = 99.7 \%$
 % computation
@@ -44,7 +37,6 @@ Ensuring the security for the system is a major issue so all the data needed for
  		value & description \\
  		\req{SEC} & Each user is identified and has to log in in order to view his "Home Energy Monitor" account. \\
  		\req{SEC} & The data is encrypted. \\ % developp , which database ?
- 		\req{SEC} & Passwords of the users are stored and transmitted as a hash\\
  	}
 
  
