@@ -92,4 +92,12 @@ Template view is implemented in this system to make the HTML code reusable in di
 
 Figure \ref{fig:template-view-architecture} shows an example of implementation of the template view pattern. Each page of the system (presented in green color) will combine several HTML code snippets (presented in blue color) together. \texttt{TopMenuBarSnippet} and \texttt{SideMenuBarSnippet} are used several times, as each page contains top menu bar and side menu bar. This is also good for expandability because the new page may just combine existing page template to create new web page.
 
+\subsection{Shared repository view}
+This view represents the communication with the central database all the clients of the system.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{7-software/images/database.png}
+	\caption{Shared repository}
+	\label{fig:mvc-architecture}
+\end{figure}
 % etc...
