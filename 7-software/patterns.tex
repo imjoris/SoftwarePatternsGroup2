@@ -1,12 +1,37 @@
 % !TEX root = ../report.tex
 
+\clearpage
 \section{Elaborated model with patterns}
 This section will describe the elaborated model on the basis of the patterns used in the architecture. For each patterns, this section will describe how it is implemented and how it affects the quality attributes of the system.
 
-\subsection{Layers}
+\subsection{Layers pattern}
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.45]{7-software/images/Layers.png}
+\caption{The Layers}
+\label{fig:layers}
+\end{figure}
+The system is divided into three layers. The top layer is the Service Layer, see Section~\ref{sec:service-layer-pattern} for more information about this layer.
 
-\subsection{Service Layer}
+The middle layer is the Domain Layer and is responsible for the domain logic. The Domain Model contains all the classes, has an in-memory representation of the data and contains the logic which is inherent to the objects.
+It uses the Unit of Work pattern (see Section~\ref{sec:unit-of-work-pattern}) to keep track of the changes to objects, so not every change leads to a new database call. 
+The other components in the Domain Layer are connected to the Domain Model, so they have access to the classes in there. 
+The Alerting component is responsible for sending alerts by email to the end user, for which it depends on an external Email Gateway.\\
+The Domain Model exposes an interface, which is used by the API on the Service Layer to store new sensor data. The Configuration and Statistics components also expose an interface to the Service Layer, which are used by the Web Interface, where a user can change the configuration and compute statistics.
+% gateway is actually also a pattern :o
 
-\subsection{Unit of Work}
+The Data Source layer contains the Unit of Work, which keeps track of the changes to the objects and translates those changes to database transactions when the object is committed. The layer also contains a Database Driver, which handles the communication with the database.
+
+%TODO explain individual components (in one of the views?)
+
+
+\subsection{Service Layer pattern}
+\label{sec:service-layer-pattern}
+
+\subsection{Unit of Work pattern}
+\label{sec:unit-of-work-pattern}
+
+%It also uses an \textit{Identity Map} in order to guarantee that
+  % explain this pattern somewhere
 
 % etc...
