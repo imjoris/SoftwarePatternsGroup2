@@ -418,3 +418,49 @@ To consider:
 %
 %%MVP potel:
 %%\url{Potel: http://www.wildcrest.com/Potel/Portfolio/mvp.pdf}
+
+\section{Layers}
+\manuallabel{sec:layers}{Layers}
+
+\begin{description}
+\item [Source]~\\
+Pattern-oriented Software Architecture - Volume 1 \cite{wiley-1}
+
+\item [Issue]~\\
+The system consists of high-level components (e.g. user interface), which are dependent on lower level components (domain logic, database). Decoupling these components is important.
+
+\item [Assumptions/Constraints]~
+\begin{itemize}
+\item It is assumed that the system will have higher-level components that depend on lower-level components.
+\end{itemize}
+~\\[-1.5cm]
+
+\item [Positions]~
+\begin{enumerate}
+\item Relaxed Layered System
+\item Layers
+% Indirection Layers??
+\end{enumerate}
+~\\[-1.5cm]
+
+\item [Decision] ~\\
+The system will use the Layers pattern to divide the application in multiple layers. The top layer will implement the Service Layer pattern, the middle layer will implement the domain logic (domain model) and the bottom layer will be responsible for the data storage.
+
+\item [Argument]~
+\begin{enumerate}
+\item The relaxed layered system is a variant of the Layers pattern which allows layers to use services of any layer below it, instead of only the next layer. This increases the flexibility and performance of the system. However, this pattern has a large negative impact on the maintainability.
+
+\item 
+Using the layers pattern increases maintainability by decoupling components of different levels of abstraction.
+
+\end{enumerate}
+
+\item [Implications]~\\
+Using layers will have a positive impact on the maintainability and re-usability of the system. An increased maintainability will help prevent bugs, which on the longer term helps to increase the reliability of the system. 
+
+The performance of the system will have some negative impact, since the request have to pass all the layers, even if they only need logic/data in the bottom layer.
+
+\item [Related requirements/decisions]~\\
+\ref{sec:service-layer}, 
+
+\end{description}
