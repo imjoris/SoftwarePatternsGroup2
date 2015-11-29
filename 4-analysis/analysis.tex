@@ -332,72 +332,72 @@ The repository gives a lot more control over how the data is handled. The benefi
 Performing analysis on the data also consists of executing complex queries on the data source. The database that executes these queries, however, might change. Or the system might decide to use multiple databases and data sources.
 Using the Repository pattern, these changes can be made fast. The repository also allows for multiple configurations to exist. So an extra repository could be created for testing purposes, only using an in-memory database to increase the test execution speed.
 
-\section{Client user interface}
+% \section{Client user interface}
 
-\subsection{Controller}
-%\myworries{
-%On p 99:
-%\begin{itemize}
-%\item Given a free choice, I'd recommend Page Controller (p333). 
-%\item More complex navigation and UI lead you toward a Front Controller (344)
-%\end{itemize}
-%}
-Page controller: controller for each page. So upon receiving a request do:
-\begin{itemize}
-\item decode url, extract data
-\item invoke model to process data
-\item determine view and use the model data to create the HTML to return
-\end{itemize}
+% \subsection{Controller}
+% %\myworries{
+% %On p 99:
+% %\begin{itemize}
+% %\item Given a free choice, I'd recommend Page Controller (p333). 
+% %\item More complex navigation and UI lead you toward a Front Controller (344)
+% %\end{itemize}
+% %}
+% Page controller: controller for each page. So upon receiving a request do:
+% \begin{itemize}
+% \item decode url, extract data
+% \item invoke model to process data
+% \item determine view and use the model data to create the HTML to return
+% \end{itemize}
 
-Front page controller:\\
-One controller for all requests/views. This allows building a filter chain, handling authentication, logging etc.
-Front page is better/helps with concurrency, because a new command object is created on each request. Reducing thread-safety concerns. \ign{(P346)}The model, however, can have shared objects that do require thread safety management.
+% Front page controller:\\
+% One controller for all requests/views. This allows building a filter chain, handling authentication, logging etc.
+% Front page is better/helps with concurrency, because a new command object is created on each request. Reducing thread-safety concerns. \ign{(P346)}The model, however, can have shared objects that do require thread safety management.
 
-The front page will be used, because it provides more functionality to the system. The only advantage of a page controller compared to the front controller is that it has a more natural structure.
+% The front page will be used, because it provides more functionality to the system. The only advantage of a page controller compared to the front controller is that it has a more natural structure.
 
-\subsection{View}
-%\myworries{
-%Template view (350) or Transform view (361).
-%\\
-%(P forgot):
-%Template views have the edge at the moment.
-%}
+% \subsection{View}
+% %\myworries{
+% %Template view (350) or Transform view (361).
+% %\\
+% %(P forgot):
+% %Template views have the edge at the moment.
+% %}
 
-\begin{description}
-\item [Template view] Write HTML code including markers. Replace the markers with the data when the page is requested. (Play framework)
-\item [Transform view] Convert the domain data to HTML, "transform" the domain data. Upon a request, it get the domain data, for each item in the data it looks for a appropriate "transform" to transform the data to HTML.
-\end{description}
+% \begin{description}
+% \item [Template view] Write HTML code including markers. Replace the markers with the data when the page is requested. (Play framework)
+% \item [Transform view] Convert the domain data to HTML, "transform" the domain data. Upon a request, it get the domain data, for each item in the data it looks for a appropriate "transform" to transform the data to HTML.
+% \end{description}
 
-The template view will be used, because it is used a lot more then the transform view. Major web frameworks are based on this pattern (the play framework, laravel...). The view patterns don't have an important difference in how beneficial they are to the project.
+% The template view will be used, because it is used a lot more then the transform view. Major web frameworks are based on this pattern (the play framework, laravel...). The view patterns don't have an important difference in how beneficial they are to the project.
 
-%Transform view avoids having too much data in the HTML, because of the transform methods creating the HTML.
-%Transform view can be tested without having a web server up.
+% %Transform view avoids having too much data in the HTML, because of the transform methods creating the HTML.
+% %Transform view can be tested without having a web server up.
 
-\subsection{Model}
-%\myworries{
-%Communication with the model: p100:
-%Preference: Having everything run in one process if you can. Else Remote Facade (p388) and DTO (p 401).
-%}
-%
-%\myworries{
-%\section{Notes only}
-%\subsection{Model-View View-Model}
-%}
-This section will describe how the Model updates the view and how the view updates the model.
-%\myworries{View update model using page controller as is already described}
+% \subsection{Model}
+% %\myworries{
+% %Communication with the model: p100:
+% %Preference: Having everything run in one process if you can. Else Remote Facade (p388) and DTO (p 401).
+% %}
+% %
+% %\myworries{
+% %\section{Notes only}
+% %\subsection{Model-View View-Model}
+% %}
+% This section will describe how the Model updates the view and how the view updates the model.
+% %\myworries{View update model using page controller as is already described}
 
-To consider:
-\begin{description}
-\item [Observer Synchronization] Synchronize multiple screens by having them all be observers to a shared area of domain data.
-\item [Separated Presentation] Ensure that any code that manipulates presentation only manipulates presentation, pushing all domain and data source logic into clearly separated areas of the program.
+% To consider:
+% \begin{description}
+% \item [Observer Synchronization] Synchronize multiple screens by having them all be observers to a shared area of domain data.
+% \item [Separated Presentation] Ensure that any code that manipulates presentation only manipulates presentation, pushing all domain and data source logic into clearly separated areas of the program.
 
-\item [Presentation model] Represent the state and behavior of the presentation independently of the GUI controls used in the interface
+% \item [Presentation model] Represent the state and behavior of the presentation independently of the GUI controls used in the interface
 
-\item [Supervising controller] Factor the UI into a view and controller where the view handles simple mapping to the underlying model and the the controller handles input response and complex view logic.
+% \item [Supervising controller] Factor the UI into a view and controller where the view handles simple mapping to the underlying model and the the controller handles input response and complex view logic.
 
-\item [Model view controller/presenter] 
+% \item [Model view controller/presenter] 
 
-\end{description}
+% \end{description}
 
 %Observer Synchronization
 %%Synchronize multiple screens by having them all be observers to a shared area of domain data.
@@ -419,48 +419,89 @@ To consider:
 %%MVP potel:
 %%\url{Potel: http://www.wildcrest.com/Potel/Portfolio/mvp.pdf}
 
-\section{Layers}
-\manuallabel{sec:layers}{Layers}
-
+\section{Model-View-Controller}
 \begin{description}
 \item [Source]~\\
-Pattern-oriented Software Architecture - Volume 1 \cite{wiley-1}
+Pattern-oriented Software Architecture - Volume 1 P.125 \cite{wiley-1}\\
+Patterns of Enterprise Application Architecture, P.330 \cite{Fowler:2002:PEA:579257}
 
 \item [Issue]~\\
-The system consists of high-level components (e.g. user interface), which are dependent on lower level components (domain logic, database). Decoupling these components is important.
+The system must handle multiple client applications. The client may connect to the system trough web-based interface or a native application that is developed specially to see the data. In order to increase re-usability, the views may be decoupled from the logic, resulting in separated logic (controller and model) and view.
 
 \item [Assumptions/Constraints]~
 \begin{itemize}
-\item It is assumed that the system will have higher-level components that depend on lower-level components.
+\item It is assumed that the client uses modern web browser or,
+\item the client uses native application in smart phone to see the corresponding information.
 \end{itemize}
 ~\\[-1.5cm]
 
 \item [Positions]~
 \begin{enumerate}
-\item Relaxed Layered System
-\item Layers
-% Indirection Layers??
+\item Presentation-Abstraction-Control
+\item Layers-Model-View-Controller
 \end{enumerate}
 ~\\[-1.5cm]
 
 \item [Decision] ~\\
-The system will use the Layers pattern to divide the application in multiple layers. The top layer will implement the Service Layer pattern, the middle layer will implement the domain logic (domain model) and the bottom layer will be responsible for the data storage.
+The system will use the Model-View-Controller pattern to decouple the view and the logic behind it. The view consists of view for responsive web, which supports varying screen size of the client, and a native application for smartphone. The controller and model for those different views are the same. This pattern resides in different layers of this system.
 
 \item [Argument]~
 \begin{enumerate}
-\item The relaxed layered system is a variant of the Layers pattern which allows layers to use services of any layer below it, instead of only the next layer. This increases the flexibility and performance of the system. However, this pattern has a large negative impact on the maintainability.
+\item The Presentation-Abstraction-Control (PAC) pattern decompose the system into a tree-like hierarchy of agents, which each agent is made of its own presentation (UI), abstraction, and control. This type of pattern is not well suited to the HEMS since the HEMS only needs decoupled views with the same control and abstraction.
 
-\item 
-Using the layers pattern increases maintainability by decoupling components of different levels of abstraction.
+\item The Model-View-Controller (MVC) pattern only decouple the views, models, and controller, which indicates that different views may use the same controller and/or model. This pattern is well-suited with the HEMS and is good for re-usability, which we think has less complexity.
 
 \end{enumerate}
 
 \item [Implications]~\\
-Using layers will have a positive impact on the maintainability and re-usability of the system. An increased maintainability will help prevent bugs, which on the longer term helps to increase the reliability of the system. 
-
-The performance of the system will have some negative impact, since the request have to pass all the layers, even if they only need logic/data in the bottom layer.
+By implementing the MVC pattern, several views are created to support multiple client types. However, those are using the same controllers and models. This will also allows building a filter chain, handling authentication, logging etc. Thus, this will drive better reusability and have less complexity.
 
 \item [Related requirements/decisions]~\\
-\ref{sec:service-layer}, 
+\ref{fr:retrieve-usage}, \ref{fr:interface-selectstats}, \ref{fr:interface-login}, \ref{fr:alerts}, \ref{fr:interface-graph} 
+
+\end{description}
+
+
+
+\section{Template view}
+\begin{description}
+\item [Source]~\\
+Patterns of Enterprise Application Architecture, P.350 \cite{Fowler:2002:PEA:579257}
+
+\item [Issue]~\\
+In the view component of MVC, the system must handle dynamic web interface in a Single Page Application (SPA) flavored application. The same view (HTML code) will be displayed several time in different page, which will be possibly causing code smells.
+
+\item [Assumptions/Constraints]~
+\begin{itemize}
+\item This pattern is only applied on web application, not the native smartphone application.
+\item The system is developed using framework that supports this pattern.
+\end{itemize}
+~\\[-1.5cm]
+
+\item [Positions]~
+\begin{enumerate}
+\item Transform view
+\item Two step view
+\item Template view
+\end{enumerate}
+~\\[-1.5cm]
+
+\item [Decision] ~\\
+The system will utilize template view in order to increase reusability and to prevent code smells in the project. In this way, several HTML code snippets that corresponds to same element of a page will be reused by embedding markers. Thus, this will lead to a better modifiability as well.
+
+\item [Argument]~
+\begin{enumerate}
+\item Transform view processes domain data element by element and transforms it into HTML. In the system, such task is handled by the models. Thus, if this pattern is used, there will be duplication of work.
+
+\item Two step view turns domain data into HTML in two steps: first by forming some kind of logical page, then rendering the logical page into HTML. These operations are considered as inefficient, as the forming logical page and rendering HTML can be joined. There is also overlapping between models, controllers, and views in this pattern.
+
+\item Template view renders information into HTML by embedding markers in an HTML page, which solves the issues and prevents code smells.
+\end{enumerate}
+
+\item [Implications]~\\
+Several HTML code snippet will be reusable. Furthermore, code smells can be prevented using this template view.
+
+\item [Related requirements/decisions]~\\
+\ref{fr:retrieve-usage}, \ref{fr:interface-selectstats}, \ref{fr:interface-login}, \ref{fr:alerts}, \ref{fr:interface-graph}
 
 \end{description}
