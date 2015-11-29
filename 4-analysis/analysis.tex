@@ -426,12 +426,12 @@ Pattern-oriented Software Architecture - Volume 1 P.125 \cite{wiley-1}\\
 Patterns of Enterprise Application Architecture, P.330 \cite{Fowler:2002:PEA:579257}
 
 \item [Issue]~\\
-The system must handle multiple client applications. The client may connect to the system trough web-based interface or a native application that is developed specially to see the data. In order to increase re-usability, the views may be decoupled from the logic, resulting in separated logic (controller and model) and view.
+The system must handle the request from user by dynamic web interface. In order to increase re-usability, the views may be decoupled from the logic, resulting in separated logic (controller and model) and view.
 
 \item [Assumptions/Constraints]~
 \begin{itemize}
-\item It is assumed that the client uses modern web browser or,
-\item the client uses native application in smart phone to see the corresponding information.
+\item It is assumed that the client uses web browser to connect to the system.
+\item It is assumed that there are multiple views in the system.
 \end{itemize}
 ~\\[-1.5cm]
 
@@ -443,7 +443,7 @@ The system must handle multiple client applications. The client may connect to t
 ~\\[-1.5cm]
 
 \item [Decision] ~\\
-The system will use the Model-View-Controller pattern to decouple the view and the logic behind it. The view consists of view for responsive web, which supports varying screen size of the client, and a native application for smartphone. The controller and model for those different views are the same. This pattern resides in different layers of this system.
+The system will use the Model-View-Controller pattern to decouple the view and the logic behind it. This pattern resides in different layers of this system.
 
 \item [Argument]~
 \begin{enumerate}
@@ -454,7 +454,7 @@ The system will use the Model-View-Controller pattern to decouple the view and t
 \end{enumerate}
 
 \item [Implications]~\\
-By implementing the MVC pattern, several views are created to support multiple client types. However, those are using the same controllers and models. This will also allows building a filter chain, handling authentication, logging etc. Thus, this will drive better reusability and have less complexity.
+By implementing the MVC pattern, several views are created to support multiple pages. Each view may use the same controller that provides required process. This will also allows building a filter chain, handling authentication, logging etc. Thus, this will drive better reusability and have less complexity. Furthermore, it is also easier to modify the code since the view and the logic are separated.
 
 \item [Related requirements/decisions]~\\
 \ref{fr:retrieve-usage}, \ref{fr:interface-selectstats}, \ref{fr:interface-login}, \ref{fr:alerts}, \ref{fr:interface-graph} 
@@ -473,7 +473,7 @@ In the view component of MVC, the system must handle dynamic web interface in a 
 
 \item [Assumptions/Constraints]~
 \begin{itemize}
-\item This pattern is only applied on web application, not the native smartphone application.
+\item This pattern is only applied on web application.
 \item The system is developed using framework that supports this pattern.
 \end{itemize}
 ~\\[-1.5cm]
