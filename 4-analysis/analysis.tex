@@ -89,7 +89,7 @@ The performance of the system will have some negative impact, since the request 
 Patterns of Enterprise Application Architecture, P.133 \cite{Fowler:2002:PEA:579257}
 
 \item [Issue]~\\
-The system will have different interfaces with different kinds of clients. For example, commands to compute statistics can come from the user interface, but also from the alerting module. These different interfaces have common interactions with the system to invoke the business logic. %TODO describe altering module in elaborated model
+The system will have different interfaces with different kinds of clients. For example, commands to compute statistics can come from the user interface, but also from the alerting module. These different interfaces have common interactions with the system to invoke the business logic.
 
 \item [Assumptions/Constraints]~
 \begin{itemize}
@@ -106,8 +106,7 @@ The system will have different interfaces with different kinds of clients. For e
 \item [Decision] ~\\
 The system will use the Service Layer pattern to define the boundary of the application using a layer of services.
 
-The service layer exposes a set of services to be used by clients and for each service, there is a certain script that will be executed when the service is called. The service layer will be used with the "operation script" variation. This means that the Service Layer consists of thick classes that contain logic. %TODO Why do we want thick classes with logic?????
-
+The service layer exposes a set of services to be used by clients and for each service, there is a certain script that will be executed when the service is called. The service layer will be used with the "operation script" variation. This means that the Service Layer consists of thick classes that contain logic.
 \item [Argument]~
 \begin{enumerate}
 \item Using just the Domain Model pattern alone does not make a distinction between application logic and domain logic.
@@ -121,11 +120,11 @@ There is a boundary between the application- and domain logic.
 \item [Related requirements/decisions]~\\
 \ref{sec:layers}, \ref{fr:interface-selectstats}, \ref{fr:receive-usage}
 
-\begin{figure}[H]
-\caption{Service Layer}
-\centering
-\includegraphics[scale=0.7]{4-analysis/images/ServiceLayer.jpg}
-\end{figure}
+%\begin{figure}[H]
+%\caption{Service Layer}
+%\centering
+%\includegraphics[scale=0.7]{4-analysis/images/ServiceLayer.jpg}
+%\end{figure}
 
 
 \end{description}
@@ -274,30 +273,28 @@ Using Unit of Work will reduce the load on the database (the number of database 
 
 \begin{description}
 \item [Source]~\\
-Pattern-oriented Software Architecture - Volume 4 \cite{wiley-4}
+Pattern-oriented Software Architecture - Volume 4, P.237 \cite{wiley-4}
 
 \item [Issue]~\\
 The system uses several servers to compute the statistics. This introduces a lot of challenges, like communication to these servers and dividing the work over these servers. The application code should not have to address these challenges.
 
 \item [Assumptions/Constraints]~\\
+It is assumed that the workload for computing statistics can be divided over multiple nodes, and that multiple nodes are available.
 
 \item [Positions]~
 \begin{enumerate}
 \item Publisher-Subscriber
-\item Broker
-\item Message Queuing
+\item Broker 
+\item Message Queuing %TODO is this better maybe, it allows temporary outage -> good reliability
 \item Remote Procedure Call
 \end{enumerate}
 ~\\[-1.5cm]
 
 \item [Decision] ~\\
 
+\item [Argument]~
 
-\item [Argument]~\\
-
-
-\item [Implications]~\\
-
+\item [Implications]~\\ 
 
 \item [Related requirements/decisions]~\\
 \ref{fr:compute-total}, \ref{fr:compute-bill}, \ref{fr:compute-bill}
