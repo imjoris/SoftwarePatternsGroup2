@@ -20,7 +20,7 @@
 %%• The solution balances the forces.
 %
 %\item [Context]
-%The system has to handle different kinds of incoming request. The web interface of the client wants to receive a web page from the system. The energy data collectors will send the data to the system so it can be stored and analyzed.
+%
 %
 %\item [Problem]
 %The system needs a structure to coordinate the external calls and requests.
@@ -34,7 +34,55 @@
 %\EAA  \cite{Fowler:2002:PEA:579257}
 %\end{description}
 
+\section{Layers}
+\manuallabel{sec:layers}{Layers}
+
+\begin{description}
+\item [Source]~\\
+Pattern-oriented Software Architecture - Volume 1 \cite{wiley-1}
+
+\item [Issue]~\\
+The system consists of high-level components (e.g. user interface), which are dependent on lower level components (domain logic, database). Decoupling these components is important.
+
+\item [Assumptions/Constraints]~
+\begin{itemize}
+\item It is assumed that the system will have higher-level components that depend on lower-level components.
+\end{itemize}
+~\\[-1.5cm]
+
+\item [Positions]~
+\begin{enumerate}
+\item Relaxed Layered System
+\item Layers
+% Indirection Layers??
+\end{enumerate}
+~\\[-1.5cm]
+
+\item [Decision] ~\\
+The system will use the Layers pattern to divide the application in multiple layers. The top layer will implement the Service Layer pattern, the middle layer will implement the domain logic (domain model) and the bottom layer will be responsible for the data storage.
+
+\item [Argument]~
+\begin{enumerate}
+\item The relaxed layered system is a variant of the Layers pattern which allows layers to use services of any layer below it, instead of only the next layer. This increases the flexibility and performance of the system. However, this pattern has a large negative impact on the maintainability.
+
+\item 
+Using the layers pattern increases maintainability by decoupling components of different levels of abstraction.
+
+\end{enumerate}
+
+\item [Implications]~\\
+Using layers will have a positive impact on the maintainability and re-usability of the system. An increased maintainability will help prevent bugs, which on the longer term helps to increase the reliability of the system. 
+
+The performance of the system will have some negative impact, since the request have to pass all the layers, even if they only need logic/data in the bottom layer.
+
+\item [Related requirements/decisions]~\\
+\ref{sec:service-layer}, 
+
+\end{description}
+
+
 \section{Service Layer}
+\manuallabel{sec:service-layer}{Service Layer}
 
 \begin{description}
 \item [Source]~\\
@@ -71,7 +119,7 @@ The service layer exposes a set of services to be used by clients and for each s
 There is a boundary between the application- and domain logic.
 
 \item [Related requirements/decisions]~\\
-\ref{fr:interface-selectstats}, \ref{fr:receive-usage}
+\ref{sec:layers}, \ref{fr:interface-selectstats}, \ref{fr:receive-usage}
 
 \begin{figure}[H]
 \caption{Service Layer}
@@ -83,52 +131,52 @@ There is a boundary between the application- and domain logic.
 \end{description}
 
 
-\section{Layer Supertype}
-
-\begin{description}
+%\section{Layer Supertype}
 %
-%Context – a recurring set of situations in which the
-%pattern applies.
-%Problem - a set of forces (goals and constraints)
-%occurring in this context.
-%• Forces are often competing
-%Solution - a canonical design form or rule that
-%someone can apply to resolve these forces.
-%• The solution balances the forces.
-
 %\begin{description}
+%%
+%%Context – a recurring set of situations in which the
+%%pattern applies.
+%%Problem - a set of forces (goals and constraints)
+%%occurring in this context.
+%%• Forces are often competing
+%%Solution - a canonical design form or rule that
+%%someone can apply to resolve these forces.
+%%• The solution balances the forces.
+%
+%%\begin{description}
+%%\item [Context]
+%%\item [Problem]
+%%\item [Solution]
+%%\item [Source]
+%
 %\item [Context]
+%There is duplicate code within each layer of the system.
+%
 %\item [Problem]
+%Duplicate code makes the system hard to modify and maintain.
+%
 %\item [Solution]
-%\item [Source]
-
-\item [Context]
-There is duplicate code within each layer of the system.
-
-\item [Problem]
-Duplicate code makes the system hard to modify and maintain.
-
-\item [Solution]
-With the Layer Supertype pattern, all the classes of a certain layer have the same super class. This super class then contains the features that are very common for the layer.
-
-This pattern will be used in every layer.
-\begin{description}
-\item[Service layer] All the services need to take care of security. The client needs to be authenticated and the data needs to be decryption by the service layer. All this security logic will be placed in a super type using the "Layer Supertype" pattern In the service layer it contains the security logic.
-
-\item[Domain layer] In this layer, the sypertype will contain common features and functions for handling storage.
-%\myworries{From book:
-%-  "Common features, such as the storage and handling of 'Identity Fields (216), can go there."}
-
-\item[Data source layer]
-The data mapper in the data source pattern can use a layer super type that handles all the common behavior, which can greatly reduce the extra work of coding. 
-
-%(p308 (Metadata mapping pattern))
-\end{description}
-
-%\myworries{p475 POEAA
-%"A type that acts as the super type for all types in the layer".}
-
-\end{description}
+%With the Layer Supertype pattern, all the classes of a certain layer have the same super class. This super class then contains the features that are very common for the layer.
+%
+%This pattern will be used in every layer.
+%\begin{description}
+%\item[Service layer] All the services need to take care of security. The client needs to be authenticated and the data needs to be decryption by the service layer. All this security logic will be placed in a super type using the "Layer Supertype" pattern In the service layer it contains the security logic.
+%
+%\item[Domain layer] In this layer, the sypertype will contain common features and functions for handling storage.
+%%\myworries{From book:
+%%-  "Common features, such as the storage and handling of 'Identity Fields (216), can go there."}
+%
+%\item[Data source layer]
+%The data mapper in the data source pattern can use a layer super type that handles all the common behavior, which can greatly reduce the extra work of coding. 
+%
+%%(p308 (Metadata mapping pattern))
+%\end{description}
+%
+%%\myworries{p475 POEAA
+%%"A type that acts as the super type for all types in the layer".}
+%
+%\end{description}
 
 \section{Domain layer}
 
