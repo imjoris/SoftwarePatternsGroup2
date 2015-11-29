@@ -158,7 +158,6 @@ There is a boundary between the application- and domain logic.
 %
 %\item [Solution]
 %\item [Source]
-
 %\item [Context]
 %There is duplicate code within each layer of the system.
 %
@@ -376,21 +375,25 @@ Using the Repository pattern, these changes can be made fast. The repository als
 
 The Shared Repository pattern will be applied and the Architectural decisions documented according to the template presented in \textit{Using Patterns to Capture Architectural Decisions} \\
  "In the SHARED REPOSITORY pattern one component of the system is used as a central data store, accessed by all other independent components."\\
-Source : \textit{Architectural Pattern Revisited- A Pattern Language} \\
+
 % Forces ?
 % Context
- \textit{Name:} Shared Repository (or also called Repository) \\
- \textit{Issue:} The external data must be stored, updaded, accessed by multiple clients and servers simultaneously and analyzed.\\
- %\textit{Assumptions/Contrainsts:} \\
- \textit{Position:} When using the Active Repository Pattern the clients are notified when there is a change is the repository which is not a feature of the system.\\
- %BlackBoard Pattern  \\
- \textit{Decision: } The system uses the Shared Repository Pattern.\\
- %\textit{Arguments:} The Shared repository patttern is suitable because \\
- \textit{Implication :} After the integration of the SRP to the system the system as one central repository (the database) and all clients can access it using loggin. It ensures Reusability, Changeability, Maintainability. \\
-%\textit{Related Decisions} \\
- \textit{Related Requirements} : FR-1 FR-2 FR-3 \\
+\begin{description}
+\item [Source]~\\
+\textit{Architectural Pattern Revisited- A Pattern Language} \\
 
+ \item [Name]~\\ Shared Repository (also called Repository) \\
+ \item [Issue]~\\ The external data must be stored, updaded, accessed by multiple clients and servers simultaneously and analyzed.\\
+ %\textit{Assumptions/Contrainsts:} \\
+ \item [Position]~\\ When using the Active Repository Pattern the clients are notified when there is a change is the repository which is not a feature of the system.\\
+ %BlackBoard Pattern  \\
+ \item [Decision]~\\ The system uses the Shared Repository Pattern in order to centralized the access to the data.\\
+ %\textit{Arguments:} The Shared repository patttern is suitable because \\
+ \item [Implication]~\\ After the integration of the SRP to the system the system as one central repository (the database) and all clients can access it using loggin. It ensures Reusability, Changeability, Maintainability. \\
+\item [Related decisions]~\\ Data source layer pattern \\
+\item [Related requirements]~\\ FR-1 FR-2 FR-3 \\
  
+ \end{description}
 
  %One database will be accessed by all the clients . The security in ensured by the logging through the UI.
 
