@@ -20,7 +20,7 @@
 %%• The solution balances the forces.
 %
 %\item [Context]
-%The system has to handle different kinds of incoming request. The web interface of the client wants to receive a web page from the system. The energy data collectors will send the data to the system so it can be stored and analyzed.
+%
 %
 %\item [Problem]
 %The system needs a structure to coordinate the external calls and requests.
@@ -34,7 +34,55 @@
 %\EAA  \cite{Fowler:2002:PEA:579257}
 %\end{description}
 
+\section{Layers}
+\manuallabel{sec:layers}{Layers}
+
+\begin{description}
+\item [Source]~\\
+Pattern-oriented Software Architecture - Volume 1 \cite{wiley-1}
+
+\item [Issue]~\\
+The system consists of high-level components (e.g. user interface), which are dependent on lower level components (domain logic, database). Decoupling these components is important.
+
+\item [Assumptions/Constraints]~
+\begin{itemize}
+\item It is assumed that the system will have higher-level components that depend on lower-level components.
+\end{itemize}
+~\\[-1.5cm]
+
+\item [Positions]~
+\begin{enumerate}
+\item Relaxed Layered System
+\item Layers
+% Indirection Layers??
+\end{enumerate}
+~\\[-1.5cm]
+
+\item [Decision] ~\\
+The system will use the Layers pattern to divide the application in multiple layers. The top layer will implement the Service Layer pattern, the middle layer will implement the domain logic (domain model) and the bottom layer will be responsible for the data storage.
+
+\item [Argument]~
+\begin{enumerate}
+\item The relaxed layered system is a variant of the Layers pattern which allows layers to use services of any layer below it, instead of only the next layer. This increases the flexibility and performance of the system. However, this pattern has a large negative impact on the maintainability.
+
+\item 
+Using the layers pattern increases maintainability by decoupling components of different levels of abstraction.
+
+\end{enumerate}
+
+\item [Implications]~\\
+Using layers will have a positive impact on the maintainability and re-usability of the system. An increased maintainability will help prevent bugs, which on the longer term helps to increase the reliability of the system. 
+
+The performance of the system will have some negative impact, since the request have to pass all the layers, even if they only need logic/data in the bottom layer.
+
+\item [Related requirements/decisions]~\\
+\ref{sec:service-layer}, 
+
+\end{description}
+
+
 \section{Service Layer}
+\manuallabel{sec:service-layer}{Service Layer}
 
 \begin{description}
 \item [Source]~\\
@@ -71,7 +119,7 @@ The service layer exposes a set of services to be used by clients and for each s
 There is a boundary between the application- and domain logic.
 
 \item [Related requirements/decisions]~\\
-\ref{fr:interface-selectstats}, \ref{fr:receive-usage}
+\ref{sec:layers}, \ref{fr:interface-selectstats}, \ref{fr:receive-usage}
 
 \begin{figure}[H]
 \caption{Service Layer}
@@ -83,22 +131,31 @@ There is a boundary between the application- and domain logic.
 \end{description}
 
 
-\section{Layer Supertype}
-
-\begin{description}
+%\section{Layer Supertype}
 %
-%Context – a recurring set of situations in which the
-%pattern applies.
-%Problem - a set of forces (goals and constraints)
-%occurring in this context.
-%• Forces are often competing
-%Solution - a canonical design form or rule that
-%someone can apply to resolve these forces.
-%• The solution balances the forces.
-
 %\begin{description}
+%%
+%%Context – a recurring set of situations in which the
+%%pattern applies.
+%%Problem - a set of forces (goals and constraints)
+%%occurring in this context.
+%%• Forces are often competing
+%%Solution - a canonical design form or rule that
+%%someone can apply to resolve these forces.
+%%• The solution balances the forces.
+%
+%%\begin{description}
+%%\item [Context]
+%%\item [Problem]
+%%\item [Solution]
+%%\item [Source]
+%
 %\item [Context]
+%There is duplicate code within each layer of the system.
+%
 %\item [Problem]
+%Duplicate code makes the system hard to modify and maintain.
+%
 %\item [Solution]
 %\item [Source]
 
@@ -129,6 +186,28 @@ The data mapper in the data source pattern can use a layer super type that handl
 %"A type that acts as the super type for all types in the layer".}
 
 \end{description}
+
+%With the Layer Supertype pattern, all the classes of a certain layer have the same super class. This super class then contains the features that are very common for the layer.
+%
+%This pattern will be used in every layer.
+%\begin{description}
+%\item[Service layer] All the services need to take care of security. The client needs to be authenticated and the data needs to be decryption by the service layer. All this security logic will be placed in a super type using the "Layer Supertype" pattern In the service layer it contains the security logic.
+%
+%\item[Domain layer] In this layer, the sypertype will contain common features and functions for handling storage.
+%%\myworries{From book:
+%%-  "Common features, such as the storage and handling of 'Identity Fields (216), can go there."}
+%
+%\item[Data source layer]
+%The data mapper in the data source pattern can use a layer super type that handles all the common behavior, which can greatly reduce the extra work of coding. 
+%
+%%(p308 (Metadata mapping pattern))
+%\end{description}
+%
+%%\myworries{p475 POEAA
+%%"A type that acts as the super type for all types in the layer".}
+%
+%\end{description}
+
 
 \section{Domain layer}
 
@@ -163,24 +242,32 @@ The system has several object stored in a database which can be edited and creat
 
 \item [Assumptions/Constraints]~\\
 
-\item [Positions]
+\item [Positions]~
 \begin{enumerate}
 \item Active Record
+\item Unit of Work with Caller Registration
+\item Unit of Work with Object Registration
 \end{enumerate}
 
 \item [Decision] ~\\
 Unit of Work pattern will be used to keep track of changes to objects and to coordinate writing these changes to the database in one database call.
+The variant used is the Object Registration variant, which removes the burden of having to register the object explicitly with the Unit of Work, which could introduce bugs when this is not done.
 
 \item [Argument]~\\
-With Active Record, every change to an in-memory object leads to a database call. This means that multiple consecutive changes to an object lead to multiple database calls. 
+\begin{enumerate}
+\item With Active Record, every change to an in-memory object leads to a database call. This means that multiple consecutive changes to an object lead to multiple database calls, which negatively impact the performance.
 
-The Unit of Work instead keeps track of these changes, to allow writing these changes to the database in a single call.
+\item The Unit of Work instead keeps track of these changes, to allow writing these changes to the database in a single call.\\ When using Unit of Work with Caller Registration, the creator of the object should register it with the Unit of Work explicitly, or else the Unit of Work will not keep track of its changes. This offers the flexibility to have changes to in-memory objects that are never written to database. 
+
+\item Using Unit of Work with Object Registration means that the creator of the object does not need to explicitly register it with the Unit of Work. Instead, the created object is implicitly registered (e.g. as part of the logic in the constructor). 
+\end{enumerate}
+
 
 \item [Implications]~\\
 Using Unit of Work will reduce the load on the database (the number of database calls). It does however introduce a delay before the change in the in-memory object is present in the representation in the database.
 
 \item [Related requirements/decisions]~\\
---
+
 
 \end{description}
 
@@ -284,32 +371,29 @@ The repository gives a lot more control over how the data is handled. The benefi
 \end{itemize}
 
 Performing analysis on the data also consists of executing complex queries on the data source. The database that executes these queries, however, might change. Or the system might decide to use multiple databases and data sources.
-Using the Repository pattern, these changes can be made fast. The repository also allows for multiple configurations to exist. So an extra repository could be created for testing purposes, only using an in-memory database to increase the test execution speed.
+Using the Repository pattern, these changes can be made fast. The repository also allows for multiple configurations to exist. So an extra repository could be created for testing purposes, only using an in-memory database to increase the test execution speed. \\
+
 
 The Shared Repository pattern will be applied and the Architectural decisions documented according to the template presented in \textit{Using Patterns to Capture Architectural Decisions} \\
  "In the SHARED REPOSITORY pattern one component of the system is used as a central data store, accessed by all other independent components."\\
 Source : \textit{Architectural Pattern Revisited- A Pattern Language} \\
 % Forces ?
+% Context
  \textit{Name:} Shared Repository (or also called Repository) \\
- \textit{Issue:} The external data must be stored, updaded, accessed by multiple clients simultaneously and analyzed.\\
- \textit{Assumptions/Contrainsts :} \\
- \textit{Position:} \\
- \textit{Decision}\\
- \textit{Arguments} \\
- \textit{Implication} \\
- \textit{Related Decisions} \\
- \textit{Related Requirements} \\
- \textit{Quality attributes:} Reusability, Changeability, Maintainability \\
- 
- % Active repository
- 
- Ths system, uses the Shared repository pattern.\\
- One database will be accessed by all the clients . The security in ensured by the logging through the UI.
- 
- %WHAT NOW ?
+ \textit{Issue:} The external data must be stored, updaded, accessed by multiple clients and servers simultaneously and analyzed.\\
+ %\textit{Assumptions/Contrainsts:} \\
+ \textit{Position:} When using the Active Repository Pattern the clients are notified when there is a change is the repository which is not a feature of the system.\\
+ %BlackBoard Pattern  \\
+ \textit{Decision: } The system uses the Shared Repository Pattern.\\
+ %\textit{Arguments:} The Shared repository patttern is suitable because \\
+ \textit{Implication :} After the integration of the SRP to the system the system as one central repository (the database) and all clients can access it using loggin. It ensures Reusability, Changeability, Maintainability. \\
+%\textit{Related Decisions} \\
+ \textit{Related Requirements} : FR-1 FR-2 FR-3 \\
+
  
 
-
+ %One database will be accessed by all the clients . The security in ensured by the logging through the UI.
+ 
 \section{Client user interface}
 
 \subsection{Controller}
@@ -377,6 +461,74 @@ To consider:
 
 \end{description}
 
+% \section{Client user interface}
+
+% \subsection{Controller}
+% %\myworries{
+% %On p 99:
+% %\begin{itemize}
+% %\item Given a free choice, I'd recommend Page Controller (p333). 
+% %\item More complex navigation and UI lead you toward a Front Controller (344)
+% %\end{itemize}
+% %}
+% Page controller: controller for each page. So upon receiving a request do:
+% \begin{itemize}
+% \item decode url, extract data
+% \item invoke model to process data
+% \item determine view and use the model data to create the HTML to return
+% \end{itemize}
+
+% Front page controller:\\
+% One controller for all requests/views. This allows building a filter chain, handling authentication, logging etc.
+% Front page is better/helps with concurrency, because a new command object is created on each request. Reducing thread-safety concerns. \ign{(P346)}The model, however, can have shared objects that do require thread safety management.
+
+% The front page will be used, because it provides more functionality to the system. The only advantage of a page controller compared to the front controller is that it has a more natural structure.
+
+% \subsection{View}
+% %\myworries{
+% %Template view (350) or Transform view (361).
+% %\\
+% %(P forgot):
+% %Template views have the edge at the moment.
+% %}
+
+% \begin{description}
+% \item [Template view] Write HTML code including markers. Replace the markers with the data when the page is requested. (Play framework)
+% \item [Transform view] Convert the domain data to HTML, "transform" the domain data. Upon a request, it get the domain data, for each item in the data it looks for a appropriate "transform" to transform the data to HTML.
+% \end{description}
+
+% The template view will be used, because it is used a lot more then the transform view. Major web frameworks are based on this pattern (the play framework, laravel...). The view patterns don't have an important difference in how beneficial they are to the project.
+
+% %Transform view avoids having too much data in the HTML, because of the transform methods creating the HTML.
+% %Transform view can be tested without having a web server up.
+
+% \subsection{Model}
+% %\myworries{
+% %Communication with the model: p100:
+% %Preference: Having everything run in one process if you can. Else Remote Facade (p388) and DTO (p 401).
+% %}
+% %
+% %\myworries{
+% %\section{Notes only}
+% %\subsection{Model-View View-Model}
+% %}
+% This section will describe how the Model updates the view and how the view updates the model.
+% %\myworries{View update model using page controller as is already described}
+
+% To consider:
+% \begin{description}
+% \item [Observer Synchronization] Synchronize multiple screens by having them all be observers to a shared area of domain data.
+% \item [Separated Presentation] Ensure that any code that manipulates presentation only manipulates presentation, pushing all domain and data source logic into clearly separated areas of the program.
+
+% \item [Presentation model] Represent the state and behavior of the presentation independently of the GUI controls used in the interface
+
+% \item [Supervising controller] Factor the UI into a view and controller where the view handles simple mapping to the underlying model and the the controller handles input response and complex view logic.
+
+% \item [Model view controller/presenter] 
+
+% \end{description}
+
+
 %Observer Synchronization
 %%Synchronize multiple screens by having them all be observers to a shared area of domain data.
 %%\url{http://www.martinfowler.com/eaaDev/uiArchs.html}
@@ -396,3 +548,90 @@ To consider:
 %
 %%MVP potel:
 %%\url{Potel: http://www.wildcrest.com/Potel/Portfolio/mvp.pdf}
+
+\section{Model-View-Controller}
+\begin{description}
+\item [Source]~\\
+Pattern-oriented Software Architecture - Volume 1 P.125 \cite{wiley-1}\\
+Patterns of Enterprise Application Architecture, P.330 \cite{Fowler:2002:PEA:579257}
+
+\item [Issue]~\\
+The system must handle multiple client applications. The client may connect to the system trough web-based interface or a native application that is developed specially to see the data. In order to increase re-usability, the views may be decoupled from the logic, resulting in separated logic (controller and model) and view.
+
+\item [Assumptions/Constraints]~
+\begin{itemize}
+\item It is assumed that the client uses modern web browser or,
+\item the client uses native application in smart phone to see the corresponding information.
+\end{itemize}
+~\\[-1.5cm]
+
+\item [Positions]~
+\begin{enumerate}
+\item Presentation-Abstraction-Control
+\item Layers-Model-View-Controller
+\end{enumerate}
+~\\[-1.5cm]
+
+\item [Decision] ~\\
+The system will use the Model-View-Controller pattern to decouple the view and the logic behind it. The view consists of view for responsive web, which supports varying screen size of the client, and a native application for smartphone. The controller and model for those different views are the same. This pattern resides in different layers of this system.
+
+\item [Argument]~
+\begin{enumerate}
+\item The Presentation-Abstraction-Control (PAC) pattern decompose the system into a tree-like hierarchy of agents, which each agent is made of its own presentation (UI), abstraction, and control. This type of pattern is not well suited to the HEMS since the HEMS only needs decoupled views with the same control and abstraction.
+
+\item The Model-View-Controller (MVC) pattern only decouple the views, models, and controller, which indicates that different views may use the same controller and/or model. This pattern is well-suited with the HEMS and is good for re-usability, which we think has less complexity.
+
+\end{enumerate}
+
+\item [Implications]~\\
+By implementing the MVC pattern, several views are created to support multiple client types. However, those are using the same controllers and models. This will also allows building a filter chain, handling authentication, logging etc. Thus, this will drive better reusability and have less complexity.
+
+\item [Related requirements/decisions]~\\
+\ref{fr:retrieve-usage}, \ref{fr:interface-selectstats}, \ref{fr:interface-login}, \ref{fr:alerts}, \ref{fr:interface-graph} 
+
+\end{description}
+
+
+
+\section{Template view}
+\begin{description}
+\item [Source]~\\
+Patterns of Enterprise Application Architecture, P.350 \cite{Fowler:2002:PEA:579257}
+
+\item [Issue]~\\
+In the view component of MVC, the system must handle dynamic web interface in a Single Page Application (SPA) flavored application. The same view (HTML code) will be displayed several time in different page, which will be possibly causing code smells.
+
+\item [Assumptions/Constraints]~
+\begin{itemize}
+\item This pattern is only applied on web application, not the native smartphone application.
+\item The system is developed using framework that supports this pattern.
+\end{itemize}
+~\\[-1.5cm]
+
+\item [Positions]~
+\begin{enumerate}
+\item Transform view
+\item Two step view
+\item Template view
+\end{enumerate}
+~\\[-1.5cm]
+
+\item [Decision] ~\\
+The system will utilize template view in order to increase reusability and to prevent code smells in the project. In this way, several HTML code snippets that corresponds to same element of a page will be reused by embedding markers. Thus, this will lead to a better modifiability as well.
+
+\item [Argument]~
+\begin{enumerate}
+\item Transform view processes domain data element by element and transforms it into HTML. In the system, such task is handled by the models. Thus, if this pattern is used, there will be duplication of work.
+
+\item Two step view turns domain data into HTML in two steps: first by forming some kind of logical page, then rendering the logical page into HTML. These operations are considered as inefficient, as the forming logical page and rendering HTML can be joined. There is also overlapping between models, controllers, and views in this pattern.
+
+\item Template view renders information into HTML by embedding markers in an HTML page, which solves the issues and prevents code smells.
+\end{enumerate}
+
+\item [Implications]~\\
+Several HTML code snippet will be reusable. Furthermore, code smells can be prevented using this template view.
+
+\item [Related requirements/decisions]~\\
+\ref{fr:retrieve-usage}, \ref{fr:interface-selectstats}, \ref{fr:interface-login}, \ref{fr:alerts}, \ref{fr:interface-graph}
+
+\end{description}

@@ -18,6 +18,9 @@ HEMS will use clusters of computer to manage the database system and to store ou
 
 As can be seen in \autoref{fig:database-cluster}, HEMS will use four database racks to have redundancy in the system. The server is connected as a ring, which is the common way to setup database server. By using this form of architecture, HEMS will be more reliable and fault tolerant. There will also be two physical connection to the main analytic cluster to make this system more fault tolerant in terms of connection. HEMS database cluster will use the same server, Dell PowerEdge R530, for controlling the SATA storage machine.
 
+\subsection*{Related patterns}
+This storage cluster implements broker, shared repository, and unit of work patterns. Broker pattern is implemented in a mechanism that any other component of this system can connect to the cluster and see this as a single entity, although actually the cluster consists of more than one entity. If this storage cluster is seen as a single entity, then this is also an implementation of shared repository pattern, where a client or other instance connects to the storage cluster and proceeds with corresponding operations. Unit of Work pattern will be used to keep track of changes to objects and to coordinate writing these changes to the database in one database call.
+
 \subsection{Compute cluster}
 \label{subsec:analytics}
 Compute cluster will be the main brain of HEMS. The data presentation will be handled by this system. The analysis process also runs on top of this hardware. To increase availability and reliability, HEMS will have six server racks to do the processing as depicted in \autoref{fig:analytic-cluster}.
@@ -28,3 +31,6 @@ Compute cluster will be the main brain of HEMS. The data presentation will be ha
 \caption{Logical schematic of analytic cluster of HEMS}
 \label{fig:analytic-cluster}
 \end{figure}
+
+\subsection*{Related patterns}
+Front page controller pattern is implemented in the compute cluster, which includes decorator and command pattern, because the compute cluster is also responsible for handling incoming connection through API. 
