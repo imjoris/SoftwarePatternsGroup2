@@ -211,18 +211,26 @@ The system has several object stored in a database which can be edited and creat
 
 \item [Assumptions/Constraints]~\\
 
-\item [Positions]
+\item [Positions]~
 \begin{enumerate}
 \item Active Record
+\item Unit of Work with Caller Registration
+\item Unit of Work with Object Registration
 \end{enumerate}
 
 \item [Decision] ~\\
 Unit of Work pattern will be used to keep track of changes to objects and to coordinate writing these changes to the database in one database call.
+The variant used is the Object Registration variant, which removes the burden of having to register the object explicitly with the Unit of Work, which could introduce bugs when this is not done.
 
 \item [Argument]~\\
-With Active Record, every change to an in-memory object leads to a database call. This means that multiple consecutive changes to an object lead to multiple database calls. 
+\begin{enumerate}
+\item With Active Record, every change to an in-memory object leads to a database call. This means that multiple consecutive changes to an object lead to multiple database calls, which negatively impact the performance.
 
-The Unit of Work instead keeps track of these changes, to allow writing these changes to the database in a single call.
+\item The Unit of Work instead keeps track of these changes, to allow writing these changes to the database in a single call.\\ When using Unit of Work with Caller Registration, the creator of the object should register it with the Unit of Work explicitly, or else the Unit of Work will not keep track of its changes. This offers the flexibility to have changes to in-memory objects that are never written to database. 
+
+\item Using Unit of Work with Object Registration means that the creator of the object does not need to explicitly register it with the Unit of Work. Instead, the created object is implicitly registered (e.g. as part of the logic in the constructor). 
+\end{enumerate}
+
 
 \item [Implications]~\\
 Using Unit of Work will reduce the load on the database (the number of database calls). It does however introduce a delay before the change in the in-memory object is present in the representation in the database.
