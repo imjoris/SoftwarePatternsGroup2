@@ -159,33 +159,33 @@ There is a boundary between the application- and domain logic.
 %\item [Solution]
 %\item [Source]
 
-\item [Context]
-There is duplicate code within each layer of the system.
-
-\item [Problem]
-Duplicate code makes the system hard to modify and maintain.
-
-\item [Solution]
-With the Layer Supertype pattern, all the classes of a certain layer have the same super class. This super class then contains the features that are very common for the layer.
-
-This pattern will be used in every layer.
-\begin{description}
-\item[Service layer] All the services need to take care of security. The client needs to be authenticated and the data needs to be decryption by the service layer. All this security logic will be placed in a super type using the "Layer Supertype" pattern In the service layer it contains the security logic.
-
-\item[Domain layer] In this layer, the sypertype will contain common features and functions for handling storage.
-%\myworries{From book:
-%-  "Common features, such as the storage and handling of 'Identity Fields (216), can go there."
-
-\item[Data source layer]
-The data mapper in the data source pattern can use a layer super type that handles all the common behavior, which can greatly reduce the extra work of coding. 
+%\item [Context]
+%There is duplicate code within each layer of the system.
+%
+%\item [Problem]
+%Duplicate code makes the system hard to modify and maintain.
+%
+%\item [Solution]
+%With the Layer Supertype pattern, all the classes of a certain layer have the same super class. This super class then contains the features that are very common for the layer.
+%
+%This pattern will be used in every layer.
+%\begin{description}
+%\item[Service layer] All the services need to take care of security. The client needs to be authenticated and the data needs to be decryption by the service layer. All this security logic will be placed in a super type using the "Layer Supertype" pattern In the service layer it contains the security logic.
+%
+%\item[Domain layer] In this layer, the sypertype will contain common features and functions for handling storage.
+%%\myworries{From book:
+%%-  "Common features, such as the storage and handling of 'Identity Fields (216), can go there."
+%
+%\item[Data source layer]
+%The data mapper in the data source pattern can use a layer super type that handles all the common behavior, which can greatly reduce the extra work of coding. 
 
 %(p308 (Metadata mapping pattern))
-\end{description}
+%\end{description}
 
 %\myworries{p475 POEAA
 %"A type that acts as the super type for all types in the layer".}
 
-\end{description}
+%\end{description}
 
 %With the Layer Supertype pattern, all the classes of a certain layer have the same super class. This super class then contains the features that are very common for the layer.
 %
