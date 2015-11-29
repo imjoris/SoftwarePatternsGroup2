@@ -19,7 +19,6 @@ In this section the architectural significant use-cases will be presented.
 	value & description \\
 	\req{uc} & \textbf{The End user registration} \\
 	Goal & The user has to register on the website to create his account. \\
-	Stakeholders and interests & \textbf{End user} -- wants to be able to use the system to gain insight into his/her electricity usage \\
 	Primary actor & End-User\\
 	Level & User goal\\
 	Precondition & The website has the internal process to add an user to the database \\
@@ -30,16 +29,16 @@ In this section the architectural significant use-cases will be presented.
 		 \item The system checks if the user isn't already in the database. 
 		 \item If not the user is added in the database. 
 		 \item The user receives a confirmation link on his email address and clicks on it.  % or verification code ?
-		 \item The user is redirected to the HEMS website. 
+		 \item The user account is activated 
 		}\\
-	Postcondition & The account is created : the user get access to his own Home Energy Monitor interface. \\
+	Postcondition & The account is created. \\
 	Extensions & \compactList{itemize}{ %
 			\item[4a.] The user is already in the database.
 			\begin{itemize}
 			 \item[1.] The user gets to see a message telling him the user is already registered.
 			\end{itemize} ~\\[-1.0cm]
 		} \\
-	Related requirements & FR-9\\
+	Related requirements & \ref{fr:interface-register} \\
 	}
 \caption{UC-\arabic{uc}: The End user registration}
 \label{table:uc-registration}
@@ -56,12 +55,16 @@ In this section the architectural significant use-cases will be presented.
 	Primary actor & The energy usage sensors \\
 	%Level & User goal\\
 	Precondition & The energy data is available \\
-	Main success scenario & \\  % what is the process ?
+	Main success scenario & \compactList{enumerate}{%
+			\item The sensor sends energy usage information to the REST API with a security token attached.
+			\item The REST API confirms the attached security token.
+			\item The system stores the energy usage data.
+			} \\ \\  % what is the process ?
 	Postcondition & The data is stored in the database. \\
-	Extensions & The data isn't stored. \\
-	Related requirements & FR-1 FR-2 FR-3 \\
+	Extensions &  \\
+	Related requirements & \ref{fr:receive-usage}, \ref{fr:store-usage} \\
 	}
-\caption{UC-\arabic{uc}: Receiving and store external energy usage data}
+\caption{UC-\arabic{uc}: Receiving external energy usage data}
 \label{table:uc-external-usage}
 \end{table}
 
@@ -73,18 +76,18 @@ In this section the architectural significant use-cases will be presented.
 	value & description \\
 	\req{uc} & \textbf{Display the estimated bill} \\
 	Goal & The End-User wants to see the estimation of his next bill \\
-	Stakeholders \& interests & \textbf{End user} -- wants to know about estimated bill for that month \\ \\
 	Primary actor & End-User \\
 	Level & User goal\\
 	Precondition & The user is registered in the system. \\
 	Main success scenario & \compactList{enumerate}{%
-		\item The user gets access to his interface.
+		\item The user gets access to his interface by clicking on "Sign in" Button
 		\item In the menu he clicks on "Bill".
-		\item The computation (see the z"Compuatation/statistics"use-case) is made by the system.
+		\item The system computes the expected bill.
+		\item The system shows the expected bill to the end user
 		} \\
 	Postcondition &  The estimated bill is displayed \\
 	Extensions &  \\
-	Related requirements & FR-6\\
+	Related requirements & \ref{fr:compute-bill}, \ref{fr:web-interface} \\
 	}
 \caption{UC-\arabic{uc}: Display the estimated bill}
 \label{table:uc-display-bill}
@@ -97,20 +100,20 @@ In this section the architectural significant use-cases will be presented.
 	value & description \\
 	\req{uc} & \textbf{Display analysis, daily/weekly/monthly report} \\
 	Goal & The End-User wants to display several kind of analysis about his energy consumption \\
-	Stakeholders \& interests & \compactCell{
-		\textbf{End user} -- wants to know about the electricity usage \\
-	} \\
 	Primary actor & End-User \\
 	Level & User goal\\
 	Precondition & The user is registered in the system. \\
 	Main success scenario & \compactList{enumerate}{%
-		\item The user gets access to his interface by clicking on " Sign in " Button 
+		\item The user gets access to his interface by clicking on "Sign in" Button 
 		\item In the menu he clicks on " Analysis- Chart " 
+		\item The user selects the type of statistic
+		\item The user select the period for which to compute the statistic
 		\item The system computes/make the analysis.
+		\item The computed result is shown to the user.
 		} \\
 	Postcondition &  Charts with different item are displayed. \\
 	Extensions & The statistics aren't made. \\
-	Related requirements & FR-10\\
+	Related requirements & \ref{fr:web-interface}, \ref{fr:compute-timeperiod}, \ref{fr:compute-total}, \ref{fr:interface-selectstats} \\
 	}
 \caption{UC-\arabic{uc}: Display analysis, daily/weekly/monthly report}
 \label{table:uc-display-analysis}
@@ -156,13 +159,7 @@ In this section the architectural significant use-cases will be presented.
 		 \item The user enters the new device' characteristics and submits.
 		} \\
 	Postcondition & The new device and its related information are added in the database. \\
-	Extensions & \compactList{itemize}{ %
-		\item[2] The system didn't take into account the information the user just added.
-		\begin{itemize}
-		 \item[2a.] An error message is displayed " Configuration failed, would you like to try again Y/N ? ".
-		 \item[2b] If yes Go to step1.
-		\end{itemize}
-	} \\
+	Extensions & \\
 	Related requirements & FR-10 FR-11 FR-12\\
 	}
 \caption{UC-\arabic{uc}: Configuration- adding new devices}

@@ -52,7 +52,7 @@ This section lists the functional requirements of the system.
 	{ The system must be able to send feedback to registered devices about the current electricity usage. }
 	
 	\frReqRow{show-accuracy}{Must}
-	{ The system must be able to receive a statement about the accuracy form the sensors, such that when data might be inaccurate, the user can be informed about this. }
+	{ The system must be able to take the inaccuracy of the sensors into account when computing the statistics. }
 	
 	\frReqRow{show-history}{Must}
 	{ The system must be able to display the history of electricity usage. }
@@ -65,9 +65,6 @@ This section lists the functional requirements of the system.
 	
 	\frReqRow{interface-graph}{Should}
 	{ The system should be able to show the computed statistics in a graph. }
-	
-	\frReqRow{cache-data}{Should}
-	{ The system should cache received usage data when the data storage becomes unavailable, so it can be stored later. }
 	
 	
 	\bottomrule
