@@ -1,0 +1,111 @@
+%p339 in POSA
+%= 371
+
+%\begin{description}
+%\item [Source]~\\
+%Pattern-oriented Software Architecture - Volume 4 \cite{wiley-4} P.339
+%\EAA  \cite{Fowler:2002:PEA:579257} P.344
+%
+%\item [Issue]~\\
+%\item [Assumptions/Constraints]~\\
+%\item [Positions]~
+%%\begin{enumerate}
+%%\item Publisher-Subscriber
+%%\item Broker
+%%\item Message Queuing
+%%\item Remote Procedure Call
+%%\end{enumerate}
+%~\\[-1.5cm]
+%\item [Decision] ~\\
+%\item [Argument]~\\
+%\item [Implications]~\\
+%\item [Related requirements/decisions]~\\
+%\end{description}
+
+
+% %\myworries{
+% %On p 99:
+% %\begin{itemize}
+% %\item Given a free choice, I'd recommend Page Controller (p333). 
+% %\item More complex navigation and UI lead you toward a Front Controller (344)
+% %\end{itemize}
+% %}
+% Page controller: controller for each page. So upon receiving a request do:
+% \begin{itemize}
+% \item decode url, extract data
+% \item invoke model to process data
+% \item determine view and use the model data to create the HTML to return
+% \end{itemize}
+
+% Front page controller:\\
+% One controller for all requests/views. This allows building a filter chain, handling authentication, logging etc.
+% 
+
+% The front page will be used, because it provides more functionality to the system. The only advantage of a page controller compared to the front controller is that it has a more natural structure.
+
+
+\section{Front page}
+\begin{description}
+\item [Source]~\\
+\begin{itemize}
+\item Pattern-oriented Software Architecture - Volume 4 \cite{wiley-4} P.339
+\item \EAA  \cite{Fowler:2002:PEA:579257} P.344
+
+\end{itemize}
+
+\item [Issue]~\\
+All the different kinds of HTTPS requests that can be made to the system have similar initial handling. If every request has a dedicated handler, the code for handling these similar functions would be duplicated. This decreases the reliability  of the system and might have negative affects on the availability as well.
+
+\item [Assumptions/Constraints]~\\
+\begin{itemize}
+\item The users use a web browser to view a graphical interface
+\item There is a central system handling all the HTTPS requests
+\end{itemize}
+
+\item [Positions]~
+\begin{enumerate}
+\item Page controller
+\item Front controller 
+\end{enumerate}
+
+~\\[-1.5cm]
+\item [Decision] ~\\
+The front page provides more functionality to this system. The front page resides in the service layer. Here it will create a pipe of filters and functions using an Intercepting Filter (\cite{eaa}). This will allow the pipe to be created using a decorator pattern (\cite{eaa}) The front page will be configured to handle the logging, authentication and initial security of the request. Finally the front page dispatches the requests to the domain. 
+
+%\ign{(P346)}
+\item [Argument]~\\
+\begin{enumerate}
+\item By using the front controller, a pipeline can be created that handles the similar activities in handling requests, having all the similar request functionality in one central place.
+\item It simplifies configuring the system.
+\item Front page reduces concurrency issues, because a new command object is created for each request. Reducing thread-safety concerns. The model, however, can have shared objects that do require thread safety management.
+\end{enumerate}
+
+\item [Implications]~\\
+The page controller is more intuitive. Having a controller for each request is a clear way of structuring a web server. It increases the understanding of each single request separately, however it decreases the overall understanding because each request could be handled completely different.
+
+\item [Related requirements/decisions]~\\
+\ref{kd:2}, \ref{kd:3}
+
+\end{description}
+
+\section{Controller pattern}
+%\begin{description}
+%\item [Source]~\\
+%Pattern-oriented Software Architecture - Volume 4 \cite{wiley-4} P.339
+%\EAA  \cite{Fowler:2002:PEA:579257} P.344
+%
+%\item [Issue]~\\
+%\item [Assumptions/Constraints]~\\
+%\item [Positions]~
+%%\begin{enumerate}
+%%\item Publisher-Subscriber
+%%\item Broker
+%%\item Message Queuing
+%%\item Remote Procedure Call
+%%\end{enumerate}
+%~\\[-1.5cm]
+%\item [Decision] ~\\
+%\item [Argument]~\\
+%\item [Implications]~\\
+%\item [Related requirements/decisions]~\\
+%\end{description}
