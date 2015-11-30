@@ -205,40 +205,79 @@ There is a boundary between the application- and domain logic.
 %
 %\end{description}
 
+\section{Front page}
 \input{4-analysis/frontpage.tex}
 
 \section{Domain layer}
+%
+%\begin{description}
+%\item [Context]
+%The domain logic consists of complex functions for serving web request and analyzing data.
+%
+%\item [Problem]
+%The functionality of the system must be modifiable and must not contain duplicate code to prevent inconsistency.
+%
+%\item [Solution]
+%The domain logic is complex and so it requires the use of the domain model pattern. This means that the domain is Object Oriented, with every class representing one specific, individual, meaningful part.
+%This is the most advanced pattern, reducing code duplication and increasing flexibility of the system.
+%\end{description}
 
 \begin{description}
-\item [Context]
-The domain logic consists of complex functions for serving web request and analyzing data.
+\item [Source]~
+\EAA  \cite{Fowler:2002:PEA:579257} P.116
+%POSA P.182 (=219)
+Pattern-oriented Software Architecture - Volume 4, P.182 \cite{wiley-4}
 
-\item [Problem]
-The functionality of the system must be modifiable and must not contain duplicate code to prevent inconsistency.
+\item [Issue]~
+The domain logic consists of complex functions for serving web request and analyzing data. The functionality of the system must be modifiable and must reduce the amount of duplicate code to a minimum in order to prevent inconsistencies.
 
-\item [Solution]
-The domain logic is complex and so it requires the use of the domain model pattern. This means that the domain is Object Oriented, with every class representing one specific, individual, meaningful part.
-This is the most advanced pattern, reducing code duplication and increasing flexibility of the system.
+\item [Assumptions/Constraints]~
+\begin{itemize}
+\item The presentation layer uses a front controller pattern
+\end{itemize}
 
+\item [Positions]~
+\begin{enumerate}
+\item Transaction Script
+\item Table Module
+\item Domain model
+\end{enumerate}
+
+\item [Decision] ~
+The domain model pattern will be used.
+
+\item [Argument]~
+The domain logic is complex and so it requires the use of the domain model pattern. This means that the domain is Object Oriented, with every class representing one specific, individual, meaningful part. The domain model is the most advanced domain pattern, minimizing code duplication and increasing the flexibility of the system. The domain model also integrates well with the front page controller in the first layer.
+
+\item [Implications]~
+Having a script that is solely responsible for handling a specific request, would not be conform the domain model. This makes it harder to understand how the requests are handled, because the used functions might be spread across the classes in the domain layer.
+
+\item [Related requirements/decisions]~\\
+%\end{description}
+\cite{fr:4} \cite{fr:5} \cite{fr:6}  \cite{fr:15} \cite{fr:17} \cite{kd:3}
+ 
 %The alternatives are : Transaction Script and Table module.
 %
 %Transaction script: Each system call has its corresponding script that will be executed.\\
 %Table module: One class per table in the database that contains all the logic acting on that data.
-
-\item [Source]
-
 \end{description}
 
 \section{Unit of work}
 
 \begin{description}
 \item [Source]~\\
-Patterns of Enterprise Application Architecture, P.184 \cite{Fowler:2002:PEA:579257}
+\EAA , P.184 \cite{eaa}\\
+Pattern-oriented Software Architecture - Volume 4, P.541 \cite{wiley-4}
 
 \item [Issue]~\\
 The system has several object stored in a database which can be edited and created. For example, new sensor data of devices becomes available and changes to the configuration (changing device names etc.) can be made. Updating database records on each change leads to a lot of database calls, which is bad for performance.
 
 \item [Assumptions/Constraints]~\\
+\begin{itemize}
+\item The domain layer uses the domain model pattern.
+\item Requests to store and receive data are    being made continuously while the server runs.
+
+\end{itemize}
 
 \item [Positions]~
 \begin{enumerate}
@@ -249,23 +288,22 @@ The system has several object stored in a database which can be edited and creat
 
 \item [Decision] ~\\
 Unit of Work pattern will be used to keep track of changes to objects and to coordinate writing these changes to the database in one database call.
-The variant used is the Object Registration variant, which removes the burden of having to register the object explicitly with the Unit of Work, which could introduce bugs when this is not done.
+The variant used is the Object Registration variant, which removes the burden of having to register the object explicitly with the Unit of Work. Registering the object self could introduce bugs.
 
 \item [Argument]~\\
 \begin{enumerate}
-\item With Active Record, every change to an in-memory object leads to a database call. This means that multiple consecutive changes to an object lead to multiple database calls, which negatively impact the performance.
+\item With Active Record, every change to an in-memory object leads to one or multiple database calls. This reduces the performance significantly, especially when using the domain model pattern.
 
-\item The Unit of Work instead keeps track of these changes, to allow writing these changes to the database in a single call.\\ When using Unit of Work with Caller Registration, the creator of the object should register it with the Unit of Work explicitly, or else the Unit of Work will not keep track of its changes. This offers the flexibility to have changes to in-memory objects that are never written to database. 
+\item The Unit of Work instead keeps track of these changes to allow writing these changes to the database in a single call.\\ When using Unit of Work with Caller Registration, the creator of the object should register it with the Unit of Work explicitly, or else the Unit of Work will not keep track of its changes. This offers the flexibility to have changes to in-memory objects that are never written to database. 
 
 \item Using Unit of Work with Object Registration means that the creator of the object does not need to explicitly register it with the Unit of Work. Instead, the created object is implicitly registered (e.g. as part of the logic in the constructor). 
 \end{enumerate}
-
 
 \item [Implications]~\\
 Using Unit of Work will reduce the load on the database (the number of database calls). It does however introduce a delay before the change in the in-memory object is present in the representation in the database.
 
 \item [Related requirements/decisions]~\\
-
+\ref{KD:1}, \ref{fr:2}, \ref{fr:3}
 
 \end{description}
 
@@ -290,13 +328,21 @@ It is assumed that the workload for computing statistics can be divided over mul
 \end{enumerate}
 ~\\[-1.5cm]
 
-\item [Decision] ~\\
+\item [Decision]~\\
+The broker pattern will be used. The broker pattern is part of the domain layer.
 
-\item [Argument]~
+%from p73 (=110)
+\item [Argument]~\\
+Using a broker creates a layer of abstraction for the specific layer using it. This increases encapsulation, location independence and scale ability.
 
 \item [Implications]~\\ 
+\begin{itemize}
+\item Adding an other layer of abstraction which must be used can reduce the performance of the system
+\item If the broker fails, the sourced that the broker provided can't be accessed any more.
+\item A bug in the broker is hard to trace back.
+\end{itemize}
 
-\item [Related requirements/decisions]~\\
+\item [Related requirements/decisions]~
 \ref{fr:compute-total}, \ref{fr:compute-bill}, \ref{fr:compute-bill}
 %Refer to layers
 %Most B ROKER realizations are based on a L AYERS (185) architecture
@@ -306,42 +352,87 @@ It is assumed that the workload for computing statistics can be divided over mul
 %cation tasks. We illustrate this partitioning using the CORBA layering
 %[SC99]—other layering schemes and middleware may involve differ-
 %ent assignments [VKZ04].
-
 \end{description}
 
-
 \section{Data source layer}
-The main database will be quite simple and the database actions won't be very complicated. However, the tables needed for the statistics can become very complex.
+\begin{description}
 
-\begin{figure}[H]
-\caption{Database structure draft}
-\centering
-\includegraphics[height=10cm]{4-analysis/images/SoftwarePatternsDatabaseDraft.jpg}
-\end{figure}
-
-Considered patterns to connect to data sources:
+\item [source]
 \begin{itemize}
+%\item Pattern-oriented Software Architecture - Volume 1, P.31 \cite{wiley-1}
+\item Pattern-oriented Software Architecture - Volume 4, P.540 \cite{wiley-4}
+\item \EAA \cite{eaa}, 
+%540=577
+\end{itemize}
+
+\item [Issue]~
+
+
+\item [Assumptions/Constraints]~\\
+\begin{itemize}
+\item The domain layer uses the domain model pattern
+\end{itemize}
+
+\item [Positions]~
+\begin{enumerate}
+%\item Publisher-Subscriber
+%\item Broker
+%\item Message Queuing
+%\item Remote Procedure Call
 \item Table data gateway% (p144)
 \item Row data gateway% (p152)
 \item Active record %(p160)
 \item Data mapper% (p165)
-\end{itemize}
+\end{enumerate}
 
-Because the domain model is used in the domain layer, the data mapper pattern is best to use . \ign{(153 and 97)}
-The logic that will operate on the data will generate statistics of the data, which can become quite complex. This is why the data mapper pattern is chosen as a pattern for connecting to the data sources. This pattern is the most advanced pattern, but provides the best functionality and abstraction.
+\item [Decision] ~\\
+The data mapper pattern will be used. The data mapper pattern creates the most abstraction between the domain and data source layer.
 
-With the active record pattern, the database access/communication, data and logic of that data is all stored in the same class. Since the logic that will be executed on the sensor data is very complex, this patterns will not be useful.
-
+\item [Argument]~\\
+%Because the domain model is used in the domain layer, the data mapper pattern is best to use. \ign{(153 and 97)}
+\begin{itemize}
+\item The data mapper pattern best suits the domain model pattern used in the domain layer
+\item The logic that will operate on the data will generate statistics of the data, which can become quite complex. This is why the data mapper pattern is chosen as a pattern for connecting to the data sources. This pattern is the most advanced pattern, and provides the best functionality and abstraction.
+With the active record pattern, the database access/communication, data and logic of that data is all stored in the same class. Since the logic that will be executed on the sensor could be quite complex, this patterns will not be useful.
 A gateway of any kind leads to performance overhead, because for each call coming from the domain model pattern, a database call is made. It lacks the necessary coordination.
-%
-%\subsection{Table data gateway}
-%\myworries{Not needed if the repository is used (i assume)}
-%
-%The data mapper can use the table data gateway to remove the dependency on how the data is queried. Queries can be replaced with stored procedures in the Table data gateway without the data mappers having to change 
-%
-%%Using a record set (504) turning into a unit of work (184)? P98 (lost the page:()
+\end{itemize}
+The data mapper pattern best suits the domain model pattern used in the domain layer
+The logic that will operate on the data will generate statistics of the data, which can become quite complex. This is why the data mapper pattern is chosen as a pattern for connecting to the data sources. This pattern is the most advanced pattern, and provides the best functionality and abstraction.
+With the active record pattern, the database access/communication, data and logic of that data is all stored in the same class. Since the logic that will be executed on the sensor could be quite complex, this patterns will not be useful.
+A gateway of any kind leads to performance overhead, because for each call coming from the domain model pattern, a database call is made. It lacks the necessary coordination.
 
 
+\item [Implications]~\\
+The data source mapper requires the most amount of work to set up, but it 
+
+\item [Related requirements/decisions]~\\
+\end{description}
+%
+%%\begin{figure}[H]
+%%\caption{Database structure draft}
+%%\centering
+%%\includegraphics[height=10cm]{4-analysis/images/SoftwarePatternsDatabaseDraft.jpg}
+%%\end{figure}
+%
+%Considered patterns to connect to data sources:
+%\begin{itemize}
+%\item Table data gateway% (p144)
+%\item Row data gateway% (p152)
+%\item Active record %(p160)
+%\item Data mapper% (p165)
+%\end{itemize}
+%
+%
+%With the active record pattern, the database access/communication, data and logic of that data is all stored in the same class. Since the logic that will be executed on the sensor data is very complex, this patterns will not be useful.
+%
+%A gateway of any kind leads to performance overhead, because for each call coming from the domain model pattern, a database call is made. It lacks the necessary coordination.
+%%
+%%\subsection{Table data gateway}
+%%\myworries{Not needed if the repository is used (i assume)}
+%%
+%%The data mapper can use the table data gateway to remove the dependency on how the data is queried. Queries can be replaced with stored procedures in the Table data gateway without the data mappers having to change 
+%%
+%%%Using a record set (504) turning into a unit of work (184)? P98 (lost the page:()
 
 \subsection{Repository}
 %\myworries{
@@ -357,7 +448,7 @@ A gateway of any kind leads to performance overhead, because for each call comin
 %"In a large system with many domain object types and many possible queries, Repository reduces the amount of code needed to deal with all the querying that go's on."
 %}
 
-The repository pattern mediates between the domain and data layer. The repository clients create a criteria object, specifying what kind of data is wanted. For example $criteria.equals(Device.NAME, Computer)$. Then the clients use this criteria by invoking repository.matching(criteria) to receive the data from the repository. The client just asks the data, it has no further knowledge about any interaction with any data source/data base.
+The repository pattern is used by the broker pattern to get the sources the domain layer requests. The repository clients create a criteria object, specifying what kind of data is wanted. For example $criteria.equals(Device.NAME, Computer)$. Then the clients use this criteria by invoking repository.matching(criteria) to receive the data from the repository. The client just asks the data, it has no further knowledge about any interaction with any data source/data base.
 
 The repository gives a lot more control over how the data is handled. The benefits are:
 \begin{itemize}
@@ -377,6 +468,7 @@ The Shared Repository pattern will be applied and the Architectural decisions do
 % Context
 \begin{description}
 \item [Source]~\\
+\EAA P.322 \cite{eaa}
 \textit{Architectural Pattern Revisited- A Pattern Language} \\
 
  \item [Name]~\\ Shared Repository (also called Repository) \\
