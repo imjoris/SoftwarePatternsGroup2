@@ -48,7 +48,6 @@ The system consists of high-level components (e.g. user interface), which are de
 \begin{itemize}
 \item It is assumed that the system will have higher-level components that depend on lower-level components.
 \end{itemize}
-~\\[-1.5cm]
 
 \item [Positions]~
 \begin{enumerate}
@@ -56,7 +55,6 @@ The system consists of high-level components (e.g. user interface), which are de
 \item Layers
 % Indirection Layers??
 \end{enumerate}
-~\\[-1.5cm]
 
 \item [Decision] ~\\
 The system will use the Layers pattern to divide the application in multiple layers. The top layer will implement the Presentation logic. Below that will be the Service Layer pattern, the third layer will implement the domain logic (domain model) and the bottom layer will be responsible for the data storage.
@@ -100,7 +98,7 @@ The system will have different interfaces with different kinds of clients. For e
 \item Domain Model % just domain model not good enough
 \item Service Layer
 \end{enumerate}
-~\\[-1.5cm]
+
 
 \item [Decision] ~\\
 The system will use the Service Layer pattern to define the boundary of the application using a layer of services.
@@ -254,7 +252,7 @@ Having a script that is solely responsible for handling a specific request, woul
 
 \item [Related requirements/decisions]~\\
 %\end{description}
-\cite{fr:4} \cite{fr:5} \cite{fr:6}  \cite{fr:15} \cite{fr:17} \cite{kd:3}
+\ref{fr:compute-total} \ref{fr:compute-timeperiod} \ref{fr:compute-bill}  \ref{fr:show-accuracy} \ref{fr:choose-alerts} \ref{kd:3}
  
 %The alternatives are : Transaction Script and Table module.
 %
@@ -303,7 +301,7 @@ The variant used is the Object Registration variant, which removes the burden of
 Using Unit of Work will reduce the load on the database (the number of database calls). It does however introduce a delay before the change in the in-memory object is present in the representation in the database.
 
 \item [Related requirements/decisions]~\\
-\ref{KD:1}, \ref{fr:2}, \ref{fr:3}
+\ref{kd:1}, \ref{fr:store-usage}, \ref{fr:retrieve-usage}
 
 \end{description}
 
@@ -326,7 +324,7 @@ It is assumed that the workload for computing statistics can be divided over mul
 \item Message Queuing %TODO is this better maybe, it allows temporary outage -> good reliability
 \item Remote Procedure Call
 \end{enumerate}
-~\\[-1.5cm]
+
 
 \item [Decision]~\\
 The broker pattern will be used. The broker pattern is part of the domain layer.
@@ -396,10 +394,10 @@ The data mapper pattern will be used. The data mapper pattern creates the most a
 With the active record pattern, the database access/communication, data and logic of that data is all stored in the same class. Since the logic that will be executed on the sensor could be quite complex, this patterns will not be useful.
 A gateway of any kind leads to performance overhead, because for each call coming from the domain model pattern, a database call is made. It lacks the necessary coordination.
 \end{itemize}
-The data mapper pattern best suits the domain model pattern used in the domain layer
-The logic that will operate on the data will generate statistics of the data, which can become quite complex. This is why the data mapper pattern is chosen as a pattern for connecting to the data sources. This pattern is the most advanced pattern, and provides the best functionality and abstraction.
-With the active record pattern, the database access/communication, data and logic of that data is all stored in the same class. Since the logic that will be executed on the sensor could be quite complex, this patterns will not be useful.
-A gateway of any kind leads to performance overhead, because for each call coming from the domain model pattern, a database call is made. It lacks the necessary coordination.
+%The data mapper pattern best suits the domain model pattern used in the domain layer
+%The logic that will operate on the data will generate statistics of the data, which can become quite complex. This is why the data mapper pattern is chosen as a pattern for connecting to the data sources. This pattern is the most advanced pattern, and provides the best functionality and abstraction.
+%With the active record pattern, the database access/communication, data and logic of that data is all stored in the same class. Since the logic that will be executed on the sensor could be quite complex, this patterns will not be useful.
+%A gateway of any kind leads to performance overhead, because for each call coming from the domain model pattern, a database call is made. It lacks the necessary coordination.
 
 
 \item [Implications]~\\
@@ -434,7 +432,7 @@ The data source mapper requires the most amount of work to set up, but it
 %%
 %%%Using a record set (504) turning into a unit of work (184)? P98 (lost the page:()
 
-\subsection{Repository}
+\section{Repository}
 %\myworries{
 %P322:
 %"Mediates between the domain and data mapping layers using a collection-like interface for accesing domain objects."
@@ -480,7 +478,8 @@ The Shared Repository pattern will be applied and the Architectural decisions do
  %\textit{Arguments:} The Shared repository patttern is suitable because \\
  \item [Implication]~\\ After the integration of the SRP to the system the system as one central repository (the database) and all clients can access it using loggin. It ensures Reusability, Changeability, Maintainability. \\
 \item [Related decisions]~\\ Data source layer pattern \\
-\item [Related requirements]~\\ FR-1 FR-2 FR-3 \\
+\item [Related requirements]~\\ 
+\ref{fr:receive-usage}, \ref{fr:store-usage}, \ref{fr:retrieve-usage} \\
  
  \end{description}
 
@@ -588,14 +587,14 @@ The system must handle the request from user by dynamic web interface. In order 
 \item It is assumed that the client uses web browser to connect to the system.
 \item It is assumed that there are multiple views in the system.
 \end{itemize}
-~\\[-1.5cm]
+
 
 \item [Positions]~
 \begin{enumerate}
 \item Presentation-Abstraction-Control
 \item Layers-Model-View-Controller
 \end{enumerate}
-~\\[-1.5cm]
+
 
 \item [Decision] ~\\
 The system will use the Model-View-Controller pattern to decouple the view and the logic behind it. This pattern resides in the service layers of this system.
@@ -631,7 +630,7 @@ In the view component of MVC, the system must handle dynamic web interface in a 
 \item This pattern is only applied on web application.
 \item The system is developed using framework that supports this pattern.
 \end{itemize}
-~\\[-1.5cm]
+
 
 \item [Positions]~
 \begin{enumerate}
@@ -639,7 +638,7 @@ In the view component of MVC, the system must handle dynamic web interface in a 
 \item Two step view
 \item Template view
 \end{enumerate}
-~\\[-1.5cm]
+
 
 \item [Decision] ~\\
 The system will utilize template view in order to increase reusability and to prevent code smells in the project. In this way, several HTML code snippets that corresponds to same element of a page will be reused by embedding markers. Thus, this will lead to a better modifiability as well.
