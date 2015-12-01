@@ -1,0 +1,33 @@
+Wouter:
+Service layer
+unit of work
+
+Aurelie:
+shared repository
+
+Joris:
+front page controller (which includes:)
+    decorator pattern
+    command pattern for usability
+
+Guntur:
+Template view
+MVC
+
+undo redo function
+user web page that automatically updates
+
+
+usability
+	Command pattern
+	MVC
+	template view
+	
+reliability
+	Service layer
+	front page controller
+	decorator / piping
+	
+functional suitability
+	unit of work
+	shared repository
