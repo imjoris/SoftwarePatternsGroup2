@@ -1,7 +1,8 @@
 % !TEX root = ../report.tex
 \chapter{Analysis}
 \label{ch:analysis}
-
+The following section describes the architectural decisions related to the patterns applied in the system.
+In order to document our decisons we followed the publication: \textit{Using Patterns to Capture Architectural Decisions}.
 %All layers (with their patterns) is very clearly described in ch8 starting on p95.
 
 \newcommand{\EAA}{Patterns of Enterprise Application Architecture}
@@ -159,27 +160,26 @@ There is a boundary between the application- and domain logic.
 %\item [Solution]
 %\item [Source]
 
-<<<<<<< HEAD
-\item [Context]~\\
-There is duplicate code within each layer of the system.
+%\item [Context]~\\
+%There is duplicate code within each layer of the system.
 
-\item [Problem]~\\
-Duplicate code makes the system hard to modify and maintain.
+%\item [Problem]~\\
+%Duplicate code makes the system hard to modify and maintain.
 
-\item [Solution]~\\
-With the Layer Supertype pattern, all the classes of a certain layer have the same super class. This super class then contains the features that are very common for the layer.
+%\item [Solution]~\\
+%With the Layer Supertype pattern, all the classes of a certain layer have the same super class. This super class then contains the features that are very common for the layer.
+%
+%This pattern will be used in every layer.
+%\begin{description}
+%\item[Service layer] All the services need to take care of security. The client needs to be authenticated and the data needs to be decryption by the service layer. All this security logic will be placed in a super type using the "Layer Supertype" pattern In the service layer it contains the security logic.
+%
+%\item[Domain layer] In this layer, the sypertype will contain common features and functions for handling storage.
+%%\myworries{From book:
+%%-  "Common features, such as the storage and handling of 'Identity Fields (216), can go there."
+%
+%\item[Data source layer]
+%The data mapper in the data source pattern can use a layer super type that handles all the common behavior, which can greatly reduce the extra work of coding. 
 
-This pattern will be used in every layer.
-\begin{description}
-\item[Service layer] All the services need to take care of security. The client needs to be authenticated and the data needs to be decryption by the service layer. All this security logic will be placed in a super type using the "Layer Supertype" pattern In the service layer it contains the security logic.
-
-\item[Domain layer] In this layer, the sypertype will contain common features and functions for handling storage.
-%\myworries{From book:
-%-  "Common features, such as the storage and handling of 'Identity Fields (216), can go there."
-
-\item[Data source layer]
-The data mapper in the data source pattern can use a layer super type that handles all the common behavior, which can greatly reduce the extra work of coding. 
-=======
 %\item [Context]
 %There is duplicate code within each layer of the system.
 %
@@ -199,7 +199,7 @@ The data mapper in the data source pattern can use a layer super type that handl
 %
 %\item[Data source layer]
 %The data mapper in the data source pattern can use a layer super type that handles all the common behavior, which can greatly reduce the extra work of coding. 
->>>>>>> a20c0f2661ce7ed8ffee8fe4608230a569de449a
+
 
 %(p308 (Metadata mapping pattern))
 %\end{description}
@@ -383,38 +383,44 @@ A gateway of any kind leads to performance overhead, because for each call comin
 %"In a large system with many domain object types and many possible queries, Repository reduces the amount of code needed to deal with all the querying that go's on."
 %}
 
-The repository pattern mediates between the domain and data layer. The repository clients create a criteria object, specifying what kind of data is wanted. For example $criteria.equals(Device.NAME, Computer)$. Then the clients use this criteria by invoking repository.matching(criteria) to receive the data from the repository. The client just asks the data, it has no further knowledge about any interaction with any data source/data base.
+%The repository pattern mediates between the domain and data layer. The repository clients create a criteria object, specifying what kind of data is wanted. For example $criteria.equals(Device.NAME, Computer)$. Then the clients use this criteria by invoking repository.matching(criteria) to receive the data from the repository. The client just asks the data, it has no further knowledge about any interaction with any data source/data base.
 
-The repository gives a lot more control over how the data is handled. The benefits are:
-\begin{itemize}
-\item Reduces code (and code complexity)
-\item Increases performance
-\item Separated domain and data layers, increasing flexibility and changeability
-\end{itemize}
+%The repository gives a lot more control over how the data is handled. The benefits are:
+%\begin{itemize}
+%\item Reduces code (and code complexity)
+%\item Increases performance
+%\item Separated domain and data layers, increasing flexibility and changeability
+%\end{itemize}
 
-Performing analysis on the data also consists of executing complex queries on the data source. The database that executes these queries, however, might change. Or the system might decide to use multiple databases and data sources.
-Using the Repository pattern, these changes can be made fast. The repository also allows for multiple configurations to exist. So an extra repository could be created for testing purposes, only using an in-memory database to increase the test execution speed. \\
+%Performing analysis on the data also consists of executing complex queries on the data source. The database that executes these queries, however, might change. Or the system might decide to use multiple databases and data sources.
+%Using the Repository pattern, these changes can be made fast. The repository also allows for multiple configurations to exist. So an extra repository could be created for testing purposes, only using an in-memory database to increase the test execution speed. \\
 
 
-The Shared Repository pattern will be applied and the Architectural decisions documented according to the template presented in \textit{Using Patterns to Capture Architectural Decisions} \\
- "In the SHARED REPOSITORY pattern one component of the system is used as a central data store, accessed by all other independent components."\\
+%The Shared Repository pattern will be applied and the Architectural decisions documented according to the template presented in \textit{Using Patterns to Capture Architectural Decisions} \\
+
 
 % Forces ?
 % Context
 \begin{description}
-\item [Source]\\
+\item [Source]~\\
 \textit{Architectural Pattern Revisited- A Pattern Language} \\
 
- \item [Name] \\ Shared Repository (also called Repository) \\
- \item [Issue] \\ The external data must be stored, updaded, accessed by multiple clients and servers simultaneously and analyzed.\\
- %\textit{Assumptions/Contrainsts:} \\
- \item [Position] \\ When using the Active Repository Pattern the clients are notified when there is a change is the repository which is not a feature of the system.\\
- %BlackBoard Pattern  \\
- \item [Decision]\\ The system uses the Shared Repository Pattern in order to centralized the access to the data.\\
+ \item [Name] ~\\ 
+ Shared Repository (also called Repository) \\
+ \item [Issue]~ \\
+  The external data must be stored, updaded, accessed by multiple clients and servers simultaneously and analyzed.\\
+ \item [Assumptions/contrainsts]~ \\
+ \item [Position]~ \\ 
+ In the \textit{Shared Repository pattern}one component of the system is used as a central data store, accessed by all other independent components."\\
+ When using the \textit{Active Repository Pattern} the clients are notified when there is a change is the repository which is not a feature of the system.\\
+ \textit{BlackBoard Pattern} \\
+ \item [Decision]~\\ 
+ The system uses the Shared Repository Pattern in order to centralize the access to the data.\\
  %\textit{Arguments:} The Shared repository patttern is suitable because \\
- \item [Implication] \\ After the integration of the SRP to the system the system as one central repository (the database) and all clients can access it using loggin. It ensures Reusability, Changeability, Maintainability. \\
-\item [Related decisions] \\ Data source layer pattern \\
-\item [Related requirements] \\ FR-1 FR-2 FR-3 \\
+ \item [Implication]~ \\ 
+ After the integration of the SRP to the system the system as one central repository (the database) and all clients can access it using loggin. It ensures Reusability, Changeability, Maintainability. \\
+\item [Related decisions]~ \\ Data source layer pattern \\
+\item [Related requirements]~ \\ FR-1 FR-2 FR-3 \\
  
  \end{description}
 

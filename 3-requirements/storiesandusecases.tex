@@ -21,7 +21,7 @@ In this section the architectural significant use-cases will be presented.
 	Goal & The user has to register on the website to create his account. \\
 	Primary actor & End-User\\
 	Level & User goal\\
-	Precondition & The website has the internal process to add an user to the database \\
+	Precondition & The website is implemented to add an user to the database \\
 	Main success scenario & \compactList{enumerate}{%
 		 \item The user access the \ShortName~URL 
 		 %\item The user click on the `Sign up' Button 
@@ -49,6 +49,35 @@ In this section the architectural significant use-cases will be presented.
 		UCTable
 	]{%
 	value & description \\
+	\req{uc} & \textbf{The End user login } \\
+	Goal & The user wants to be logged into the system. \\
+	Primary actor & End-User\\
+	Level & User goal\\
+	Precondition & The End-User has an account. \\
+	Main success scenario & \compactList{enumerate}{%
+		 \item The user access the \ShortName~URL and clicks on the "Log in" button.
+		 \item The user enters his username and password.
+		 \item The system checks the validity of the username and passwords.
+		}\\
+	Postcondition & The user his logged into the system and accesses his interface. \\
+	Extensions & \compactCell{
+			The username/password are incorrect
+			%\begin{itemize}
+			 %\item[1.]
+			 An error message is prompt. \\
+			 Go to step 2. \\
+			} \\
+	Related requirements & \ref{fr:interface-register} \\
+	}
+\caption{UC-\arabic{uc}: The End user login}
+\label{table:uc-login}
+\end{table}
+
+\begin{table}[H]
+	\pgfplotstabletypeset[%
+		UCTable
+	]{%
+	value & description \\
 	\req{uc} & \textbf{Receiving, collecting and store external energy usage data} \\
 	Goal & The sytem needs to receive energy data and store it. \\
 	%Stakeholders \& interests & \\
@@ -59,10 +88,11 @@ In this section the architectural significant use-cases will be presented.
 			\item The sensor sends energy usage information to the REST API with a security token attached.
 			\item The REST API confirms the attached security token.
 			\item The system stores the energy usage data.
-			} \\ \\  % what is the process ?
+			} \\ \\ 
 	Postcondition & The data is stored in the database. \\
-	Extensions &  \\
-	Related requirements & \ref{fr:receive-usage}, \ref{fr:store-usage} \\
+	Extensions & The token is unvalid. 
+		Log and ignore the request\\
+	Related requirements & \ref{fr:receive-usage}, \ref{fr:store-usage}, \ref{fr:feedback} \\
 	}
 \caption{UC-\arabic{uc}: Receiving external energy usage data}
 \label{table:uc-external-usage}
@@ -80,14 +110,14 @@ In this section the architectural significant use-cases will be presented.
 	Level & User goal\\
 	Precondition & The user is registered in the system. \\
 	Main success scenario & \compactList{enumerate}{%
-		\item The user gets access to his interface by clicking on "Sign in" Button
+		\item The user gets access to his interface. (cf. UC "User log in ")
 		\item In the menu he clicks on "Bill".
-		\item The system computes the expected bill.
+		\item The system computes the expected bill (cf.UC "Computation/statistics")
 		\item The system shows the expected bill to the end user
 		} \\
 	Postcondition &  The estimated bill is displayed \\
-	Extensions &  \\
-	Related requirements & \ref{fr:compute-bill}, \ref{fr:web-interface} \\
+	Extensions & cf. extenstions of UC "Computation/statistics". \\
+	Related requirements & \ref{fr:compute-bill}, \ref{fr:web-interface}, \ref{fr:configure-price} \\
 	}
 \caption{UC-\arabic{uc}: Display the estimated bill}
 \label{table:uc-display-bill}
@@ -104,15 +134,15 @@ In this section the architectural significant use-cases will be presented.
 	Level & User goal\\
 	Precondition & The user is registered in the system. \\
 	Main success scenario & \compactList{enumerate}{%
-		\item The user gets access to his interface by clicking on "Sign in" Button 
+		\item The user gets access to his interface. (cf. UC "User log in ")
 		\item In the menu he clicks on " Analysis- Chart " 
 		\item The user selects the type of statistic
-		\item The user select the period for which to compute the statistic
-		\item The system computes/make the analysis.
-		\item The computed result is shown to the user.
+		\item The user select the period for which to compute the statistics
+		\item The system computes/make the analysis (cf. UC "Computation/Statistics").
+		\item The computed result is displayed to the user.
 		} \\
 	Postcondition &  Charts with different item are displayed. \\
-	Extensions & The statistics aren't made. \\
+	Extensions & The statistics aren't computed : cf. extenstions of UC "Computation/statistics". \\
 	Related requirements & \ref{fr:web-interface}, \ref{fr:compute-timeperiod}, \ref{fr:compute-total}, \ref{fr:interface-selectstats} \\
 	}
 \caption{UC-\arabic{uc}: Display analysis, daily/weekly/monthly report}
@@ -154,12 +184,16 @@ In this section the architectural significant use-cases will be presented.
 	Level & User goal\\
 	Precondition & The user is registered in the database of the system. \\
 	Main success scenario & \compactList{enumerate}{%
-		 \item After logging in on the dashboard/website the user clicks on the " Settings" button. 
+		 \item The user get access to his interface.(cf. UC "User log in ")
+		 \item The user clicks on the " Settings" button. 
 		 \item The user gets access to the Settings section with all the internal sections and choooses "Adding new devices".
 		 \item The user enters the new device' characteristics and submits.
 		} \\
 	Postcondition & The new device and its related information are added in the database. \\
-	Extensions & \\
+	Extensions & \compactCell{The device isn't added into the database. \\
+		An error message is displayed"The device couldn't be added". \\
+		Go to step2. \\ 
+		} \\
 	Related requirements & FR-10 FR-11 FR-12\\
 	}
 \caption{UC-\arabic{uc}: Configuration- adding new devices}
@@ -178,15 +212,23 @@ In this section the architectural significant use-cases will be presented.
 	%Level & User goal\\
 	Precondition & The database of the system has the necessary data. \\
 	Main success scenario & \compactList{enumerate}{%
-		 \item The data needed for the selected computation is filtered
+		 \item The data needed for the selected computation is filtered.
 		 \item The system invoks Map/Reduce Functions or Spark and computes
 		}\\
 	Postcondition & The analysis is made and the result available/displayed.  \\
 	Extensions & The system can't compute the statistics.\\
 	% The statistics are incorrect.
-	Related requirements & FR-4 FR-5 FR-6 FR-7 FR-8 FR-10 FR-16 FR-19\\
+	Related requirements & FR-4 FR-5 FR-6 FR-7 FR-8 FR-10 FR-16 FR-19, \ref{fr:show-accuracy}\\
 	}
 \caption{UC-\arabic{uc}: Computation-statistics}
 \label{table:uc-registration}
 \end{table}
+
+The figure below represents the Use-case Diagram of HEMS.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth]{3-requirements/images/usecaseD.png}
+	\caption{Use case diagram}
+	\label{fig:template-view-architecture}
+\end{figure}
 
