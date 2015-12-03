@@ -4,7 +4,7 @@
 %kind of QA's (accourding to "Software Requirements" 3rd edition, Karll Wiegers and Joy Beatty)
 %from page 263:
 
-This section defines all stakeholders of our system and describes the concerns of the stakeholders. A stakeholder might be a person, group of persons, or organization that are involved in our system. There are ten stakeholders, ranged from first parties to third parties stakeholders. Several quality standards from the "Software Requirements" book by Microsoft \cite{wiegers2013software} are used. Those quality standards are described in \autoref{table:qa_standard}.
+This section defines all stakeholders of our system and describes the concerns of the stakeholders. A stakeholder is a person, group of persons, or organization that are involved in our system. There are ten stakeholders, ranged from first parties to third parties stakeholders. Several quality standards from the "Software Requirements" book by Microsoft \cite{wiegers2013software} are used. Those quality standards are described in \autoref{table:qa_standard}.
 
 \begin{table}[!htbp] \centering
 	\caption{Quality attributes of Software Architecture from "Software Requirements" Book \cite{wiegers2013software}.}
@@ -12,20 +12,19 @@ This section defines all stakeholders of our system and describes the concerns o
 	\begin{tabular}{L{\tw{0.2}} L{\tw{0.4}}}
 		\toprule
 		\textbf{Quality Attributes} & \textbf{Brief description}                                                                                        \\ \midrule
-		Availability                & The extent to which the system's services are available when and where they are needed                            \\
 		Interoperability            & How easily the system can interconnect and exchange data with other systems or components                         \\
-		Performance                 & How quickly and predictable the system responds to user inputs or other events                                    \\
-		Reliability                 & How reliable the results of the system are (accuracy). \\
+		Reliability                 & How reliable the results of the system are (accuracy). This includes availability, which is the extent to which the system's services are available when and where they are needed \\
 		Security                    & How well the system protects against unauthorized access to the application and its data                          \\
 		Usability                   & How easy it is for people to learn, remember, and use the system                                                  \\
+		Maintainability             & How efficient and effective the system can be maintained/modified by the maintainers \\
 		\bottomrule
 	\end{tabular}
 \end{table}
 
-There are six quality attributes, as can be seen in \autoref{table:qa_standard}, for measuring stakeholders' concern regarding our system. Furthermore, profitability has been added as another quality standard to improve measuring stakeholders' concern. The stakeholders are listed below and are then explained in more detail below.
+There are six quality attributes, as can be seen in \autoref{table:qa_standard}, for measuring stakeholders' concern regarding our system.  The stakeholders are listed below and are then explained in more detail below.
 
 \begin{itemize}
-\item Product owner
+%\item Product owner
 \item Developers
 \item Maintainers
 \item Government
@@ -34,28 +33,39 @@ There are six quality attributes, as can be seen in \autoref{table:qa_standard},
 
 \begin{description}
 
-\item [Product owner] is the owner of the website. This stakeholder funds the website and its main concern is creating a profit. This affects the quality attributes usability and availability.
+%\item [Product owner] is the owner of the system. This stakeholder funds the project.  This affects the quality attributes usability and availability.
 
-\item [Developers] have to make sure the system provides the functionality that the users expect the system to have. This means that their main concern is usability. But also interoperability is their main concern, because users will want to connect any energy consuming device to this site in order to monitor the consumption.
+\item [Developers] have to make sure the system provides the functionality that the users expect the system to have. They want the external components (sensors) to work with the system. This means that their main concern is interoperability, because users will want to connect any energy consuming device to this site in order to monitor the consumption.
 
-\item [Maintainers] are mainly concerned that the website is up and running at all times. Meaning their concern is the availability and security of the system.
+\item [Maintainers] are mainly concerned that the website is up and running at all times. Meaning their concern is the reliability of the system. Since they are responsible for the maintenance to the system, they also care about its maintainability.
 
-\item [The government] wants to lower the energy consumption of the citizens. It wants to comply with the aims of the EU to reduce the energy consumption by 20\% by 2020. Their main concern is the usability and reliability of the system, because the system is only useful to the government if it is used by allot of people and the statistics of the system are reliable.
+\item [The government] wants to lower the energy consumption of the citizens. It wants to comply with the aims of the EU to reduce the energy consumption by 20\% by 2020. Their main concern is that the end users will be able to use the system, so it will be widely adopted. This means they care about the usability and reliability of the system, because the system is only useful to the government if it is used by allot of people and the statistics of the system are reliable.
 
-\item [Home owners] want to get an insight in their energy usage. They want to know how to effectively reduce their energy consumption. In order to do this, they might want to receive alerts about sudden increases of energy consumption in certain devices. These alerts have to be accurate and reliable. The main concern of the home owners, thus, is the usability and reliability of the system.
+\item [Home owners] want to get an insight in their energy usage. They want to know how to effectively reduce their energy consumption. In order to do this, they might want to receive alerts about sudden increases of energy consumption in certain devices. These alerts have to be accurate and reliable. The main concern of the home owners, thus, is the usability of the system.
 
 \end{description}
 
 
-% %from page 209 (Software Requirements book from microsoft):
-% \todo{quote book, and ISO}
-% Book and (ISO/IEC/IEEE 2011):\\
-% \begin{tabular}{|L{\tw{0.2}}|L{\tw{0.4}}|}
-% \toprule
-% \textbf{Keyword} & \textbf{Priority} \\
-% Shall & Required \\
-% Should & Desired \\
-% May & Optional \\
-% \bottomrule
-% \end{tabular}
+\autoref{table:stakeholder_concern} illustrates the stakeholder concern matrix. In our approach every stakeholder is equally important. 
+
+\begin{table}[!htbp] \centering
+	\caption{Matrix of stakeholders concern.}
+	\label{table:stakeholder_concern}
+	\begin{tabular}{@{} cl*{8}c @{}}
+		&  & \multicolumn{6}{c}{\textbf{Concerns}} \\[2ex]
+		& \textbf{Stakeholder} & \rot{Weight} & \rot{Usability} & \rot{Reliability} & \rot{Interoperability} 
+		&   \rot{Maintainability} \\
+		\cmidrule[1pt]{2-7}		
+		 %                	      weight usa  reli  int  r main
+		  %& Product owner          & 1 &     &    &     &    & & \\
+		  & Developers             & 1 &     &    & 100 &     & & \\
+		  %& Sensor suppliers       & 1 &   &  &  &   &    & \\
+		  & Maintainers            & 1 &   & 50   &       & 50 &  \\
+		  & Government             & 1 & 60  & 40 &        &&  \\
+		  & Home owners            & 1 & 70  & 30  &        &&  \\
+		\cmidrule{2-7}
+		  & Total                  &   & 130 & 120& 100 & 50 &  \\
+		\cmidrule{2-7}
+	\end{tabular}
+\end{table}
 
