@@ -1,0 +1,9 @@
+General remarks:
+- Sentences are often too long. This leads to unclear and ambiguous descriptions.
+- Quite allot of "We " and "our". Try to reduce using those words to a minimum.
+
+Significant notes:
+- I think the broker pattern is confused with the proxy pattern. This is not the way the broker pattern is used.
+- The repository and the broker pattern don't differ allot accourding to the document. The only difference is that the repository explicitly accesses data storage.
+- There is not need for a verification cluster
+- 
