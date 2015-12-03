@@ -1,0 +1,42 @@
+This document lists our general remarks and the most significant notes about your report. The annotated document contains these notes as well in addition to some non-structural notes such as spelling and formatting niggles.
+
+The annotations are coloured as follows: 
+ - Yellow: substantial problems regarding the content
+ - Green: spelling / grammar mistakes or inelegancies
+ - Blue: formatting
+ - Light-blue/cyan: compliments
+
+General remarks:
+ - Start sections with an introduction not with an subsection (like in chapter 3 for example)
+ - The requirements part is quite chaotic. Make sure everyone reads & reviews all sections so everyone is on the same page.
+    
+Significant notes:
+
+Introduction
+ - The image displays space & water heating as the main consumers of energy. These are generally not electricity-based solutions. (pg. 1)
+ Requirements
+ - No it doesn't, you described your vision in the previous sub-section and immediately proceed to the stakeholders here. (pg. 3)
+ - Explain/describe profitability as well (pg. 3)
+ - No, usability concerns the end-users (Home owners). The developers care about what affects them (modularity, interoperability and testability). Usability is not their concern, it is their responsibility. (pg. 3)
+ - Like before, availability is the responsibility of the maintainers, not their concern. (pg. 3)
+ - How did you derive the key drivers? (Stakeholder concern table...) (pg. 4)
+ - Compatibility is not listed as a stakeholder concern. (Did you mean interoperability?) (pg. 4)
+ - Suggestion: make a use case for signing in and have it as a precondition to all use cases that require the user to be signed in. (pg. 7)
+ - UC-4, extensions: `The statistics aren't made' And then? Message to the user, retry etc?
+ - Not all functional requirements are linked to use cases (pg. 9)
+ - RE-2: 44 minutes per what? Ever/per year/per month? (pg. 10)
+ - Where are the requirements for compatibility/interoperability (your third key driver)? (pg. 10)
+ - SEC-2 `The data is encrypted': Needs to be more specific (Caesar/ROT13 would count as encryption but isn't useful). Also: which data: communication, database, graphs? (pg. 10)
+ - Scalability not a key driver at all. (pg. 10)
+ - SCA-1: Not S.M.A.R.T: how many users? What do you mean by efficiently? (pg. 10)
+ 
+Analysis
+ - Missing introduction text, explain what you're going to tell the reader. (pg. 14)
+ - Suggestion : Illustrations to help explain the patterns. (pg. 14)
+ - Avoid these direct contradictions ('reducing thread-safety concerns'/'do require thread safety management' & 'increases the understanding'/'decreases the overall understanding'). If a pattern can have either consequence (but obviously not both at the same time) go with what happens concretely in your system. (pg. 16)
+ - Don't forget to fill the empty pattern properties in. (pg. 18)
+ - What you describe under Repository can also be considered a combination of the Shared Repository and the Table/Row Data Gateway patterns. You could split them up. (pg. 18)
+ - Move this text into the paragraphs below and structure it like the others. (pg. 19)
+ 
+Software architecture
+ - Two components per view? Are they perhaps controllers? (pg. 35)
