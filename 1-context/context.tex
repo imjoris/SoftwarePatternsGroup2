@@ -1,9 +1,9 @@
 %!TEX root = ../report.tex
 \chapter{Introduction}
 \label{ch:context}
-This document depicts the software architecture of the Home Energy Monitoring System (HEMS) as the first assignment of Software Patterns course. We proclaim ourself a software architect team working on the Home Energy Monitoring System.
+This document describes the software architecture of the Home Energy Monitoring System (HEMS) as the first assignment of Software Pattern course. We proclaim ourself a software architect team working on the Home Energy Monitoring System.
 
-Energy is one of the main concern in a household. The problem is how to monitor energy usage of a particular house in order to prevent inefficient consumption of energy and even to figure out how to save energy, resulting in lower household expenses for energy. An example of energy consumption for a house is shown in Figure \ref{fig:home-energy-consumption}, which indicates that electricity is one of the main energy consumption of a house. Thus, in the initial product this system focuses only on the electricity usage.
+Energy is one of the main concerns in a household. The problem is how to monitor energy usage of a particular house in order to prevent inefficient consumption of energy and even to figure out how to save energy, resulting in lower household expenses for energy. An example of energy consumption for a house is shown in Figure \ref{fig:home-energy-consumption}, which indicates that electricity is one of the main energy consumption of a house. Thus, in the initial product this system focuses only on the electricity usage.
 
 \begin{figure}[!ht]
 	\centering
@@ -14,7 +14,7 @@ Energy is one of the main concern in a household. The problem is how to monitor 
 
 This system will allow the user to collect and store their electricity consumption. This system will also have a web dashboard that shows the graph of electricity consumption, which the user can adjust the time range of the graph to see different data, and other useful data such as which device uses the electricity the most, etc. The data, which will be stored in our database, will be used to do analysis that will help user to predict the upcoming electricity bill in the next month and other required analysis. This system also provides a fault-tolerant computing platform to compute these analyses.
 
-The data collection is not our part, we leave this portion of the system to the third party developers. Basically, we provide a online software service of cloud computing environment, which can be categorized as SaaS\footnote{Software as a service}, to do energy management system. SaaS describes when users rent or borrow online software instead of actually purchasing and installing it on their own computers \cite{whatissaas}.
+The data collection is not our part, we leave this portion of the system to the third party developers. Basically, we provide a online software service of cloud computing environment, which can be categorized as SaaS\footnote{Software as a service}, to deliver energy management system. SaaS describes when users rent or borrow online software instead of actually purchasing and installing it on their own computers \cite{whatissaas}.
 
 Figure \ref{fig:vision} depicts the architectural vision of the HEMS.
 
