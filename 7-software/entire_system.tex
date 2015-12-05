@@ -1,8 +1,28 @@
 % !TEX root = ../report.tex
-
-\section{Views}
 The following section will elaborate the two of the `4$+$1 model' views of the system, namely the Logic View and the Process View.
 
-\subsection{Logic view}
+\section{Logic view}
 
-\subsection{Process view}
+\section{Process view}
+\subsection*{Unit of Work pattern}
+\label{sec:unit-of-work-pattern}
+
+The Unit of Work pattern is used to keep track of the changes made to objects and newly created objects. Whenever an object is created, changed or deleted, the Unit of Work is told about this. 
+Whenever the object can be saved to the database, the \verb|commit()| method of the Unit of Work is called, which translates the stored changes into database transactions.
+
+A sequence diagram showing an example of this can be seen in Figure~\ref{fig:unitofworkseq}. 
+This is an example of the user configuring the system. Here, the StatisticsController constructs a new Device object, which is fetched from the database and then registers itself with the Unit of Work. When the StatisticsController changes the name of this device, the device object registers itself as dirty with the Unit of Work. 
+When the device object is saved, it calls \verb|commit()| on the Unit of Work, which leads to the device updating the appropriate fields in the database.
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.7]{7-software/images/UnitOfWorkSeq.png}
+\caption{Sequence diagram showing an update to a Device-object using Unit of Work}
+\label{fig:unitofworkseq}
+\end{figure}
+
+%It also uses an \textit{Identity Map} in order to guarantee that
+  % explain this pattern somewhere
+
+
