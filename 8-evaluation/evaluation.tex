@@ -95,8 +95,8 @@ The repository gives a lot more control over how the data is handled. The benefi
 \item Separated domain and data layers, increasing flexibility and changeability
 \end{itemize}
 
-Performing analysis on the data also consists of executing complex queries on the data source. The database that executes these queries, however, might change. Or the system might decide to use multiple databases and data sources.
-Using the Repository pattern, these changes can \underline{be made fast}. The repository also allows for \underline{multiple configurations} to exist. So an extra repository could be created for testing purposes, only using an in-memory database to increase the test execution speed. \\
+Performing analysis on the data also consists of executing complex queries on the data source. The database that executes these queries, however, might change. The system could also decide to use multiple databases and data sources.
+Using the Repository pattern, processing these changes is simplified and can be made in a flexible way that does not effect the rest of the system. The repository also allows for multiple configurations to exist. So an extra repository could be created for testing purposes, only using an in-memory database to increase the test execution speed. \\
 \textbf{Benefits \& Liabilities} ~
 \begin{itemize}
 \item[+] Reusability : because the data store is central
