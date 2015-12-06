@@ -21,12 +21,12 @@ The sytem will be hopefully used by a lot of people who don't necessarily have k
  		UCTable
  	]{%
  		value & description \\
- 		\req{RE} & A margin of error of $5\%$ in the energy measurements is tolerated. \\
- 		\req{RE} & The sytem should be available $99.9\%$. of the time which means down for 44 minutes. \\
+ 		\req{RE} & A margin of error of $5\%$ in the energy measurements is tolerated. \\ % incaccurary ?
+ 		\req{RE} & The sytem should be available $99.9\%$. of the time which means down for 44 minutes. 
+ 		$AV = \frac{\text{MTTF}}{\text{MTTF} + \text{MTTR}} = \frac{\text{6 months}}{\text{6 months }+\text{44 minutes}} = \frac{4380 \text{ hours}}{4380 + 12 \text{ hours}} = 99.9 \%$ \\
  		\req{RE} & The system should be down for maximum ten minutes when the user installs a new release(version). \\
  	}
-%$AV = \frac{\text{MTTF}}{\text{MTTF} + \text{MTTR}} = \frac{\text{6 months}}{\text{6 months }+\text{ 12 hours}} = \frac{4380 \text{ hours}}{4380 + 12 \text{ hours}} = 99.7 \%$
-% computation
+
  	
 \subsection{Security}
 Ensuring the security for the system is a major issue so all the data needed for its good functioning remain protected and consistent. \\
@@ -42,11 +42,11 @@ Ensuring the security for the system is a major issue so all the data needed for
  
 
 \subsection{Scalability} 
-The system should make the increase of workload, resources and users easy that's why the scalability is an important Key driver.\\
+The system should make the increase in workload, resources and users easy to handle that's why the scalability its part of non functional requirements of the system.\\
  	\pgfplotstabletypeset[%
  		UCTable
  	]{%
  		value & description \\
  		%\req{SCA} & The system must be able to monitor several kind of energy consumption for example: gas ,solar, temperature. \\
- 	\req{SCA} & The system should function as efficiently even if the number of users increases. \\% increase in the number of users \\
+ 	\req{SCA} & The system should function as efficiently when the number of users increases. \\% increase in the number of users \\
  	}

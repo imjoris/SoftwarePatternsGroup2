@@ -20,7 +20,7 @@ In this section the architectural significant use-cases will be presented.
 	\req{uc} & \textbf{The End user registration} \\
 	Goal & The user has to register on the website to create his account. \\
 	Primary actor & End-User\\
-	Level & User goal\\
+	%Level & User goal\\
 	Precondition & The website is implemented to add an user to the database \\
 	Main success scenario & \compactList{enumerate}{%
 		 \item The user access the \ShortName~URL 
@@ -52,7 +52,7 @@ In this section the architectural significant use-cases will be presented.
 	\req{uc} & \textbf{The End user login } \\
 	Goal & The user wants to be logged into the system. \\
 	Primary actor & End-User\\
-	Level & User goal\\
+	%Level & User goal\\
 	Precondition & The End-User has an account. \\
 	Main success scenario & \compactList{enumerate}{%
 		 \item The user access the \ShortName~URL and clicks on the "Log in" button.
@@ -107,7 +107,7 @@ In this section the architectural significant use-cases will be presented.
 	\req{uc} & \textbf{Display the estimated bill} \\
 	Goal & The End-User wants to see the estimation of his next bill \\
 	Primary actor & End-User \\
-	Level & User goal\\
+	%Level & User goal\\
 	Precondition & The user is registered in the system. \\
 	Main success scenario & \compactList{enumerate}{%
 		\item The user gets access to his interface. (cf. UC "User log in ")
@@ -116,7 +116,8 @@ In this section the architectural significant use-cases will be presented.
 		\item The system shows the expected bill to the end user
 		} \\
 	Postcondition &  The estimated bill is displayed \\
-	Extensions & cf. extenstions of UC "Computation/statistics". \\
+	Extensions & cf. extenstions of UC "Computation/statistics". 
+		An error message is displayed. \\
 	Related requirements & \ref{fr:compute-bill}, \ref{fr:web-interface}, \ref{fr:configure-price} \\
 	}
 \caption{UC-\arabic{uc}: Display the estimated bill}
@@ -131,7 +132,7 @@ In this section the architectural significant use-cases will be presented.
 	\req{uc} & \textbf{Display analysis, daily/weekly/monthly report} \\
 	Goal & The End-User wants to display several kind of analysis about his energy consumption \\
 	Primary actor & End-User \\
-	Level & User goal\\
+	%Level & User goal\\
 	Precondition & The user is registered in the system. \\
 	Main success scenario & \compactList{enumerate}{%
 		\item The user gets access to his interface. (cf. UC "User log in ")
@@ -142,7 +143,8 @@ In this section the architectural significant use-cases will be presented.
 		\item The computed result is displayed to the user.
 		} \\
 	Postcondition &  Charts with different item are displayed. \\
-	Extensions & The statistics aren't computed : cf. extenstions of UC "Computation/statistics". \\
+	Extensions & The statistics aren't computed : cf. extenstions of UC "Computation/statistics". 
+	An error message is displayed.\\
 	Related requirements & \ref{fr:web-interface}, \ref{fr:compute-timeperiod}, \ref{fr:compute-total}, \ref{fr:interface-selectstats} \\
 	}
 \caption{UC-\arabic{uc}: Display analysis, daily/weekly/monthly report}
@@ -181,7 +183,7 @@ In this section the architectural significant use-cases will be presented.
 	Goal & The user must be able to configure the system with his home devices' characteristics. \\
 	%Stakeholders \& interests & \\
 	Primary actor & The user \\
-	Level & User goal\\
+	%Level & User goal\\
 	Precondition & The user is registered in the database of the system. \\
 	Main success scenario & \compactList{enumerate}{%
 		 \item The user get access to his interface.(cf. UC "User log in ")
@@ -191,7 +193,7 @@ In this section the architectural significant use-cases will be presented.
 		} \\
 	Postcondition & The new device and its related information are added in the database. \\
 	Extensions & \compactCell{The device isn't added into the database. \\
-		An error message is displayed"The device couldn't be added". \\
+		An error message is displayed "The device couldn't be added". \\
 		Go to step2. \\ 
 		} \\
 	Related requirements & FR-10 FR-11 FR-12\\
@@ -205,26 +207,26 @@ In this section the architectural significant use-cases will be presented.
 		UCTable
 	]{%
 	value & description \\
-	\req{uc} & \textbf{Computation / Statistics} \\
-	Goal & The system performs several kind of statistics. \\
+	\req{uc} & \textbf{Computation/Statistics} \\
+	Goal & The system has to perform several kind of statistics. \\
 	%Stakeholders and interests & \\
 	Primary actor & System\\
 	%Level & User goal\\
 	Precondition & The database of the system has the necessary data. \\
 	Main success scenario & \compactList{enumerate}{%
 		 \item The data needed for the selected computation is filtered.
-		 \item The system invoks Map/Reduce Functions or Spark and computes
+		 \item The system invoks Map/Reduce functions or Spark and computes
 		}\\
-	Postcondition & The analysis is made and the result available/displayed.  \\
-	Extensions & The system can't compute the statistics.\\
-	% The statistics are incorrect.
+	Postcondition & The statistics are computed and the results available/displayed.  \\
+	Extensions & The system can't compute the statistics.
+		The error is propagated to the system in order to display it in a prompt message. \\
 	Related requirements & FR-4 FR-5 FR-6 FR-7 FR-8 FR-10 FR-16 FR-19, \ref{fr:show-accuracy}\\
 	}
 \caption{UC-\arabic{uc}: Computation-statistics}
 \label{table:uc-registration}
 \end{table}
 
-The figure below represents the Use-case Diagram of HEMS.
+The figure below represents the Use-case diagram of HEMS.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.7\textwidth]{3-requirements/images/usecaseD.png}
