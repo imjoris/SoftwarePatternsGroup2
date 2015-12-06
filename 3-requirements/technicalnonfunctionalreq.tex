@@ -1,5 +1,6 @@
-%!TEX root = ../report.tex
+% !TEX root = ../report.tex
 \section{Technical non-functional requirements}
+In this section, the technical non-functional aspects that are important to the system are described.
 
 \subsection{Usability}
 The sytem will be hopefully used by a lot of people who don't necessarily have knowledge in the technology field so the Usability is an important requirement so the end-user can acces all the information he needs. \\
@@ -35,18 +36,29 @@ Ensuring the security for the system is a major issue so all the data needed for
  		UCTable
  	]{%
  		value & description \\
- 		\req{SEC} & Each user is identified and has to log in in order to view his "Home Energy Monitor" account. \\
+ 		\req{SEC} & Each user is identified and has to log in in order to access his "Home Energy Monitor" account. \\
  		\req{SEC} & The data is encrypted. \\ % developp , which database ?
  	}
 
+\subsection{Interoperability}
+\pgfplotstabletypeset[%
+ 		UCTable
+ 	]{%
+ 		value & description \\
+ 		\req{INT} & The web interface of the system is available and functioning for 95\% of the browser market share. \\
+ 		\req{INT} & The system exposes a REST interface that allows different electricity usage sensors to submit the electricity usage data. \\ 
+ 	}
  
 
 \subsection{Scalability} 
+
 The system should make the increase in workload, resources and users easy to handle that's why the scalability its part of non functional requirements of the system.\\
+
  	\pgfplotstabletypeset[%
  		UCTable
  	]{%
  		value & description \\
  		%\req{SCA} & The system must be able to monitor several kind of energy consumption for example: gas ,solar, temperature. \\
  	\req{SCA} & The system should function as efficiently when the number of users increases. \\% increase in the number of users \\
+ 	\req{SCA} & The system should function as efficiently when the number of devices increases. \\ % percentage ?
  	}
