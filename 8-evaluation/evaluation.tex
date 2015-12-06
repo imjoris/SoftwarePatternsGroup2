@@ -8,6 +8,7 @@
 In this chapter the architecture of the system will be evaluated. After taking architectural decisions and building the system the architects have to make sure that the patterns applied suit the architecture, especially the quality attributes and key drivers .%in terms of benefits and liablities.
 
 \section{Key-Driver Validation}
+% http://www.cs.rug.nl/paris/papers/ECSA07.pdf
 
 \subsection*{Layers}
 \subsection*{Service Layer}
@@ -19,6 +20,21 @@ The Service Layer pattern defines the boundary of the application using a layer 
 
 \subsection*{Front-Controller}
 \subsection*{Domain Model}
+\subsection*{Broker}
+The reliability of the system increases by the use of the Broker pattern. The pattern guarantees the delivery of messages to the destination. This guarantees that statistics are computed by a server in the compute cluster.
+The modifiability of the system increases, since the brokers separate the messaging logic from the domain logic. This means that changes to the messaging logic do not affect the rest of the system.
+
+The interoperability of the system increases as well, since the broker allow the system to interoperate with the servers in the compute cluster.
+
+The broker pattern does however introduce a slight overhead, which reduces the performance.\\
+\textbf{Benefits \& Liabilities} ~
+\begin{itemize}
+\item[+] Reliability
+\item[+] Modifiability
+\item[+] Interoperability
+\item[$-$] Performance
+\end{itemize}
+
 \subsection*{Model View Controller}
 \subsection*{Unit of Work}
 The Unit of Work will significantly reduce the load on the database. The increased performance has a direct impact on the usability of the system. Faster processing will make the web interface of the system more responsive to the actions of the user, which increases the usability.
