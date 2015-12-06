@@ -157,7 +157,6 @@ The service layer will offer the services of the system. There will be a service
 %
 %\item [Solution]
 %\item [Source]
-<<<<<<< HEAD
 
 %\item [Context]~\\
 %There is duplicate code within each layer of the system.
@@ -230,9 +229,12 @@ The service layer will offer the services of the system. There will be a service
 %\end{description}
 
 \section{Front page}
+\manuallabel{sec:front-page}{Front page}
+
 \input{4-analysis/frontpage.tex}
 
 \section{Domain layer}
+\manuallabel{sec:domain-layer}{Domain layer}
 %
 %\begin{description}
 %\item [Context]
@@ -287,7 +289,7 @@ Having a script that is solely responsible for handling a specific request, woul
 \end{description}
 
 \section{Unit of work}
-
+\manuallabel{sec:unit-of-work}{Unit of work}
 \begin{description}
 \begin{figure}[H]
 \centering
@@ -338,7 +340,7 @@ Using Unit of Work will reduce the load on the database (the number of database 
 \end{description}
 
 \section{Broker}
-
+\manuallabel{sec:broker}{Broker}
 \begin{description}
 \item [Source]~\\
 Pattern-oriented Software Architecture - Volume 4, P.237 \cite{wiley-4}
@@ -385,6 +387,7 @@ Using a broker creates a layer of abstraction for the specific layer using it. T
 \end{description}
 
 \section{Data source layer}
+\manuallabel{sec:data-source-layer}{Data source layer}
 \begin{description}
 
 \item [source]
@@ -465,6 +468,7 @@ The data source mapper requires the most amount of work to set up, but it
 %%%Using a record set (504) turning into a unit of work (184)? P98 (lost the page:()
 
 \section{Repository}
+\manuallabel{sec:repository}{Repository}
 %\myworries{
 %P322:
 %"Mediates between the domain and data mapping layers using a collection-like interface for accesing domain objects."
@@ -478,7 +482,6 @@ The data source mapper requires the most amount of work to set up, but it
 %"In a large system with many domain object types and many possible queries, Repository reduces the amount of code needed to deal with all the querying that go's on."
 %}
 
-<<<<<<< HEAD
 %The repository pattern mediates between the domain and data layer. The repository clients create a criteria object, specifying what kind of data is wanted. For example $criteria.equals(Device.NAME, Computer)$. Then the clients use this criteria by invoking repository.matching(criteria) to receive the data from the repository. The client just asks the data, it has no further knowledge about any interaction with any data source/data base.
 The repository pattern is used by the broker pattern to get the sources the domain layer requests. The repository clients create a criteria object, specifying what kind of data is wanted. For example $criteria.equals(Device.NAME, Computer)$. Then the clients use this criteria by invoking repository.matching(criteria) to receive the data from the repository. The client just asks the data, it has no further knowledge about any interaction with any data source/data base.
 
@@ -629,6 +632,7 @@ The repository pattern is used by the broker pattern to get the sources the doma
 %%\url{Potel: http://www.wildcrest.com/Potel/Portfolio/mvp.pdf}
 
 \section{Model-View-Controller}
+\manuallabel{sec:mvc-analysis}{Model-View-Controller}
 Model-View-Controller (MVC) started as a framework developed by Trygve Reenskaug for the Smalltalk platform in the late 1970s \cite{Fowler:2002:PEA:579257}. Since then it has played an influential role in most UI frameworks and in the thinking about UI design.
 
 \begin{figure}[H]
@@ -682,6 +686,7 @@ By implementing the MVC pattern, several views are created to support multiple p
 
 
 \section{Template view}
+\manuallabel{sec:template-view-analysis}{Template view}
 Template view pattern renders information into HTML by embedding markers in an HTML page \cite{Fowler:2002:PEA:579257}.
 	
 \begin{figure}[H]

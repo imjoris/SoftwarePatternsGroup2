@@ -1,3 +1,163 @@
 %!TEX root = ../report.tex
 \subsection{Functional requirements}
 \label{sec:fr-validation}
+Functional requirements evaluation is depicted in Table \ref{table:eval-functional-requirements} below.
+
+\begin{longtable}{lllL{\tw{0.2}}L{\tw{0.4}}}
+    \bo{Nr.} & \bo{Priority} & \bo{Fulfilled} & \bo{Pattern(s)} & \bo{Remarks} \\ \toprule \endhead
+
+ 	% {receive-usage}{Must}
+	% { The system must be able to receive electricity usage data from devices. }
+    ~\ref{fr:receive-usage} 
+    & Must     
+    & Yes
+    & ~\ref{sec:layers}
+    & Receving data is handled by the layers pattern. The process starts with reception of sensor data from service layer, then the data is forwarded to domain layer to perform several failure checks. Lastly, the data is stored through data-source layer. \\ \midrule
+
+ 	% {store-usage}{Must}
+	% { The system must be able to store electricity usage data. }
+	~\ref{fr:store-usage} 
+    & Must     
+    & Yes
+    & ~\ref{sec:unit-of-work}, \ref{sec:data-source-layer}, \ref{sec:repository}
+    & Storing the data is mainly handled in data-source layer. This layer receives the data from the domain-layer. Unit of Work keeps track of changes to objects and coordinates storing the data to the database in one database call. The data is stored in single repository, so to say. \\ \midrule
+	
+	% {retrieve-usage}{Must}
+	% { The system must be able to retrieve previously stored electricity usage data. }
+	~\ref{fr:retrieve-usage} 
+    & Must
+    & Yes
+    & ~\ref{sec:unit-of-work}, \ref{sec:data-source-layer}, \ref{sec:repository}
+    & Previously stored data is available in the repository, which belongs to data-source layer. Unit of Work also keeps track of changes to objects. \\ \midrule
+	
+	% {compute-total}{Must}
+	% { The system must be able to compute the total electricity consumption for a given time period for a particular house. }
+	~\ref{fr:compute-total} 
+    & Must     
+    & Yes
+    & ~\ref{sec:broker}, \ref{sec:layers}, \ref{sec:unit-of-work}
+    & Computation process involves multiple pattern: domain and data-source layer. This process is also a high read-write process, thus unit of work pattern is useful for tracking the changes of objects and coordinates read/write process to the database. Broker makes sure that the parallel computation is taken care properly. \\ \midrule
+	
+	% {compute-timeperiod}{Must}
+	% { The system must be able to compute the electricity consumption per device for a given time period. }
+	~\ref{fr:compute-timeperiod} 
+    & Must     
+    & Yes
+    & ~\ref{sec:broker}, \ref{sec:layers}, \ref{sec:unit-of-work}
+    & This process is also similar with previous process (\ref{fr:compute-timeperiod}), but this is more time-range restricted. \\ \midrule
+	
+	% {compute-bill}{Must}
+	% { The system must be able to compute an estimated electricity bill for the current month based on the electricity consumption to that point. }
+	~\ref{fr:compute-bill} 
+    & Must     
+    & Yes
+    & ~\ref{sec:broker}, \ref{sec:layers}, \ref{sec:unit-of-work}
+    & Computing bill process involves multiple pattern: domain and data-source layer. This process is also a high read-write process, thus unit of work pattern is useful for tracking the changes of objects and coordinates read/write process to the database. Broker makes sure that the parallel computation is taken care properly. \\ \midrule
+	
+	% {interface-selectstats}{Must}
+	% { A user of the system must be able to select which statistics to compute in a web interface. }
+	~\ref{fr:interface-selectstats} 
+    & Must     
+    & Yes
+    & ~\ref{sec:mvc-analysis}, \ref{sec:template-view-analysis}
+    & All operations done in web interface are taken care by the template view and MVC pattern. \\ \midrule
+	
+	% {web-interface}{Must}
+	% { The system must be able to show the computed statistics in a web interface. }
+	~\ref{fr:web-interface} 
+    & Must     
+    & Yes
+    & ~\ref{sec:mvc-analysis}, \ref{sec:template-view-analysis}
+    & All operations done in web interface are taken care by the template view and MVC pattern.\\ \midrule
+	
+	% {interface-register}{Must}
+	% { The system must allow users to register an account on the web interface. }
+	~\ref{fr:interface-register} 
+    & Must     
+    & Yes
+    & ~\ref{sec:front-page}, \ref{sec:mvc-analysis}, \ref{sec:template-view-analysis}
+    & Registration, which is done through web interface, is taken care by the template view and MVC pattern as well. The front page will handle the logging, authentication and initial security of the request. \\ \midrule
+	
+	% {interface-login}{Must}
+	% { The system must require users to be logged in, before the user can view electricity usage information about his/her house. }
+	~\ref{fr:interface-login} 
+    & Must     
+    & Yes
+    & ~\ref{sec:front-page}, \ref{sec:mvc-analysis}, \ref{sec:template-view-analysis}
+    & The front page will handle the logging, authentication and initial security of the request. User interface is provided through MVC and template view pattern. \\ \midrule
+	
+	% {add-house}{Must}
+	% { A user of the system must be able to register a new house using the web interface. }
+	~\ref{fr:add-house} 
+    & Must     
+    & Yes
+    & ~\ref{sec:front-page}, \ref{sec:mvc-analysis}, \ref{sec:template-view-analysis}
+    & In order to add a house, a user must be logged in. The front page will handle the logging, authentication and initial security of the request. User interface is provided through MVC and template view pattern. \\ \midrule
+	
+	% {add-device}{Must}
+	% { A user of the system must be able to register a new device for his house using the web interface. }
+	~\ref{fr:add-device} 
+    & Must
+    & Yes
+    & ~\ref{sec:front-page}, \ref{sec:mvc-analysis}, \ref{sec:template-view-analysis}
+    & In order to add a device, a user must be logged in. The front page will handle the logging, authentication and initial security of the request. User interface is provided through MVC and template view pattern. \\ \midrule
+	
+	% {configure-price}{Must}
+	% { A user of the system must be able to configure the price of a kWH in the web interface. }
+	~\ref{fr:configure-price} 
+    & Must     
+    & Yes
+    & ~\ref{sec:front-page}, \ref{sec:mvc-analysis}, \ref{sec:template-view-analysis}
+    & In order to configure the price of the electricity, a user must be logged in. The front page will handle the logging, authentication and initial security of the request. User interface is provided through MVC and template view pattern. \\ \midrule
+	
+	% {feedback}{Must}
+	% { The system must be able to send feedback to registered devices about the current electricity usage. }
+	~\ref{fr:feedback} 
+    & Must     
+    & Yes
+    & ~\ref{sec:layers}, \ref{sec:service-layer}
+    & This is multi-tier operation, which involves all layers. The feedback is sent through the service layer. \\ \midrule
+	
+	% {show-accuracy}{Must}
+	% { The system must be able to take the inaccuracy of the sensors into account when computing the statistics. }
+	~\ref{fr:show-accuracy} 
+    & Must     
+    & Yes
+    & ~\ref{sec:layers}, \ref{sec:domain-layer}, \ref{sec:unit-of-work}
+    & The accuracy is provided by the sensor itself. The computation process is taken care in the domain layer. \\ \midrule
+	
+	% {show-history}{Must}
+	% { The system must be able to display the history of electricity usage. }
+	~\ref{fr:show-history} 
+    & Must     
+    & Yes
+    & ~\ref{sec:mvc-analysis}, \ref{sec:template-view-analysis}
+    & The history, computed in \ref{fr:retrieve-usage}, is shown to the user through web interface, which involves MVC and template view pattern. \\ \midrule
+	
+	% {choose-alerts}{Should}
+	% { Users of the system should be able to subscribe to alerts in the web interface, alerting them about sudden energy increases or when they are using more energy than in previous months/weeks. }
+	~\ref{fr:choose-alerts} 
+    & Should     
+    & Yes
+    & ~\ref{sec:mvc-analysis}, \ref{sec:template-view-analysis}
+    & The alert is shown in the web interface, which employs MVC and template view pattern. \\ \midrule
+	
+	% {alerts}{Should}
+	% { The system should send alerts to users by mail when the user is subscribed for this alert and the condition for the alert is met. }
+	~\ref{fr:alerts}
+    & Should     
+    & Yes
+    & ~\ref{sec:layers}, \ref{sec:domain-layer}
+    & This is a multi-tier operation, which includes domain and service layer. The email is sent through service layer. \\ \midrule
+	
+	% {interface-graph}{Should}
+	% { The system should be able to show the computed statistics in a graph. }
+	~\ref{fr:interface-graph} 
+    & Should
+    & Yes
+    & ~\ref{sec:mvc-analysis}, \ref{sec:template-view-analysis}
+    & Graph is shown in the web interface, which employs MVC and template view pattern. \\\bottomrule		
+
+    \caption{Evaluation of functional-requirements}
+    \label{table:eval-functional-requirements}
+\end{longtable}
