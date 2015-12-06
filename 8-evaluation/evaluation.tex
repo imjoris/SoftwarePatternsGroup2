@@ -28,6 +28,7 @@ The Service Layer pattern defines the boundary of the application using a layer 
 
 \subsection*{Front-Controller}
 By having a central point that handles all requests, all the requests get prepossessed for the domain layer in the same way. All the common functions like security and logging are handled by the front controller for each request.\\
+It increases usability by for example not showing the users with different authentication results for accessing a similar page. The web page results are more consistent.\\
 It increases security because the security the request security is handled before any other operation in the system. And the security is handled the same for every request.\\
 Reliability increases, because all the the common functions are centrally handled and so there are no duplicate implementations leading to unexpected results. \\
 The front page increases maintainability because the way each request is received and initially handled can be modified in a central place in a very flexible way. It allows for easy modifications of the piping functions by using the decorator pattern.\\
@@ -36,6 +37,7 @@ A downside of the front page controller is that it is a single point of failure.
 In conclusion, the front page has the following benefits and liabilities:\\
 \textbf{Benefits \& Liabilities} ~
 \begin{itemize}
+\item[+] Usability
 \item[+] Reliability
 \item[+] Modifiability
 \item[+] Security
@@ -43,6 +45,14 @@ In conclusion, the front page has the following benefits and liabilities:\\
 \end{itemize}
 
 \subsection*{Domain Model}
+The domain model fits well with the front page controller and the domain mapper. It aims to reduce all the code duplication. This increases the maintainability.\\
+It increases the reliability, because the adding failure recovery and handling exceptions can be handled in a more flexible way.\\
+\textbf{Benefits \& Liabilities} ~
+\begin{itemize}
+\item[+] Reliability
+\item[+] Maintainability
+\end{itemize}
+
 \subsection*{Broker}
 The reliability of the system increases by the use of the Broker pattern. The pattern guarantees the delivery of messages to the destination. This guarantees that statistics are computed by a server in the compute cluster.
 The modifiability of the system increases, since the brokers separate the messaging logic from the domain logic. This means that changes to the messaging logic do not affect the rest of the system.
