@@ -1,7 +1,7 @@
 % !TEX root = ../report.tex
 \chapter{Analysis}
 \label{ch:analysis}
-The following section describes the architectural decisions related to the patterns applied in the system.
+This chapter describes the architectural decisions related to the patterns applied to the system.
 In order to document our decisons we followed the publication: \textit{Using Patterns to Capture Architectural Decisions}.
 %All layers (with their patterns) is very clearly described in ch8 starting on p95.
 
@@ -207,7 +207,7 @@ There will be a service for collecting the electricity usage data and computing 
 
 \input{4-analysis/frontpage.tex}
 
-\section{Domain layer}
+\section{Domain model}
 \manuallabel{sec:domain-layer}{Domain layer}
 %
 %\begin{description}
@@ -247,14 +247,20 @@ The domain logic consists of complex functions for serving web request and analy
 The domain model pattern will be used.
 
 \item [Argument]~\\
-The domain logic is complex and so it requires the use of the domain model pattern. This means that the domain is Object Oriented, with every class representing one specific, individual, meaningful part. The domain model is the most advanced domain pattern, minimizing code duplication and increasing the flexibility of the system. The domain model also integrates well with the front page controller in the first layer.
+\begin{enumerate}
+\item The complex logic in the domain layer is not well suited for the Transaction Script pattern. There would be a lot of duplicated code. 
+
+\item Table Module does fully allow the use of the power of objects. It does not support instance-to-instance relationships. Domain Model is a better choice for handling complex logic.
+
+\item The domain logic is complex and so it requires the use of the domain model pattern. This means that the domain is Object Oriented, with every class representing one specific, individual, meaningful part. The domain model is the most advanced domain pattern, minimizing code duplication and increasing the flexibility of the system. The domain model also integrates well with the front page controller in the first layer.
+\end{enumerate}
+
 
 \item [Implications]~\\
-Having a script that is solely responsible for handling a specific request, would not be conform the domain model. This makes it harder to understand how the requests are handled, because the used functions might be spread across the classes in the domain layer.
+The domain logic will be organized in objects that incorporate both behavior and data. This will increase maintainability.
 
 \item [Related requirements/decisions]~\\
-%\end{description}
-\ref{fr:compute-total} \ref{fr:compute-timeperiod} \ref{fr:compute-bill}  \ref{fr:show-accuracy} \ref{fr:choose-alerts} \ref{kd:3}
+\ref{fr:compute-total}, \ref{fr:compute-timeperiod}, \ref{fr:compute-bill}, \ref{fr:show-accuracy}, \ref{fr:choose-alerts}, \ref{kd:3}
  
 %The alternatives are : Transaction Script and Table module.
 %
