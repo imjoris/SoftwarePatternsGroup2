@@ -19,7 +19,7 @@ Functional requirements evaluation is depicted in Table \ref{table:eval-function
 	~\ref{fr:store-usage} 
     & Must     
     & Yes
-    & ~\ref{sec:unit-of-work}, \ref{sec:data-source-layer}, \ref{sec:repository}
+    & ~\ref{sec:unitofwork}, \ref{sec:datamapper}, \ref{sec:repository}
     & Storing the data is mainly handled in data-source layer. This layer receives the data from the domain-layer. Unit of Work keeps track of changes to objects and coordinates storing the data to the database in one database call. The data is stored in single repository, so to say. \\ \midrule
 	
 	% {retrieve-usage}{Must}
@@ -27,7 +27,7 @@ Functional requirements evaluation is depicted in Table \ref{table:eval-function
 	~\ref{fr:retrieve-usage} 
     & Must
     & Yes
-    & ~\ref{sec:unit-of-work}, \ref{sec:data-source-layer}, \ref{sec:repository}
+    & ~\ref{sec:unitofwork}, \ref{sec:datamapper}, \ref{sec:repository}
     & Previously stored data is available in the repository, which belongs to data-source layer. Unit of Work also keeps track of changes to objects. \\ \midrule
 	
 	% {compute-total}{Must}
@@ -35,7 +35,7 @@ Functional requirements evaluation is depicted in Table \ref{table:eval-function
 	~\ref{fr:compute-total} 
     & Must     
     & Yes
-    & ~\ref{sec:broker}, \ref{sec:layers}, \ref{sec:unit-of-work}
+    & ~\ref{sec:broker}, \ref{sec:layers}, \ref{sec:unitofwork}
     & Computation process involves multiple pattern: domain and data-source layer. This process is also a high read-write process, thus unit of work pattern is useful for tracking the changes of objects and coordinates read/write process to the database. Broker makes sure that the parallel computation is taken care properly. \\ \midrule
 	
 	% {compute-timeperiod}{Must}
@@ -43,7 +43,7 @@ Functional requirements evaluation is depicted in Table \ref{table:eval-function
 	~\ref{fr:compute-timeperiod} 
     & Must     
     & Yes
-    & ~\ref{sec:broker}, \ref{sec:layers}, \ref{sec:unit-of-work}
+    & ~\ref{sec:broker}, \ref{sec:layers}, \ref{sec:unitofwork}
     & This process is also similar with previous process (\ref{fr:compute-timeperiod}), but this is more time-range restricted. \\ \midrule
 	
 	% {compute-bill}{Must}
@@ -51,7 +51,7 @@ Functional requirements evaluation is depicted in Table \ref{table:eval-function
 	~\ref{fr:compute-bill} 
     & Must     
     & Yes
-    & ~\ref{sec:broker}, \ref{sec:layers}, \ref{sec:unit-of-work}
+    & ~\ref{sec:broker}, \ref{sec:layers}, \ref{sec:unitofwork}
     & Computing bill process involves multiple pattern: domain and data-source layer. This process is also a high read-write process, thus unit of work pattern is useful for tracking the changes of objects and coordinates read/write process to the database. Broker makes sure that the parallel computation is taken care properly. \\ \midrule
 	
 	% {interface-selectstats}{Must}
@@ -123,7 +123,7 @@ Functional requirements evaluation is depicted in Table \ref{table:eval-function
 	~\ref{fr:show-accuracy} 
     & Must     
     & Yes
-    & ~\ref{sec:layers}, \ref{sec:domain-layer}, \ref{sec:unit-of-work}
+    & ~\ref{sec:layers}, \ref{sec:domain-layer}, \ref{sec:unitofwork}
     & The accuracy is provided by the sensor itself. The computation process is taken care in the domain layer. \\ \midrule
 	
 	% {show-history}{Must}

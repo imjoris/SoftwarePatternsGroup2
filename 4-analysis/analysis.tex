@@ -7,34 +7,6 @@ In order to document our decisons we followed the publication: \textit{Using Pat
 
 \newcommand{\EAA}{Patterns of Enterprise Application Architecture}
 
-%\section{Layers}
-%
-%\begin{description}
-%%
-%%Context – a recurring set of situations in which the
-%%pattern applies.
-%%Problem - a set of forces (goals and constraints)
-%%occurring in this context.
-%%• Forces are often competing
-%%Solution - a canonical design form or rule that
-%%someone can apply to resolve these forces.
-%%• The solution balances the forces.
-%
-%\item [Context]
-%
-%
-%\item [Problem]
-%The system needs a structure to coordinate the external calls and requests.
-%
-%\item [Solution]
-%Our application exposes a web service to multiple clients and so a the Service Layer pattern will be used. Using this pattern, the system will be divided into the following layers.
-%
-%
-%
-%\item [Source] 
-%\EAA  \cite{Fowler:2002:PEA:579257}
-%\end{description}
-
 \section{Layers}
 \manuallabel{sec:layers}{Layers}
 
@@ -74,13 +46,19 @@ Using layers will have a positive impact on the maintainability and re-usability
 
 The performance of the system will have some negative impact, since the request have to pass all the layers, even if they only need logic/data in the bottom layer.
 
+
 \item [Related requirements/decisions]~\\
-\ref{sec:service-layer}, 
+\ref{sec:service-layer}, \ref{sec:broker}
 
 \end{description}
 
 \section{Service Layer}
 \manuallabel{sec:service-layer}{Service Layer}
+\begin{figure}[H]
+\caption{Service Layer}
+\centering
+\includegraphics[scale=0.5]{4-analysis/images/ServiceLayer.jpg}
+\end{figure}
 
 \begin{description}
 \item [Source]~\\
@@ -105,6 +83,7 @@ The system will have different interfaces with different kinds of clients. For e
 The system will use the Service Layer pattern to define the boundary of the application using a layer of services.
 
 The service layer exposes a set of services to be used by clients and for each service, there is a certain script that will be executed when the service is called. The service layer will be used with the "operation script" variation. This means that the Service Layer consists of thick classes that contain logic.
+%TODO explain the figure
 \item [Argument]~
 \begin{enumerate}
 \item Using just the Domain Model pattern alone does not make a distinction between application logic and domain logic.
@@ -115,17 +94,11 @@ The service layer exposes a set of services to be used by clients and for each s
 \item [Implications]~\\
 There is a boundary between the application- and domain logic. 
 
-The service layer will offer the services of the system. There will be a service for collecting the electricity usage data and computing the statistics. There will also be a service for configuring the system (adding new devices, creating alerts etc.).
+As a consequence of using the Service Layer pattern, the functionalities that the system offers have to be decomposed into services. \\
+There will be a service for collecting the electricity usage data and computing the statistics. There will also be a service for configuring the system (adding new devices, creating alerts etc.).
 
 \item [Related requirements/decisions]~\\
-\ref{sec:layers}, \ref{fr:interface-selectstats}, \ref{fr:receive-usage}
-
-\begin{figure}[H]
-\caption{Service Layer}
-\centering
-\includegraphics[scale=0.7]{4-analysis/images/ServiceLayer.jpg}
-\end{figure}
-
+\ref{sec:layers}, \ref{INT:1}, \ref{INT:2}, \ref{fr:interface-selectstats}, \ref{fr:receive-usage}
 
 \end{description}
 
@@ -228,6 +201,7 @@ The service layer will offer the services of the system. There will be a service
 %
 %\end{description}
 
+
 \section{Front page}
 \manuallabel{sec:front-page}{Front page}
 
@@ -249,12 +223,12 @@ The service layer will offer the services of the system. There will be a service
 %\end{description}
 
 \begin{description}
-\item [Source]~
-\EAA  \cite{Fowler:2002:PEA:579257} P.116
+\item [Source]~\\
+\EAA, P.116 \cite{Fowler:2002:PEA:579257}\\
 %POSA P.182 (=219)
 Pattern-oriented Software Architecture - Volume 4, P.182 \cite{wiley-4}
 
-\item [Issue]~
+\item [Issue]~\\
 The domain logic consists of complex functions for serving web request and analyzing data. The functionality of the system must be modifiable and must reduce the amount of duplicate code to a minimum in order to prevent inconsistencies.
 
 \item [Assumptions/Constraints]~
@@ -269,13 +243,13 @@ The domain logic consists of complex functions for serving web request and analy
 \item Domain model
 \end{enumerate}
 
-\item [Decision] ~
+\item [Decision] ~\\
 The domain model pattern will be used.
 
-\item [Argument]~
+\item [Argument]~\\
 The domain logic is complex and so it requires the use of the domain model pattern. This means that the domain is Object Oriented, with every class representing one specific, individual, meaningful part. The domain model is the most advanced domain pattern, minimizing code duplication and increasing the flexibility of the system. The domain model also integrates well with the front page controller in the first layer.
 
-\item [Implications]~
+\item [Implications]~\\
 Having a script that is solely responsible for handling a specific request, would not be conform the domain model. This makes it harder to understand how the requests are handled, because the used functions might be spread across the classes in the domain layer.
 
 \item [Related requirements/decisions]~\\
@@ -289,7 +263,7 @@ Having a script that is solely responsible for handling a specific request, woul
 \end{description}
 
 \section{Unit of work}
-\manuallabel{sec:unit-of-work}{Unit of work}
+\manuallabel{sec:unitofwork}{Unit of Work}
 \begin{description}
 \begin{figure}[H]
 \centering
@@ -332,10 +306,11 @@ The variant used is the Object Registration variant, which removes the burden of
 \end{enumerate}
 
 \item [Implications]~\\
-Using Unit of Work will reduce the load on the database (the number of database calls). It does however introduce a delay before the change in the in-memory object is present in the representation in the database.
+Using Unit of Work will reduce the load on the database (the number of database calls). It does however introduce a delay before the change in the in-memory object is present in the representation in the database. \\
+Callers editing the objects should call the \verb|commit| method on the object after making changes to them, so that these changes are saved to the database.
 
 \item [Related requirements/decisions]~\\
-\ref{kd:1}, \ref{fr:store-usage}, \ref{fr:retrieve-usage}
+\ref{kd:1}, \ref{fr:store-usage}, \ref{fr:retrieve-usage}, \ref{RE:2}
 
 \end{description}
 
@@ -353,10 +328,10 @@ It is assumed that the workload for computing statistics can be divided over mul
 
 \item [Positions]~
 \begin{enumerate}
-\item Publisher-Subscriber
 \item Broker 
-\item Message Queuing %TODO is this better maybe, it allows temporary outage -> good reliability
-\item Remote Procedure Call
+\item Publisher-Subscriber
+%\item Message Queuing %TODO is this better maybe, it allows temporary outage -> good reliability
+\item Messaging
 \end{enumerate}
 
 
@@ -365,17 +340,25 @@ The broker pattern will be used. The broker pattern is part of the domain layer.
 
 %from p73 (=110)
 \item [Argument]~\\
-Using a broker creates a layer of abstraction for the specific layer using it. This increases encapsulation, location independence and scale ability.
-
-\item [Implications]~\\ 
 \begin{itemize}
-\item Adding an other layer of abstraction which must be used can reduce the performance of the system
-\item If the broker fails, the sourced that the broker provided can't be accessed any more.
-\item A bug in the broker is hard to trace back.
+\item Using a broker creates a layer of abstraction for the specific layer using it. This increases encapsulation, location independence and scale ability. With the Broker pattern, many clients can make remote method invocations on methods hosted by the server. It is best suited for systems that want to hide the presence of the network.
+
+\item Publish-Subscriber allows exchanging events in a one-to-many fashion. It does, however, not guarantee that an event will be processed.
+
+\item With messaging there is also no guarantee that a message will be consumed. 
 \end{itemize}
 
-\item [Related requirements/decisions]~
-\ref{fr:compute-total}, \ref{fr:compute-bill}, \ref{fr:compute-bill}
+
+\item [Implications]~
+
+\begin{itemize}
+\item The communication between the system and the servers in the compute cluster are handled by the broker. 
+\item Adding another layer of abstraction which must be used can reduce the performance of the system
+\item If the broker fails, the sourced that the broker provided can't be accessed any more.
+\end{itemize}
+
+\item [Related requirements/decisions]~\\
+\ref{fr:compute-total}, \ref{fr:compute-bill}, \ref{fr:compute-bill}, \ref{SEC:2}, \ref{RE:2}, \ref{sec:layers}
 %Refer to layers
 %Most B ROKER realizations are based on a L AYERS (185) architecture
 %to manage complexity, such as CORBA [OMG04a] and Microsoft’s
@@ -386,36 +369,33 @@ Using a broker creates a layer of abstraction for the specific layer using it. T
 %ent assignments [VKZ04].
 \end{description}
 
-\section{Data source layer}
-\manuallabel{sec:data-source-layer}{Data source layer}
+\section{Data Mapper}
+\manuallabel{sec:datamapper}{Data Mapper}
+%TODO add a figure
+
 \begin{description}
 
-\item [source]
-\begin{itemize}
+\item [Source]~\\ 
 %\item Pattern-oriented Software Architecture - Volume 1, P.31 \cite{wiley-1}
-\item Pattern-oriented Software Architecture - Volume 4, P.540 \cite{wiley-4}
-\item \EAA \cite{eaa}, 
+ Pattern-oriented Software Architecture - Volume 4, P.540 \cite{wiley-4} \\
+ \EAA, P.165 \cite{eaa}
 %540=577
-\end{itemize}
-
-\item [Issue]~
 
 
-\item [Assumptions/Constraints]~\\
+\item [Issue]~\\
+For the data source layer, there should be a way to store the data where the domain layer is shielded from the details of how the data is stored.
+
+\item [Assumptions/Constraints]~
 \begin{itemize}
 \item The domain layer uses the domain model pattern
 \end{itemize}
 
 \item [Positions]~
 \begin{enumerate}
-%\item Publisher-Subscriber
-%\item Broker
-%\item Message Queuing
-%\item Remote Procedure Call
+\item Data mapper% (p165)
 \item Table data gateway% (p144)
 \item Row data gateway% (p152)
 \item Active record %(p160)
-\item Data mapper% (p165)
 \end{enumerate}
 
 \item [Decision] ~\\
@@ -423,12 +403,14 @@ The data mapper pattern will be used. The data mapper pattern creates the most a
 
 \item [Argument]~\\
 %Because the domain model is used in the domain layer, the data mapper pattern is best to use. \ign{(153 and 97)}
-\begin{itemize}
-\item The data mapper pattern best suits the domain model pattern used in the domain layer
-\item The logic that will operate on the data will generate statistics of the data, which can become quite complex. This is why the data mapper pattern is chosen as a pattern for connecting to the data sources. This pattern is the most advanced pattern, and provides the best functionality and abstraction.
-With the active record pattern, the database access/communication, data and logic of that data is all stored in the same class. Since the logic that will be executed on the sensor could be quite complex, this patterns will not be useful.
-A gateway of any kind leads to performance overhead, because for each call coming from the domain model pattern, a database call is made. It lacks the necessary coordination.
-\end{itemize}
+\begin{enumerate}
+\item The data mapper pattern best suits the domain model pattern used in the domain layer.  This pattern is the most advanced pattern, and provides the best functionality and abstraction.
+\item
+\item The logic that will operate on the data will generate statistics of the data, which can become quite complex and will be stored in a different table than the device objects. 
+This is why the Table- and Row Data gateway patterns are not choosen.
+\item
+With the active record pattern, the database access/communication, data and logic of that data is all stored in the same class. This means there is a tight coupling between the data and the domain logic. Since the logic that will be executed on the sensor could be quite complex, this pattern is not preferred.
+\end{enumerate}
 %The data mapper pattern best suits the domain model pattern used in the domain layer
 %The logic that will operate on the data will generate statistics of the data, which can become quite complex. This is why the data mapper pattern is chosen as a pattern for connecting to the data sources. This pattern is the most advanced pattern, and provides the best functionality and abstraction.
 %With the active record pattern, the database access/communication, data and logic of that data is all stored in the same class. Since the logic that will be executed on the sensor could be quite complex, this patterns will not be useful.
@@ -436,9 +418,14 @@ A gateway of any kind leads to performance overhead, because for each call comin
 
 
 \item [Implications]~\\
-The data source mapper requires the most amount of work to set up, but it 
+The data mapper is used in the architecture. This means that the in-memory objects in the domain layer need not be aware of the presence of the database.
+The data mapper objects will implement the details of storing the object in the database.
+
+A gateway of any kind leads to performance overhead, because for each call coming from the domain model pattern, a database call is made.
 
 \item [Related requirements/decisions]~\\
+\ref{sec:repository},  \ref{sec:unitofwork}, \ref{fr:store-usage}, \ref{fr:retrieve-usage}
+
 \end{description}
 %
 %%\begin{figure}[H]
@@ -467,8 +454,8 @@ The data source mapper requires the most amount of work to set up, but it
 %%
 %%%Using a record set (504) turning into a unit of work (184)? P98 (lost the page:()
 
-\section{Repository}
-\manuallabel{sec:repository}{Repository}
+\section{Shared Repository}
+\manuallabel{sec:repository}{Shared Repository}
 %\myworries{
 %P322:
 %"Mediates between the domain and data mapping layers using a collection-like interface for accesing domain objects."
@@ -483,7 +470,7 @@ The data source mapper requires the most amount of work to set up, but it
 %}
 
 %The repository pattern mediates between the domain and data layer. The repository clients create a criteria object, specifying what kind of data is wanted. For example $criteria.equals(Device.NAME, Computer)$. Then the clients use this criteria by invoking repository.matching(criteria) to receive the data from the repository. The client just asks the data, it has no further knowledge about any interaction with any data source/data base.
-The repository pattern is used by the broker pattern to get the sources the domain layer requests. The repository clients create a criteria object, specifying what kind of data is wanted. For example $criteria.equals(Device.NAME, Computer)$. Then the clients use this criteria by invoking repository.matching(criteria) to receive the data from the repository. The client just asks the data, it has no further knowledge about any interaction with any data source/data base.
+%The repository pattern is used by the broker pattern to get the sources the domain layer requests. The repository clients create a criteria object, specifying what kind of data is wanted. For example $criteria.equals(Device.NAME, Computer)$. Then the clients use this criteria by invoking repository.matching(criteria) to receive the data from the repository. The client just asks the data, it has no further knowledge about any interaction with any data source/data base.
 
 
 %The repository gives a lot more control over how the data is handled. The benefits are:
@@ -504,40 +491,39 @@ The repository pattern is used by the broker pattern to get the sources the doma
 % Context
 \begin{description}
 \item [Source]~\\
-
-\textit{Architectural Pattern Revisited- A Pattern Language} \\
+\EAA, P.322 \cite{eaa}\\
+Architectural Pattern Revisited - A Pattern Language, P.13 \cite{avgeriou2005architectural}
 
  \item [Name] ~\\ 
- Shared Repository (also called Repository) \\
+ Shared Repository (also called Repository)
  \item [Issue]~ \\
-  The external data must be stored, updaded, accessed by multiple clients and servers simultaneously and analyzed.\\
- \item [Assumptions/contrainsts]~ \\
+  The external data must be stored, updated, accessed by multiple clients and servers simultaneously and analyzed.
+ \item [Assumptions/constraints]~
+ \begin{itemize}
+ \item It is assumed that the shared repository handles the authentication to it.
+ \end{itemize}
  \item [Position]~ \\ 
- In the \textit{Shared Repository pattern}one component of the system is used as a central data store, accessed by all other independent components."\\
+ In the \textit{Shared Repository pattern} one component of the system is used as a central data store, accessed by all other independent components."\\
  When using the \textit{Active Repository Pattern} the clients are notified when there is a change is the repository which is not a feature of the system.\\
- \textit{BlackBoard Pattern} \\
+ \textit{BlackBoard Pattern} " is used in an immature domain in which no deterministic approach to a solution is known or feasible " which is not the case in the HEMS. \\
  \item [Decision]~\\ 
  The system uses the Shared Repository Pattern in order to centralize the access to the data.\\
  %\textit{Arguments:} The Shared repository patttern is suitable because \\
- \item [Implication]~ \\ 
- After the integration of the SRP to the system the system as one central repository (the database) and all clients can access it using loggin. It ensures Reusability, Changeability, Maintainability. \\
-\item [Related decisions]~ \\ Data source layer pattern \\
-\item [Related requirements]~ \\ FR-1 FR-2 FR-3 \\
+ \item [Implications]~ \\ 
+ After the integration of the Shared Repository Pattern the system has one central repository (the database) and all clients can access it by using a loggin. \\
+  This pattern ensures Reusability, Changeability, Maintainability and Integrability (cf. Chapter 7 Evaluation). \\
+\item [Related decisions/requirements]~\\ 
+\ref{sec:datamapper}, \ref{sec:unitofwork}, \ref{fr:receive-usage}, \ref{fr:store-usage}, \ref{fr:retrieve-usage}, \ref{SEC:2} \\
 
-\EAA P.322 \cite{eaa}
-\textit{Architectural Pattern Revisited- A Pattern Language} \\
+\textit{The compoments in the figure can either be the users or the computation cluster to perform the statistics}
 
- \item [Name]~\\ Shared Repository (also called Repository) \\
- \item [Issue]~\\ The external data must be stored, updaded, accessed by multiple clients and servers simultaneously and analyzed.\\
- %\textit{Assumptions/Contrainsts:} \\
- \item [Position]~\\ When using the Active Repository Pattern the clients are notified when there is a change is the repository which is not a feature of the system.\\
- %BlackBoard Pattern  \\
- \item [Decision]~\\ The system uses the Shared Repository Pattern in order to centralized the access to the data.\\
- %\textit{Arguments:} The Shared repository patttern is suitable because \\
- \item [Implication]~\\ After the integration of the SRP to the system the system as one central repository (the database) and all clients can access it using loggin. It ensures Reusability, Changeability, Maintainability. \\
-\item [Related decisions]~\\ Data source layer pattern \\
-\item [Related requirements]~\\ 
-\ref{fr:receive-usage}, \ref{fr:store-usage}, \ref{fr:retrieve-usage} \\
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.7]{4-analysis/images/SharedRepo.png}
+\caption{Shared Repository}
+\label{fig:unitofworkclass}
+\end{figure}
+
 
  \end{description}
 
