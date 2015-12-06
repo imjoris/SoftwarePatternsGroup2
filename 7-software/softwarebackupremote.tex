@@ -1,0 +1,198 @@
+% !TEX root = ../report.tex
+\chapter{Software Architecture}
+\label{ch:software}
+
+\section{Layer decomposition}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.7]{7-software/images/LayersCircle.png}
+\caption{Layer decomposition}
+\label{fig:layerscircle}
+\end{figure}
+
+The system is decomposed into the following layers:
+\begin{itemize}
+\item Presentation
+\item ...
+\end{itemize}
+
+The presentation layer presents a view to the user. A user can use web browser and visit the energy monitoring website. The browser will then show a GUI to the user showing his energy statistics.\\
+
+%TODO describe each layer
+% The abc layer ...
+% form vol4:
+%%%% identify five different layers:
+%%%•
+%%% Presentation. This layer contains the interfaces to systems at the operation level of the automation pyramid, the so-called ‘north-bound gateways,’ as well as user-level applications that access the
+%%%system’s functionality directly, such as for picking and warehouse
+%%%topology management.
+%%%•
+%%% Business process. This layer provides the administrative and oper-
+%%%ational functionality the system must support, such as stock
+%%%management, order management, shipping, receiving, and material
+%%%flow control.
+%%%• Business objects. This layer comprises representations of domain-specific physical and logical entities on which the functionality in the business process layer operates. The main responsibility of this layer is to maintain and provide access to the warehouse topology.
+
+
+
+The figure below shows these layers and includes their responsibilities and concerns. The communication between the boxes is how the concerns are connected to each other. It is not how the actual flow of communication is handled, the communication flow will be discussed in detail later.
+%abc, add ref to communication layer thingy.
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.7]{7-software/images/layersflow.png}
+\caption{Functionality of the system in each layer}
+\label{fig:layersflow}
+\end{figure}
+
+Notice that the broker isn't mentioned. This is because the broker pattern is a pattern that handles the communication between the layers, which will be discussed in a later section.
+%TODO add reference
+
+\clearpage
+\section{Data flow and transformation}
+\label{sec:dataflow}
+This section describes how the data is handled and in the system. Requests are made to the service layer. The front page controller pattern is used to create a central set of operations to be executed for each request. These operations include logging and authenticating the request. The pipes and filters pattern to create a pipe that will execute these operations. This is shown below in figure \ref{fig:frontflow}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\linewidth]{7-software/images/FrontFlow.png}
+\caption{Figure showing requests are piped and dispatched}
+\label{fig:frontflow}
+\end{figure}
+
+The construction of the pipes will be done using the decorator pattern and the command pattern. The decorator pattern allows the system to add and remove operations to the pipe in a very flexible way. For example like $new LoggingFilter(new AuthenticationFilter(new StandardPipe()))$. It separates the operations, letting them be completely independent of each other.\\
+After the request was handled by the pipe, it is dispatched to the domain layer, by using the command pattern. The command pattern is where the service layer and domain layer come together. The service layer decides what command it should execute, but the implementation of that command resides in the domain layer. The command defines an abstract "Command" class that defines a single function which is used by the service layer.\\
+The domain layer then executes this command, which will do all the operations the command was created for. The image below shows a class diagram of how this information flow.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\linewidth]{7-software/images/FrontClasses.png}
+\caption{Class diagram of the font page controller creating the pipes and filters}
+\label{fig:frontclasses}
+\end{figure}
+
+
+\section{Data repository}
+
+There are multiple components accessing a central repository of data. They do this by creating a query object and passing this to the repository. 
+%TODO finish description
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\linewidth]{7-software/images/RepoUowBroker.png}
+\caption{Connection between domain layer and data source layer}
+\label{fig:frontclasses}
+\end{figure}
+
+The Unit of Work pattern is used to keep track of the changes made to objects and newly created objects. Whenever an object is created, changed or deleted, the Unit of Work is told about this. 
+Whenever the object can be saved to the database, the \verb|commit()| method of the Unit of Work is called, which translates the stored changes into database transactions.
+
+A sequence diagram showing an example of this can be seen in Figure~\ref{fig:unitofworkseq}. 
+This is an example of the user configuring the system. Here, the StatisticsController constructs a new Device object, which is fetched from the database and then registers itself with the Unit of Work. When the StatisticsController changes the name of this device, the device object registers itself as dirty with the Unit of Work. 
+When the device object is saved, it calls \verb|commit()| on the Unit of Work, which leads to the device updating the appropriate fields in the database.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\linewidth]{7-software/images/UnitOfWorkSeq.png}
+\caption{Sequence diagram showing an update to a Device-object using Unit of Work}
+\label{fig:unitofworkseq}
+\end{figure}
+
+The repository pattern mediates between the domain and data layer. 
+The repository pattern is used by the broker pattern to get the sources the domain layer requests. The repository clients create a criteria object, specifying what kind of data is wanted. For example $criteria.equals(Device.NAME, Computer)$. Then the clients use this criteria by invoking repository.matching(criteria) to receive the data from the repository. The client just asks the data, it has no further knowledge about any interaction with any data source/data base.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{7-software/images/repositorySketch.png}
+	\caption{Repository View}
+	\label{fig:template-view-architecture}
+\end{figure}
+
+The broker pattern is used to hide how the system interacts with the data source. Allowing the system to for example: use RPI, use a network or multiple networks, use a VPN. All without the rest of the system having to know about it.
+
+\section{Interaction decoupling}
+
+As mentioned in chapter \ref{ch:analysis}, MVC pattern is applied to decouple user-interface and the logic behind it. In this way, reusability is increased because the same models or controllers can be coupled with the same view. Modifiability is also increased because it becomes easier to modify a particular user interface or data model without interfering the logic, and vice-versa. Figure \ref{fig:mvc-architecture} depicts an example of MVC implementation in the HEMS.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{7-software/images/mvc.pdf}
+	\caption{Model-view-controller pattern implementation}
+	\label{fig:mvc-architecture}
+\end{figure}
+
+\label{sec:template-view}
+Template view is implemented in this system to make the HTML code reusable in different pages. This will also make the view structure more simple. Code duplication can be prevented because instead of duplicating the code, the HTML will use a certain template.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth]{7-software/images/template-view.pdf}
+	\caption{Template view pattern implementation}
+	\label{fig:template-view-architecture}
+\end{figure}
+
+Figure \ref{fig:template-view-architecture} shows an example of implementation of the template view pattern. Each page of the system (presented in green color) will combine several HTML code snippets (presented in blue color) together. \texttt{TopMenuBarSnippet} and \texttt{SideMenuBarSnippet} are used several times, as each page contains top menu bar and side menu bar. This is also good for expandability because the new page may just combine existing page template to create new web page.
+
+
+\section{Component interaction}
+This section will describe the elaborated model on the basis of the patterns used in the architecture. For each patterns, this section will describe how it is implemented and how it affects the quality attributes of the system.
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.4]{7-software/images/Component.png}
+\caption{The Layers}
+\label{fig:layers}
+\end{figure}
+The system is divided into four layers. The first layer is the presentation layer. This layer is responsible for handling the interaction with the end user. It contains the Web Interface, which is accessible to the user over HTTPS.
+
+The second layer is the Service Layer, see Section~\ref{sec:service-layer-pattern} for more information about this layer. This layer offers services, which can be used by other (external) components.
+
+The third layer is the Domain Layer and is responsible for the domain logic. The Domain Model contains all the classes, has an in-memory representation of the data and contains the logic which is inherent to the objects.
+It uses the Unit of Work pattern (see Section~\ref{sec:unit-of-work-pattern}) to keep track of the changes to objects, so not every change will lead to a new database call. \\
+The components in the Domain Layer are connected to the Domain Model, so they have access to the classes in there. \\
+The Alerting component is responsible for sending alerts by email to the end user, for which it depends on an external Email Gateway. It also uses the StatisticsService in order to compute statistics, which it needs to decide if the user should be alerted by email. \\
+The Configuration and Statistics components expose their functionality to the Service Layer.
+% gateway is actually also a pattern :o
+
+The Data Source layer contains the Unit of Work, which keeps track of the changes to the objects and translates those changes to database transactions when the object is committed. The layer also contains a Database Driver, which handles the communication with the database.
+
+
+%TODO Possible describe client server?....
+
+%TODO is this needed?:
+%\section{Distributed communication}
+%%- Broker
+%%- RPC
+%%- Message queue
+
+
+\section{Summary}
+
+%TODO add the challanges.
+%like on posa v4 p93
+\begin{table}[H]
+	\pgfplotstabletypeset[%
+		KeyValue
+	]{%
+	key & value\\
+	\textbf{Pattern} & \textbf{Challenges} \\
+	\midrule
+	Layers & \\
+	Model-View-Controller & \\
+	Template view & \\
+	Service Layer & \\
+	Front page & \\
+	Domain model & \\
+	Unit of work & \\
+	Broker & \\
+	Data mapper & \\
+	Repository & \\
+	}
+\caption{UC-\arabic{uc}: Configuration- adding new devices}
+\label{table:patternchallenges}
+\end{table}
+
+%\input{7-software/entire_system.tex}
+%
+%\input{7-software/patterns.tex}
+
