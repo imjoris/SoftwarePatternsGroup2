@@ -1,3 +1,132 @@
 %!TEX root = ../report.tex
 \subsection{Non-Functional requirement}
 \label{sec:nfr-validation}
+This subsection presents non-functional requirements evaluation in tables.
+
+\subsubsection{Usability}
+
+\begin{longtable}{llL{\tw{0.2}}L{\tw{0.4}}}
+    \bo{Nr.} & \bo{Fulfilled} & \bo{Pattern(s)} & \bo{Remarks} \\ \toprule \endhead
+	
+	% \reqRow{US}{app}{An application is available for tablets and phone with those OS Windows Phone, Android, and iPhone.} \\
+	~\ref{US:app}
+    & Yes
+    & ~\ref{sec:mvc-analysis}, \ref{sec:template-view-analysis}
+    & Fulfilled with web application, which employs MVC and template view pattern. \\
+	\midrule
+	% \reqRow{US}{basic-understanding}{The end-user needs maximum ten minutes to get a basic understanding of system features through the UI. }\\
+	~\ref{US:basic-understanding}
+    & Yes
+    & ~\ref{sec:mvc-analysis}, \ref{sec:template-view-analysis}
+    & Fulfilled by using MVC and template view pattern. \\
+	\midrule
+	% \reqRow{US}{spa}{Every feature/major option of the system can be accessed through the home page (Single Page Application). }\\
+	~\ref{US:spa}
+    & Yes
+    & ~\ref{sec:mvc-analysis}, \ref{sec:template-view-analysis}
+    & Fulfilled by using MVC and template view pattern. \\
+    \bottomrule		
+
+    \caption{Evaluation of non-functional requirements: usability}
+    \label{table:eval-usability}
+\end{longtable}
+
+\subsubsection{Reliability}
+
+\begin{longtable}{llL{\tw{0.2}}L{\tw{0.4}}}
+    \bo{Nr.} & \bo{Fulfilled} & \bo{Pattern(s)} & \bo{Remarks} \\ \toprule \endhead
+	
+	% \reqRow{RE}{error-margin}{A margin of error of $5\%$ in the energy measurements is tolerated.} \\
+	~\ref{RE:error-margin}
+    & No
+    & -
+    & Sensor accuracy is out of scope of this project as this project does not deal with sensor hardware. \\
+	\midrule
+	% \reqRow{RE}{availability}{The system should be available $99.9\%$. of the time which means down for 44 minutes within 6 months.}\\
+	~\ref{RE:availability}
+    & Yes
+    & ~\ref{sec:layers}, \ref{sec:service-layer}, \ref{sec:unitofwork}, \ref{sec:broker}
+    & High availability is achieved by separating the service in layers and parallelizing the processes.\\
+	\midrule
+	% \reqRow{RE}{downtime}{The system should be down for maximum ten minutes when the user installs a new release (version).}\\
+	~\ref{RE:downtime}
+    & Yes
+    & ~\ref{sec:layers}, \ref{sec:service-layer}, \ref{sec:unitofwork}, \ref{sec:broker}
+    & Separated layers tame care smooth new version deployment in the HEMS.\\
+    \bottomrule		
+
+    \caption{Evaluation of non-functional requirements: reliability}
+    \label{table:eval-reliability}
+\end{longtable}
+
+\subsubsection{Security}
+
+\begin{longtable}{llL{\tw{0.2}}L{\tw{0.4}}}
+    \bo{Nr.} & \bo{Fulfilled} & \bo{Pattern(s)} & \bo{Remarks} \\ \toprule \endhead
+	
+	% \reqRow{SEC}{login}{Each user is identified and has to log in in order to access his "Home Energy Monitor" account.} \\
+	~\ref{SEC:login}
+    & Yes
+    & ~\ref{sec:front-page}, \ref{sec:mvc-analysis}, \ref{sec:template-view-analysis}
+    & Login page is handled by MVC and template view pattern. Front page pattern also helps to serve the login request. \\
+	\midrule
+	% \reqRow{SEC}{encryption}{The data stored in the database is encrypted.}\\
+	~\ref{SEC:encryption}
+    & Yes
+    & ~\ref{sec:repository}
+    & Repository pattern is used to encrypt the data in the database.\\
+	\midrule
+	% \reqRow{SEC}{https}{The connection from/to the system is encrypted using secure connection.}\\
+	~\ref{SEC:https}
+    & Yes
+    & ~\ref{sec:layers}, \ref{sec:service-layer}
+    & Layers and service layer pattern make sure the connections are secured using HTTPS channel. \\
+    \bottomrule		
+
+    \caption{Evaluation of non-functional requirements: security}
+    \label{table:eval-security}
+\end{longtable}
+
+\subsubsection{Interoperability}
+
+\begin{longtable}{llL{\tw{0.2}}L{\tw{0.4}}}
+    \bo{Nr.} & \bo{Fulfilled} & \bo{Pattern(s)} & \bo{Remarks} \\ \toprule \endhead
+	
+	% \reqRow{INT}{interface}{The web interface of the system is available and functioning for 95\% of the browser market share.} \\
+	~\ref{INT:interface}
+    & Yes
+    & ~\ref{sec:mvc-analysis}, \ref{sec:template-view-analysis}
+    & The web interface are mainly handled by MVC and template view pattern.\\
+	\midrule
+	% \reqRow{INT}{rest}{The system exposes a REST interface that allows different electricity usage sensors to submit the electricity usage data.}\\
+	~\ref{INT:rest}
+    & Yes
+    & ~\ref{sec:layers}, \ref{sec:service-layer}
+    & REST interface are exposed in service layer. \\
+    \bottomrule		
+
+    \caption{Evaluation of non-functional requirements: interoperability}
+    \label{table:eval-interoperability}
+\end{longtable}
+
+\subsubsection{Scalability}
+
+\begin{longtable}{llL{\tw{0.2}}L{\tw{0.4}}}
+    \bo{Nr.} & \bo{Fulfilled} & \bo{Pattern(s)} & \bo{Remarks} \\ \toprule \endhead
+	
+	% \reqRow{SCA}{user}{The system should still perform as efficiently as it is suppose to be when the number of users doubled.} \\
+	~\ref{SCA:user}
+    & Yes
+    & ~\ref{sec:layers}, \ref{sec:broker}, \ref{sec:unitofwork}, \ref{sec:datamapper}
+    & The system uses layers which are possible to be replicated.\\
+	\midrule
+	% \reqRow{SCA}{device}{The system should still perform as efficiently as it is suppose to be when the number of devices doubled.}\\
+	~\ref{SCA:device}
+    & Yes
+    & ~\ref{sec:layers}, \ref{sec:broker}, \ref{sec:unitofwork}, \ref{sec:datamapper}
+    & The system uses layers which are possible to be replicated.\\
+    \bottomrule		
+
+    \caption{Evaluation of non-functional requirements: scalability}
+    \label{table:eval-scalability}
+\end{longtable}
