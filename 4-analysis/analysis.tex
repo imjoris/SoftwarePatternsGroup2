@@ -326,10 +326,10 @@ It is assumed that the workload for computing statistics can be divided over mul
 
 \item [Positions]~
 \begin{enumerate}
-\item Publisher-Subscriber
 \item Broker 
-\item Message Queuing %TODO is this better maybe, it allows temporary outage -> good reliability
-\item Remote Procedure Call
+\item Publisher-Subscriber
+%\item Message Queuing %TODO is this better maybe, it allows temporary outage -> good reliability
+\item Messaging
 \end{enumerate}
 
 
@@ -338,16 +338,24 @@ The broker pattern will be used. The broker pattern is part of the domain layer.
 
 %from p73 (=110)
 \item [Argument]~\\
-Using a broker creates a layer of abstraction for the specific layer using it. This increases encapsulation, location independence and scale ability.
-
-\item [Implications]~\\ 
 \begin{itemize}
-\item Adding an other layer of abstraction which must be used can reduce the performance of the system
-\item If the broker fails, the sourced that the broker provided can't be accessed any more.
-\item A bug in the broker is hard to trace back.
+\item Using a broker creates a layer of abstraction for the specific layer using it. This increases encapsulation, location independence and scale ability. With the Broker pattern, many clients can make remote method invocations on methods hosted by the server. It is best suited for systems that want to hide the presence of the network.
+
+\item Publish-Subscriber allows exchanging events in a one-to-many fashion. It does, however, not guarantee that an event will be processed.
+
+\item With messaging there is also no guarantee that a message will be consumed. 
 \end{itemize}
 
-\item [Related requirements/decisions]~
+
+\item [Implications]~
+
+\begin{itemize}
+\item The communication between the system and the servers in the compute cluster are handled by the broker. 
+\item Adding another layer of abstraction which must be used can reduce the performance of the system
+\item If the broker fails, the sourced that the broker provided can't be accessed any more.
+\end{itemize}
+
+\item [Related requirements/decisions]~\\
 \ref{fr:compute-total}, \ref{fr:compute-bill}, \ref{fr:compute-bill}, \ref{SEC:2}, \ref{RE:2}, \ref{sec:layers}
 %Refer to layers
 %Most B ROKER realizations are based on a L AYERS (185) architecture
