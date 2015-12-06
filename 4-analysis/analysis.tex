@@ -498,7 +498,7 @@ Architectural Pattern Revisited - A Pattern Language, P.13 \cite{avgeriou2005arc
   The external data must be stored, updated, accessed by multiple clients and servers simultaneously and analyzed.
  \item [Assumptions/constraints]~
  \begin{itemize}
- \item It is assumed that the shared repository handles the authentication to it
+ \item It is assumed that the shared repository handles the authentication to it.
  \end{itemize}
  \item [Position]~ \\ 
  In the \textit{Shared Repository pattern} one component of the system is used as a central data store, accessed by all other independent components."\\
@@ -508,7 +508,8 @@ Architectural Pattern Revisited - A Pattern Language, P.13 \cite{avgeriou2005arc
  The system uses the Shared Repository Pattern in order to centralize the access to the data.\\
  %\textit{Arguments:} The Shared repository patttern is suitable because \\
  \item [Implications]~ \\ 
- After the integration of the Shared Repository Pattern the system has one central repository (the database) and all clients can access it using loggin. This pattern ensures Reusability, Changeability, Maintainability and Integrability. \\
+ After the integration of the Shared Repository Pattern the system has one central repository (the database) and all clients can access it by using a loggin. \\
+  This pattern ensures Reusability, Changeability, Maintainability and Integrability (cf. Chapter 7 Evaluation). \\
 \item [Related decisions/requirements]~\\ 
 \ref{sec:datamapper}, \ref{sec:unitofwork}, \ref{fr:receive-usage}, \ref{fr:store-usage}, \ref{fr:retrieve-usage}, \ref{SEC:2} \\
 
