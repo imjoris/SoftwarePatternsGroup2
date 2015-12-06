@@ -11,6 +11,13 @@ In this section the architectural significant use-cases will be presented.
 % Update ?
 % Computation ? by Spark , Map/Reduce , DOES THE SYSTEM COMPUTE THE STATISTICS ONLY WHEN THE USER ASKS FOR PECIFIC STATITICS OR EVERYTIME ?
 
+The figure below represents the Use-case diagram of HEMS.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth]{3-requirements/images/usecaseD.png}
+	\caption{Use case diagram}
+	\label{fig:template-view-architecture}
+\end{figure}
 
 \begin{table}[H]
 	\pgfplotstabletypeset[%
@@ -186,17 +193,17 @@ In this section the architectural significant use-cases will be presented.
 	%Level & User goal\\
 	Precondition & The user is registered in the database of the system. \\
 	Main success scenario & \compactList{enumerate}{%
-		 \item The user get access to his interface.(cf. UC "User log in ")
-		 \item The user clicks on the " Settings" button. 
-		 \item The user gets access to the Settings section with all the internal sections and choooses "Adding new devices".
+		 \item The user get access to his interface. (cf. UC "User log in")
+		 \item The user clicks on the "Settings" button. 
+		 \item The user gets access to the Settings section with all the internal sections and chooses "Adding new devices".
 		 \item The user enters the new device' characteristics and submits.
 		} \\
 	Postcondition & The new device and its related information are added in the database. \\
 	Extensions & \compactCell{The device isn't added into the database. \\
 		An error message is displayed "The device couldn't be added". \\
-		Go to step2. \\ 
+		Go to step 2. \\ 
 		} \\
-	Related requirements & FR-10 FR-11 FR-12\\
+	Related requirements & \ref{fr:interface-login}, \ref{fr:add-house}, \ref{fr:add-device}\\
 	}
 \caption{UC-\arabic{uc}: Configuration- adding new devices}
 \label{table:uc-configuration}
@@ -208,29 +215,53 @@ In this section the architectural significant use-cases will be presented.
 	]{%
 	value & description \\
 	\req{uc} & \textbf{Computation/Statistics} \\
-	Goal & The system has to perform several kind of statistics. \\
+	Goal & The system has to compute several kind of statistics. \\
 	%Stakeholders and interests & \\
 	Primary actor & System\\
 	%Level & User goal\\
 	Precondition & The database of the system has the necessary data. \\
 	Main success scenario & \compactList{enumerate}{%
-		 \item The data needed for the selected computation is filtered.
-		 \item The system invoks Map/Reduce functions or Spark and computes
+		 \item The statistics part is invoked from the web interface (from \ref{uc:4} or \ref{uc:5})
+		 \item The relevant data is fetched from the database
+		 \item If the statistic has not been computed before and is not present in the database
+		 \item The statistic is computed on the compute cluster
+		 \item The result is stored in the database and returned
 		}\\
 	Postcondition & The statistics are computed and the results available/displayed.  \\
-	Extensions & The system can't compute the statistics. 
-		The error is propagated to the system in order to display it in a prompt message. \\
-	Related requirements & FR-4 FR-5 FR-6 FR-7 FR-8 FR-10 FR-16 FR-19, \ref{fr:show-accuracy}\\
+	Extensions & \compactCell{
+		\begin{enumerate}
+		\item[3a.] The statistic has been computed before and is present in the database
+		\item[3b.] The statistic from the database is returned.
+		\item[4a.] The system can't compute the statistics. 
+		\item[4b.] The error is propagated to the system in order to display it in a prompt message.
+		\end{enumerate}
+	}  \\
+	Related requirements & \ref{fr:retrieve-usage}, \ref{fr:compute-total}, \ref{fr:compute-timeperiod}, \ref{fr:compute-bill}, \ref{fr:interface-selectstats}, \ref{fr:web-interface}, \ref{fr:show-history}, \ref{fr:interface-graph}, \ref{fr:show-accuracy}\\
 	}
 \caption{UC-\arabic{uc}: Computation-statistics}
-\label{table:uc-registration}
+\label{table:uc-computation}
 \end{table}
 
-The figure below represents the Use-case diagram of HEMS.
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.7\textwidth]{3-requirements/images/usecaseD.png}
-	\caption{Use case diagram}
-	\label{fig:template-view-architecture}
-\end{figure}
+\begin{table}[H]
+	\pgfplotstabletypeset[%
+		UCTable
+	]{%
+	value & description \\
+	\req{uc} & \textbf{Subscribe to an alert} \\
+	Goal & Users want to receive alert about sudden energy increases or when they are using more energy than in previous months/weeks \\
+	Primary actor & User\\
+	Precondition & The user is registered and logged in \\
+	Main success scenario & \compactList{enumerate}{%
+		 \item The user navigates to the alerts page in the web interface and clicks on "Create new Alert".
+		 \item The user enters the criteria for when he wants to receive an alert.
+		 \item The user clicks the submit button.
+		 \item The system stores the new alert in the database.
+		}\\
+	Postcondition & An alert has been stored and will be checked regularly to alert the user when the criteria is met.  \\
+	Extensions & \\
+	Related requirements & \ref{fr:web-interface}, \ref{fr:choose-alerts}, \ref{fr:alerts} \\
+	}
+\caption{UC-\arabic{uc}: Subscribe to an alert}
+\label{table:uc-choosealert}
+\end{table}
 

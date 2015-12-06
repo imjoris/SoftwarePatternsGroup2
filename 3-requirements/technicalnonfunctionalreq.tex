@@ -5,60 +5,52 @@ In this section, the technical non-functional aspects that are important to the 
 \subsection{Usability}
 The sytem will be hopefully used by a lot of people who don't necessarily have knowledge in the technology field so the Usability is an important requirement so the end-user can acces all the information he needs. \\
 
- 	\pgfplotstabletypeset[%
- 		UCTable
- 	]{%
- 		value & description \\
- 		\req{US} & An application is available for tablets and phone with those OS Windows Phone,Android, and Iphone. \\
- 		\req{US} & The end-user needs maximum ten minutes to get a basic understanding of system features through the UI. \\
- 		\req{US} & Every feature/major option of the system can be accessed through the home page(Single Page Application). \\
- 	}
+ 	\begin{longtable}{L{0.1\textwidth} L{0.7\textwidth} L{0.1\textwidth}}
+		\reqRow{US}{app}{An application is available for tablets and phone with those OS Windows Phone, Android, and iPhone.} \\
+ 		\reqRow{US}{basic-understanding}{The end-user needs maximum ten minutes to get a basic understanding of system features through the UI. }\\
+ 		\reqRow{US}{spa}{Every feature/major option of the system can be accessed through the home page (Single Page Application). }\\
+		\bottomrule
+	\end{longtable}
 
 % Email The user can receive an email with the information he aked (for example etimate bill) once a month.
 %Error message
 
 \subsection{Reliability}
- 	\pgfplotstabletypeset[%
- 		UCTable
- 	]{%
- 		value & description \\
- 		\req{RE} & A margin of error of $5\%$ in the energy measurements is tolerated. \\ % incaccurary ?
- 		\req{RE} & The sytem should be available $99.9\%$. of the time which means down for 44 minutes. 
- 		$AV = \frac{\text{MTTF}}{\text{MTTF} + \text{MTTR}} = \frac{\text{6 months}}{\text{6 months }+\text{44 minutes}} = \frac{4380 \text{ hours}}{4380 + 12 \text{ hours}} = 99.9 \%$ \\
- 		\req{RE} & The system should be down for maximum ten minutes when the user installs a new release(version). \\
- 	}
+ 	\begin{longtable}{L{0.1\textwidth} L{0.7\textwidth} L{0.1\textwidth}}
+		\reqRow{RE}{error-margin}{A margin of error of $5\%$ in the energy measurements is tolerated.} \\
+ 		\reqRow{RE}{availability}{The system should be available $99.9\%$. of the time which means down for 44 minutes within 6 months.
+ 		$AV = \frac{\text{MTTF}}{\text{MTTF} + \text{MTTR}} = \frac{\text{6 months}}{\text{6 months }+\text{44 minutes}} = \frac{4380 \text{ hours}}{4380 + 12 \text{ hours}} = 99.9 \%$ 
+ 		}\\
+ 		\reqRow{RE}{downtime}{The system should be down for maximum ten minutes when the user installs a new release (version).}\\
+		\bottomrule
+	\end{longtable}
 
  	
 \subsection{Security}
 Ensuring the security for the system is a major issue so all the data needed for its good functioning remain protected and consistent. \\
 
- 	\pgfplotstabletypeset[%
- 		UCTable
- 	]{%
- 		value & description \\
- 		\req{SEC} & Each user is identified and has to log in in order to access his "Home Energy Monitor" account. \\
- 		\req{SEC} & The data is encrypted. \\ % developp , which database ?
- 	}
+ 	\begin{longtable}{L{0.1\textwidth} L{0.7\textwidth} L{0.1\textwidth}}
+		\reqRow{SEC}{login}{Each user is identified and has to log in in order to access his "Home Energy Monitor" account.} \\
+ 		\reqRow{SEC}{encryption}{The data stored in the database is encrypted.}\\
+ 		\reqRow{SEC}{https}{The connection from/to the system is encrypted using secure connection.}\\
+		\bottomrule
+	\end{longtable}
 
 \subsection{Interoperability}
-\pgfplotstabletypeset[%
- 		UCTable
- 	]{%
- 		value & description \\
- 		\req{INT} & The web interface of the system is available and functioning for 95\% of the browser market share. \\
- 		\req{INT} & The system exposes a REST interface that allows different electricity usage sensors to submit the electricity usage data. \\ 
- 	}
+
+ 	\begin{longtable}{L{0.1\textwidth} L{0.7\textwidth} L{0.1\textwidth}}
+		\reqRow{INT}{interface}{The web interface of the system is available and functioning for 95\% of the browser market share.} \\
+ 		\reqRow{INT}{rest}{The system exposes a REST interface that allows different electricity usage sensors to submit the electricity usage data.}\\
+		\bottomrule
+	\end{longtable}
  
 
 \subsection{Scalability} 
 
 The system should make the increase in workload, resources and users easy to handle that's why the scalability its part of non functional requirements of the system.\\
 
- 	\pgfplotstabletypeset[%
- 		UCTable
- 	]{%
- 		value & description \\
- 		%\req{SCA} & The system must be able to monitor several kind of energy consumption for example: gas ,solar, temperature. \\
- 	\req{SCA} & The system should function as efficiently when the number of users increases. \\% increase in the number of users \\
- 	\req{SCA} & The system should function as efficiently when the number of devices increases. \\ % percentage ?
- 	}
+ 	\begin{longtable}{L{0.1\textwidth} L{0.7\textwidth} L{0.1\textwidth}}
+		\reqRow{SCA}{user}{The system should still perform as efficiently as it is suppose to be when the number of users doubled.} \\
+ 		\reqRow{SCA}{device}{The system should still perform as efficiently as it is suppose to be when the number of devices doubled.}\\
+		\bottomrule
+	\end{longtable}
