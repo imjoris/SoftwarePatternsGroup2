@@ -23,7 +23,7 @@ The sytem will be hopefully used by a lot of people who don't necessarily have k
  	]{%
  		value & description \\
  		\req{RE} & A margin of error of $5\%$ in the energy measurements is tolerated. \\ % incaccurary ?
- 		\req{RE} & The sytem should be available $99.9\%$. of the time which means down for 44 minutes. 
+ 		\req{RE} & The system should be available $99.9\%$. of the time which means down for 44 minutes within 6 months. 
  		$AV = \frac{\text{MTTF}}{\text{MTTF} + \text{MTTR}} = \frac{\text{6 months}}{\text{6 months }+\text{44 minutes}} = \frac{4380 \text{ hours}}{4380 + 12 \text{ hours}} = 99.9 \%$ \\
  		\req{RE} & The system should be down for maximum ten minutes when the user installs a new release(version). \\
  	}
@@ -37,7 +37,8 @@ Ensuring the security for the system is a major issue so all the data needed for
  	]{%
  		value & description \\
  		\req{SEC} & Each user is identified and has to log in in order to access his "Home Energy Monitor" account. \\
- 		\req{SEC} & The data is encrypted. \\ % developp , which database ?
+ 		\req{SEC} & The data stored in the database is encrypted. \\ % developp , which database ?
+ 		\req{SEC} & The connection from/to the system is encrypted using secure connection. \\
  	}
 
 \subsection{Interoperability}
@@ -59,6 +60,6 @@ The system should make the increase in workload, resources and users easy to han
  	]{%
  		value & description \\
  		%\req{SCA} & The system must be able to monitor several kind of energy consumption for example: gas ,solar, temperature. \\
- 	\req{SCA} & The system should function as efficiently when the number of users increases. \\% increase in the number of users \\
- 	\req{SCA} & The system should function as efficiently when the number of devices increases. \\ % percentage ?
+ 	\req{SCA} & The system should still perform as efficiently as it is suppose to be when the number of users doubled. \\% increase in the number of users \\
+ 	\req{SCA} & The system should still perform as efficiently as it is suppose to be when the number of devices doubled. \\ % percentage ?
  	}
