@@ -161,10 +161,10 @@ This section will describe the elaborated model on the basis of the patterns use
 \end{figure}
 The system is divided into four layers. The first layer is the presentation layer. This layer is responsible for handling the interaction with the end user. It contains the Web Interface, which is accessible to the user over HTTPS.
 
-The second layer is the Service Layer, see Section~\ref{sec:service-layer-pattern} for more information about this layer. This layer offers services, which can be used by other (external) components.
+The second layer is the Service Layer. This layer offers services, which can be used by other (external) components.
 
 The third layer is the Domain Layer and is responsible for the domain logic. The Domain Model contains all the classes, has an in-memory representation of the data and contains the logic which is inherent to the objects.
-It uses the Unit of Work pattern (see Section~\ref{sec:unit-of-work-pattern}) to keep track of the changes to objects, so not every change will lead to a new database call. \\
+It uses the Unit of Work pattern to keep track of the changes to objects, so not every change will lead to a new database call. \\
 The components in the Domain Layer are connected to the Domain Model, so they have access to the classes in there. \\
 The Alerting component is responsible for sending alerts by email to the end user, for which it depends on an external Email Gateway. It also uses the StatisticsService in order to compute statistics, which it needs to decide if the user should be alerted by email. \\
 The Configuration and Statistics components expose their functionality to the Service Layer.
