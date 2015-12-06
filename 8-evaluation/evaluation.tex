@@ -1,4 +1,4 @@
-%!TEX root = ../report.tex
+% !TEX root = ../report.tex
 
 \newcommand{\bo}[1]{\textbf{#1}}
 
@@ -7,14 +7,31 @@
 
 In this chapter the architecture of the system will be evaluated. After taking architectural decisions and building the system the architects have to make sure that the patterns applied suit the architecture, especially the quality attributes and key drivers .%in terms of benefits and liablities.
 
+\section{Key-Driver Validation}
 
-\paragraph{Layers}
-\paragraph{Service Layer}
-\paragraph{Front-Controller}
-\paragraph{Domain Model}
-\paragraph{Model View Controller}
-\paragraph{Unit of Work}
-\paragraph{Shared Repository} 
+\subsection*{Layers}
+\subsection*{Service Layer}
+The Service Layer pattern defines the boundary of the application using a layer of services to be used by clients. This increases the interoperability, since the set of operation offered by the service layer are available to many kinds of clients. \\
+\textbf{Benefits \& Liabilities} ~
+\begin{itemize}
+\item[+] Interoperability 
+\end{itemize}
+
+\subsection*{Front-Controller}
+\subsection*{Domain Model}
+\subsection*{Model View Controller}
+\subsection*{Unit of Work}
+The Unit of Work will significantly reduce the load on the database. The increased performance has a direct impact on the usability of the system. Faster processing will make the web interface of the system more responsive to the actions of the user, which increases the usability.
+
+While the unit of work does introduce a delay before the change in the in-memory object is present in the representation in the database, this delay is very short and does not affect the functional correctness of the system or the reliability of its results.\\
+\textbf{Benefits \& Liabilities} ~
+\begin{itemize}
+\item[+] Performance 
+\item[+] Usability
+\end{itemize}
+
+
+\subsection*{Shared Repository} 
 %Repositories are the single point where we hand off and fetch objects. It is also the boundary where communication with the storage starts and ends.
 %Mediates between the domain and the data mapping layers using a collection-like interface for accessing domain objects.
 
@@ -35,7 +52,7 @@ Using the Repository pattern, these changes can be made fast. The repository als
 \textbf{+ Integrability} \\
 \textbf{+ Modifiability Changeability} by the Separation of concerns\\
 
-
+\clearpage1
 \section{Requirements validation}
 \label{sec:req-validation}
 \input{8-evaluation/functional-reqs.tex}
