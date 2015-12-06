@@ -75,4 +75,18 @@ Template view is implemented in this system to make the HTML code reusable in di
 
 Figure \ref{fig:template-view-architecture} shows an example of implementation of the template view pattern. Each page of the system (presented in green color) will combine several HTML code snippets (presented in blue color) together. \texttt{TopMenuBarSnippet} and \texttt{SideMenuBarSnippet} are used several times, as each page contains top menu bar and side menu bar. This is also good for expandability because the new page may just combine existing page template to create new web page.
 
+\subsection{Repository View}
+
+The repository pattern mediates between the domain and data layer. 
+The repository pattern is used by the broker pattern to get the sources the domain layer requests. The repository clients create a criteria object, specifying what kind of data is wanted. For example $criteria.equals(Device.NAME, Computer)$. Then the clients use this criteria by invoking repository.matching(criteria) to receive the data from the repository. The client just asks the data, it has no further knowledge about any interaction with any data source/data base.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth]{7-software/images/repositorySketch.png}
+	\caption{Repository View}
+	\label{fig:template-view-architecture}
+\end{figure}
+
+Source \textit{http://www.martinfowler.com/eaaCatalog/repository.html}
+
 
