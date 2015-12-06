@@ -1,7 +1,7 @@
 %!TEX root = ../report.tex
 \chapter{System evolution}
 \label{ch:evolution}
-Due to new environmental issues(global warming, etc) The Home Energy Monitoring is a market in expansion and building green-friendly systems has become an important issue nowadays. This is an opportunity for the HEMS to grow by adding new features in the years to come. \\
+Energy Monitoring is a field which always grows because of the new environmental issues, such as global warming. This adds opportunities for the HEMS to grow by adding new features. This chapter describes the system evolution that is targeted to be achieved within three to five years.
 " Various studies have shown a reduction in home energy use of 4-15\%\ through use of home energy display " (Source : \textit{Wikipedia} ). This percentage show the efficiency and the impact on the everyday life of such systems and that more and more users will use them. 
 
  \paragraph{Monitoring other energy consumption}
@@ -10,10 +10,22 @@ Due to new environmental issues(global warming, etc) The Home Energy Monitoring 
  \paragraph{Computing new analysis}
 The system will allow the user to compute and display to the user his greenhouse gas emission for example.
 
- %\paragraph{Application}
- %in order to make the access to his interface easier for the user an application for Android, Windows Phone and iOS will be built.
-  
  \paragraph{Home automation functionnalities}
 Knowing how the user consumes is good but controlling it is even better. \\ One of the goal of HEMS is to make the user more energy efficient.
 The website/application will allow the user to control devices remotely (turning them on/off or changing light luminosity or heating intensity for example). \\
-Th system will be able to advice the user about his energy consumption (ex: you should turn off this light because the room is empty, etc).
+The system will be able to advice the user about his energy consumption (ex: you should turn off this light because the room is empty, etc).
+
+
+
+\section{Monitoring other energy consumption}
+As can be seen on Figure \ref{fig:home-energy-consumption}, heating is one other major energy consumption of a particular house. In the first version of the HEMS, only electricity consumption is measured. In the next release, the HEMS will also support gas consumption, because it is main energy source for space and water heating. The same features will be applied in this measurement, such as predicting upcoming gas bill and analytics regarding the usage.
+
+\section{Native mobile application support}
+Current interactions are only delivered by web interface. Although this interface supports computer (large screen) and mobile device (small screen), native mobile application has richer user interactions. Native mobile application, both in Android and iOS operating system, will be developed in order to expand this system capabilities. 
+
+\section{Integration with payment company}
+Users are only able to see electricity consumption and predict upcoming electricity bill in this first version of the HEMS. Future version will also be able to pay the electricity bill directly through the system. The HEMS will be expanded to integrate with third party payment company to make this possible.
+
+\section{Building the HEMS own sensor}
+Currently, sensors installed in the houses are not the concern of the HEMS, because the first version is aimed to build robust platform to support energy measurement in cloud environment. Although the system also has support to any third party sensors by exposing REST API, specialized sensor build for the HEMS will deliver better support, because latest updates about the system will be firstly compatible and tested with the own sensor of the HEMS. The future release of the HEMS will also include its own sensor.
+
