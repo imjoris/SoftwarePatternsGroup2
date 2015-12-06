@@ -66,12 +66,10 @@ Notice that the broker isn't mentioned. This is because the broker pattern is a 
 \end{figure}
 
 
-
-%TODO show the broker between domain and data source
-
 \section{Data repository}
 
-Multiple components accessing a central repository of data.
+There are multiple components accessing a central repository of data. They do this by creating a query object and passing this to the repository. 
+%TODO finish description
 
 \begin{figure}[H]
 \centering
@@ -82,7 +80,14 @@ Multiple components accessing a central repository of data.
 
 \section{Interaction decoupling}
 
-%TODO describe MVC
+As mentioned in chapter \ref{ch:analysis}, MVC pattern is applied to decouple user-interface and the logic behind it. In this way, reusability is increased because the same models or controllers can be coupled with the same view. Modifiability is also increased because it becomes easier to modify a particular user interface or data model without interfering the logic, and vice-versa. Figure \ref{fig:mvc-architecture} depicts an example of MVC implementation in the HEMS.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{7-software/images/mvc.pdf}
+	\caption{Model-view-controller pattern implementation}
+	\label{fig:mvc-architecture}
+\end{figure}
 
 \section{Component interaction}
 
@@ -103,6 +108,9 @@ Multiple components accessing a central repository of data.
 
 
 \section{Summary}
+
+%TODO add the challanges.
+%like on posa v4 p93
 \begin{table}[H]
 	\pgfplotstabletypeset[%
 		KeyValue
