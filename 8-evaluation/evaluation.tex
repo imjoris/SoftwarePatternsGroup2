@@ -11,6 +11,14 @@ In this chapter the architecture of the system will be evaluated. After taking a
 % http://www.cs.rug.nl/paris/papers/ECSA07.pdf
 
 \subsection*{Layers}
+The layers improve the maintainability of the system, they support reusability.
+The performance is reduced, since the propagation of request/calls through the layers can be inefficient.\\
+\textbf{Benefits \& Liabilities} ~
+\begin{itemize}
+\item[+] Maintainability
+\item[-] Performance 
+\end{itemize}
+
 \subsection*{Service Layer}
 The Service Layer pattern defines the boundary of the application using a layer of services to be used by clients. This increases the interoperability, since the set of operation offered by the service layer are available to many kinds of clients. \\
 \textbf{Benefits \& Liabilities} ~
