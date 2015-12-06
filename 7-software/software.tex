@@ -13,8 +13,10 @@
 
 The system is decomposed into the following layers:
 \begin{itemize}
-\item Presentation
-\item ...
+\item Presentation Layer
+\item Service Layer
+\item Domain Layer
+\item Data Source Layer
 \end{itemize}
 
 The presentation layer presents a view to the user. A user can use web browser and visit the energy monitoring website. The browser will then show a GUI to the user showing his energy statistics.\\
@@ -36,12 +38,12 @@ The presentation layer presents a view to the user. A user can use web browser a
 
 
 
-The figure below shows these layers and includes their responsibilities and concerns. The communication between the boxes is how the concerns are connected to each other. It is not how the actual flow of communication is handled, the communication flow will be discussed in detail later.
+Figure~\ref{fig:layerscircle} shows these layers and includes their responsibilities and concerns. The communication between the boxes is how the concerns are connected to each other. It is not how the actual flow of communication is handled, the communication flow will be discussed in detail later.
 %abc, add ref to communication layer thingy.
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.7]{7-software/images/layersflow.png}
+\includegraphics[scale=0.45]{7-software/images/layersflow.png}
 \caption{Functionality of the system in each layer}
 \label{fig:layersflow}
 \end{figure}
@@ -49,6 +51,7 @@ The figure below shows these layers and includes their responsibilities and conc
 Notice that the broker isn't mentioned. This is because the broker pattern is a pattern that handles the communication between the layers, which will be discussed in a later section.
 %TODO add reference
 
+\clearpage
 \section{Data flow and transformation}
 
 \begin{figure}[H]
@@ -60,12 +63,12 @@ Notice that the broker isn't mentioned. This is because the broker pattern is a 
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.8\linewidth]{7-software/images/FrontClasses.png}
+\includegraphics[width=0.5\linewidth]{7-software/images/FrontClasses.png}
 \caption{Class diagram of the font page controller creating the pipes and filters}
 \label{fig:frontclasses}
 \end{figure}
 
-
+\clearpage
 \section{Data repository}
 
 There are multiple components accessing a central repository of data. They do this by creating a query object and passing this to the repository. 
@@ -73,9 +76,26 @@ There are multiple components accessing a central repository of data. They do th
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.8\linewidth]{7-software/images/RepoUowBroker.png}
+\includegraphics[width=0.6\linewidth]{7-software/images/RepoUowBroker.png}
 \caption{Connection between domain layer and data source layer}
 \label{fig:frontclasses}
+\end{figure}
+
+%TODO explain broker here
+
+The Unit of Work pattern is used to keep track of the changes made to objects and newly created objects. Whenever an object is created, changed or deleted, the Unit of Work is told about this. 
+Whenever the object can be saved to the database, the \verb|commit()| method of the Unit of Work is called, which translates the stored changes into database transactions.
+
+A sequence diagram showing an example of this can be seen in Figure~\ref{fig:unitofworkseq}. 
+This is an example of the user configuring the system. Here, the StatisticsController constructs a new Device object, which is fetched from the database and then registers itself with the Unit of Work. When the StatisticsController changes the name of this device, the device object registers itself as dirty with the Unit of Work. 
+When the device object is saved, it calls \verb|commit()| on the Unit of Work, which leads to the device updating the appropriate fields in the database.
+
+%TODO change the seq. diagram?? (add query object and call to broker?))
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.7]{7-software/images/UnitOfWorkSeq.png}
+\caption{Sequence diagram showing an update to a Device-object using Unit of Work}
+\label{fig:unitofworkseq}
 \end{figure}
 
 \section{Interaction decoupling}
