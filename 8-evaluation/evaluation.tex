@@ -5,7 +5,7 @@
 \chapter{Architecture evaluation}
 \label{ch:evaluation}
 
-In this chapter the architecture of the system will be evaluated. After taking architectural decisions and building the system the architects have to make sure that the patterns applied suit the architecture, especially the quality attributes and key drivers .%in terms of benefits and liablities.
+In this chapter the architecture of the system will be evaluated. After taking architectural decisions and building the system the architects have to make sure that the patterns applied suit the architecture, especially the quality attributes and key drivers.%in terms of benefits and liablities.
 
 \section{Key-Driver Validation}
 
@@ -20,6 +20,21 @@ The Service Layer pattern defines the boundary of the application using a layer 
 \subsection*{Front-Controller}
 \subsection*{Domain Model}
 \subsection*{Model View Controller}
+Model View Controller decouples the view, the logic, and the data modeling of the interface. Thus it is easier to modify the view without interfering the logic and data model. This results in good modifiability and better update to the usability since updating the view is relatively easy to increase the usability.
+
+\textbf{Benefits \& Liabilities} ~
+\begin{itemize} 
+\item[+] Usability
+\end{itemize}
+
+\subsection*{Template view}
+Template view separates each components of a web page to individual snippets. The snippets are combined together to form a web page using a HTML helper. Since the elements are separated, code reusability is increased. Updates are also easy to be implemented, since updating one snippet may results in updated elements in several pages at once. Thus, template view increases the usability of the system because of its ease of web page update.
+
+\textbf{Benefits \& Liabilities} ~
+\begin{itemize} 
+\item[+] Usability
+\end{itemize}
+
 \subsection*{Unit of Work}
 The Unit of Work will significantly reduce the load on the database. The increased performance has a direct impact on the usability of the system. Faster processing will make the web interface of the system more responsive to the actions of the user, which increases the usability.
 
@@ -52,7 +67,6 @@ Using the Repository pattern, these changes can be made fast. The repository als
 \textbf{+ Integrability} \\
 \textbf{+ Modifiability Changeability} by the Separation of concerns\\
 
-\clearpage1
 \section{Requirements validation}
 \label{sec:req-validation}
 \input{8-evaluation/functional-reqs.tex}
