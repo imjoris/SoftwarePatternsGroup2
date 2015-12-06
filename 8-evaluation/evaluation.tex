@@ -27,6 +27,21 @@ The Service Layer pattern defines the boundary of the application using a layer 
 \end{itemize}
 
 \subsection*{Front-Controller}
+By having a central point that handles all requests, all the requests get prepossessed for the domain layer in the same way. All the common functions like security and logging are handled by the front controller for each request.\\
+It increases security because the security the request security is handled before any other operation in the system. And the security is handled the same for every request.\\
+Reliability increases, because all the the common functions are centrally handled and so there are no duplicate implementations leading to unexpected results. \\
+The front page increases maintainability because the way each request is received and initially handled can be modified in a central place in a very flexible way. It allows for easy modifications of the piping functions by using the decorator pattern.\\
+A downside of the front page controller is that it is a single point of failure. If the front page controller is faulty or doesn't work, then the entire system fails. And if a function in the front page takes a long time to execute, then the performance of the entire system decreases. However, the front page controller makes testing the system easier since the functions are handled in one place.\\
+
+In conclusion, the front page has the following benefits and liabilities:\\
+\textbf{Benefits \& Liabilities} ~
+\begin{itemize}
+\item[+] Reliability
+\item[+] Modifiability
+\item[+] Security
+\item[$-$] Performance
+\end{itemize}
+
 \subsection*{Domain Model}
 \subsection*{Broker}
 The reliability of the system increases by the use of the Broker pattern. The pattern guarantees the delivery of messages to the destination. This guarantees that statistics are computed by a server in the compute cluster.
