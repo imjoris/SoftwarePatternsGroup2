@@ -88,9 +88,6 @@ While the unit of work does introduce a delay before the change in the in-memory
 \subsection*{Shared Repository} 
 %Repositories are the single point where we hand off and fetch objects. It is also the boundary where communication with the storage starts and ends.
 %Mediates between the domain and the data mapping layers using a collection-like interface for accessing domain objects.
-
-\textit{Benefits} \\
-
 The repository gives a lot more control over how the data is handled. The benefits are:
 \begin{itemize}
 \item Reduces code (and code complexity)
@@ -100,12 +97,13 @@ The repository gives a lot more control over how the data is handled. The benefi
 
 Performing analysis on the data also consists of executing complex queries on the data source. The database that executes these queries, however, might change. Or the system might decide to use multiple databases and data sources.
 Using the Repository pattern, these changes can \underline{be made fast}. The repository also allows for \underline{multiple configurations} to exist. So an extra repository could be created for testing purposes, only using an in-memory database to increase the test execution speed. \\
-
-\textit{} Liabilities : \\
-\textbf{+ Reusability} because the data store is central \\
-\textbf{+ Integrability} because the data store is central \\
-\textbf{+ Maintainability} thanks to the Separation of concerns \\
-\textbf{+ Modifiability/Changeability} thanks to the Separation of concerns\\
+\textbf{Benefits \& Liabilities} ~
+\begin{itemize}
+\item[+] Reusability : because the data store is central
+\item[+] Integrability : because the data store is central
+\item[+] Maintainability : thanks to the Separation of concerns
+\item[+] Modifiability : thanks to the Separation of concerns
+\end{itemize}
 
 \section{Requirements validation}
 \label{sec:req-validation}
