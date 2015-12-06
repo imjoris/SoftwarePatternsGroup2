@@ -389,14 +389,10 @@ For the data source layer, there should be a way to store the data where the dom
 
 \item [Positions]~
 \begin{enumerate}
-%\item Publisher-Subscriber
-%\item Broker
-%\item Message Queuing
-%\item Remote Procedure Call
+\item Data mapper% (p165)
 \item Table data gateway% (p144)
 \item Row data gateway% (p152)
 \item Active record %(p160)
-\item Data mapper% (p165)
 \end{enumerate}
 
 \item [Decision] ~\\
@@ -404,12 +400,14 @@ The data mapper pattern will be used. The data mapper pattern creates the most a
 
 \item [Argument]~\\
 %Because the domain model is used in the domain layer, the data mapper pattern is best to use. \ign{(153 and 97)}
-\begin{itemize}
-\item The data mapper pattern best suits the domain model pattern used in the domain layer
-\item The logic that will operate on the data will generate statistics of the data, which can become quite complex. This is why the data mapper pattern is chosen as a pattern for connecting to the data sources. This pattern is the most advanced pattern, and provides the best functionality and abstraction.
-With the active record pattern, the database access/communication, data and logic of that data is all stored in the same class. Since the logic that will be executed on the sensor could be quite complex, this patterns will not be useful.
-A gateway of any kind leads to performance overhead, because for each call coming from the domain model pattern, a database call is made. It lacks the necessary coordination.
-\end{itemize}
+\begin{enumerate}
+\item The data mapper pattern best suits the domain model pattern used in the domain layer.  This pattern is the most advanced pattern, and provides the best functionality and abstraction.
+\item
+\item The logic that will operate on the data will generate statistics of the data, which can become quite complex and will be stored in a different table than the device objects. 
+This is why the Table- and Row Data gateway patterns are not choosen.
+\item
+With the active record pattern, the database access/communication, data and logic of that data is all stored in the same class. This means there is a tight coupling between the data and the domain logic. Since the logic that will be executed on the sensor could be quite complex, this pattern is not preferred.
+\end{enumerate}
 %The data mapper pattern best suits the domain model pattern used in the domain layer
 %The logic that will operate on the data will generate statistics of the data, which can become quite complex. This is why the data mapper pattern is chosen as a pattern for connecting to the data sources. This pattern is the most advanced pattern, and provides the best functionality and abstraction.
 %With the active record pattern, the database access/communication, data and logic of that data is all stored in the same class. Since the logic that will be executed on the sensor could be quite complex, this patterns will not be useful.
@@ -419,6 +417,8 @@ A gateway of any kind leads to performance overhead, because for each call comin
 \item [Implications]~\\
 The data mapper is used in the architecture. This means that the in-memory objects in the domain layer need not be aware of the presence of the database.
 The data mapper objects will implement the details of storing the object in the database.
+
+A gateway of any kind leads to performance overhead, because for each call coming from the domain model pattern, a database call is made.
 
 \item [Related requirements/decisions]~\\
 \ref{sec:repository},  \ref{sec:unitofwork}, \ref{fr:store-usage}, \ref{fr:retrieve-usage}
@@ -488,8 +488,7 @@ The data mapper objects will implement the details of storing the object in the 
 % Context
 \begin{description}
 \item [Source]~\\
-
-\EAA P.322 \cite{eaa}
+\EAA, P.322 \cite{eaa}\\
 Architectural Pattern Revisited - A Pattern Language, P.13 \cite{avgeriou2005architectural}
 
  \item [Name] ~\\ 
