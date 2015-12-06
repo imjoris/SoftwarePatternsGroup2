@@ -1,18 +1,8 @@
 % !TEX root = ../report.tex
 \chapter{Software Architecture}
 \label{ch:software}
-%IEEE Definition: A viewpoint is a collection of patterns, templates, and conventions for constructing one type of view. It defines the stakeholders whose concerns are reflected in the viewpoint and the guidelines, principles, and template models for constructing its views.
-%http://www.viewpoints-and-perspectives.info/home/viewpoints/
-
-% dijkstra quote from "Code complete p79"
-The \ShortName system is a big and complex system. A developer can not, at any point in time, know the implementation of the entire system at once. "no one's skull is really big enough to contain a modern computer program" (Dijkstra 1972).\\
-At any level of abstraction, the system needs to be divided into components that have the same concern. This way a developer can work on a single and comprehensible part of the system at a time. It reduces errors in the system and makes the system manageable.\\
-%A view is a representation of a whole system from the perspective of a related set of concerns.[1][2]
-%https://en.wikipedia.org/wiki/View_model
-Each of the sections in this chapter explains a single "view" of the system, meaning it describes the system from a related set of concerns.
 
 \section{Layer decomposition}
-The layers pattern is used to create a separation of groups of classes that are reusable and share the same concerns.
 
 \begin{figure}[H]
 \centering
@@ -23,22 +13,11 @@ The layers pattern is used to create a separation of groups of classes that are 
 
 The system is decomposed into the following layers:
 \begin{itemize}
-\item Presentation layer
-\item Service layer
-\item Domain layer
-\item Data source layer
+\item Presentation
+\item ...
 \end{itemize}
 
-\begin{description}
-\item[Presentation layer] The presentation layer is concerned with presenting a graphical interface to the user (GUI). A user can use web browser and visit the \ShortName website. The browser will then show the energy statistics of that user on that browser.
-%
-\item[Service layer] The service layer is concerned with providing services to the clients of the system. One of these clients is the web browser of the user, as described in the presentation layer.  Figure \ref{fig:layerscircle} is drawn as a set of nested circles in order to show how the layers communicate. The domain and data source layer can not be directly contacted. In order to receive data and to get statistics, a service in the service layer has to be used.
-%
-\item[Domain layer] The domain layer's concern is to calculate and provide energy statistics. All the logic for generating the statistics and data that the user wants is generated in this layer
-%
-\item[Data source layer] The data source layer is concerned with storing and receiving data. The domain layer will use this layer for managing the data it generates. The data source layer has connections with databases and computing nodes. Computing nodes are nodes that provide data by doing computations on other data (i.e. Spark).
-\end{description}
-
+The presentation layer presents a view to the user. A user can use web browser and visit the energy monitoring website. The browser will then show a GUI to the user showing his energy statistics.\\
 
 %TODO describe each layer
 % The abc layer ...
@@ -56,7 +35,8 @@ The system is decomposed into the following layers:
 %%%• Business objects. This layer comprises representations of domain-specific physical and logical entities on which the functionality in the business process layer operates. The main responsibility of this layer is to maintain and provide access to the warehouse topology.
 
 
-The figure below shows these layers, including their responsibilities and concerns. The communication between the boxes is how the concerns are connected to each other. It is not how the actual flow of communication is handled, the communication flow will be discussed in detail later. 
+
+The figure below shows these layers and includes their responsibilities and concerns. The communication between the boxes is how the concerns are connected to each other. It is not how the actual flow of communication is handled, the communication flow will be discussed in detail later.
 %abc, add ref to communication layer thingy.
 
 \begin{figure}[H]
@@ -67,8 +47,9 @@ The figure below shows these layers, including their responsibilities and concer
 \end{figure}
 
 Notice that the broker isn't mentioned. This is because the broker pattern is a pattern that handles the communication between the layers, which will be discussed in a later section.
-%TODO add rprocessedeference
+%TODO add reference
 
+\clearpage
 \section{Data flow and transformation}
 \label{sec:dataflow}
 This section describes how the data is handled and in the system. Requests are made to the service layer. The front page controller pattern is used to create a central set of operations to be executed for each request. These operations include logging and authenticating the request. The pipes and filters pattern to create a pipe that will execute these operations. This is shown below in figure \ref{fig:frontflow}
@@ -90,9 +71,11 @@ The domain layer then executes this command, which will do all the operations th
 \label{fig:frontclasses}
 \end{figure}
 
+
 \section{Data repository}
 
-There are multiple components accessing a central repository of data. They do this by creating a query object and passing this to the repository. This way, the database is completely abstracted from the domain layer. The database could be replaced by a text file, without the domain layer having to change. The figure below shows an illustration of how the domain layer and the data source layer are connected.
+There are multiple components accessing a central repository of data. They do this by creating a query object and passing this to the repository. 
+%TODO finish description
 
 \begin{figure}[H]
 \centering
@@ -128,6 +111,7 @@ The repository pattern is used by the broker pattern to get the sources the doma
 The broker pattern is used to hide how the system interacts with the data source. Allowing the system to for example: use RPI, use a network or multiple networks, use a VPN. All without the rest of the system having to know about it.
 
 \section{Interaction decoupling}
+
 As mentioned in chapter \ref{ch:analysis}, MVC pattern is applied to decouple user-interface and the logic behind it. In this way, reusability is increased because the same models or controllers can be coupled with the same view. Modifiability is also increased because it becomes easier to modify a particular user interface or data model without interfering the logic, and vice-versa. Figure \ref{fig:mvc-architecture} depicts an example of MVC implementation in the HEMS.
 
 \begin{figure}[H]

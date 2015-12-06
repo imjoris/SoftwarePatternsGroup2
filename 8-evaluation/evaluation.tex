@@ -8,6 +8,7 @@
 In this chapter the architecture of the system will be evaluated. After taking architectural decisions and building the system the architects have to make sure that the patterns applied suit the architecture, especially the quality attributes and key drivers.%in terms of benefits and liablities.
 
 \section{Key-Driver Validation}
+% http://www.cs.rug.nl/paris/papers/ECSA07.pdf
 
 \subsection*{Layers}
 \subsection*{Service Layer}
@@ -19,6 +20,21 @@ The Service Layer pattern defines the boundary of the application using a layer 
 
 \subsection*{Front-Controller}
 \subsection*{Domain Model}
+\subsection*{Broker}
+The reliability of the system increases by the use of the Broker pattern. The pattern guarantees the delivery of messages to the destination. This guarantees that statistics are computed by a server in the compute cluster.
+The modifiability of the system increases, since the brokers separate the messaging logic from the domain logic. This means that changes to the messaging logic do not affect the rest of the system.
+
+The interoperability of the system increases as well, since the broker allow the system to interoperate with the servers in the compute cluster.
+
+The broker pattern does however introduce a slight overhead, which reduces the performance.\\
+\textbf{Benefits \& Liabilities} ~
+\begin{itemize}
+\item[+] Reliability
+\item[+] Modifiability
+\item[+] Interoperability
+\item[$-$] Performance
+\end{itemize}
+
 \subsection*{Model View Controller}
 Model View Controller decouples the view, the logic, and the data modeling of the interface. Thus it is easier to modify the view without interfering the logic and data model. This results in good modifiability and better update to the usability since updating the view is relatively easy to increase the usability.
 
@@ -60,12 +76,13 @@ The repository gives a lot more control over how the data is handled. The benefi
 \end{itemize}
 
 Performing analysis on the data also consists of executing complex queries on the data source. The database that executes these queries, however, might change. Or the system might decide to use multiple databases and data sources.
-Using the Repository pattern, these changes can be made fast. The repository also allows for multiple configurations to exist. So an extra repository could be created for testing purposes, only using an in-memory database to increase the test execution speed. \\
+Using the Repository pattern, these changes can \underline{be made fast}. The repository also allows for \underline{multiple configurations} to exist. So an extra repository could be created for testing purposes, only using an in-memory database to increase the test execution speed. \\
 
-\textit{} Liabilities \\
-\textbf{+ Reusability} \\
-\textbf{+ Integrability} \\
-\textbf{+ Modifiability Changeability} by the Separation of concerns\\
+\textit{} Liabilities : \\
+\textbf{+ Reusability} because the data store is central \\
+\textbf{+ Integrability} because the data store is central \\
+\textbf{+ Maintainability} thanks to the Separation of concerns \\
+\textbf{+ Modifiability/Changeability} thanks to the Separation of concerns\\
 
 \section{Requirements validation}
 \label{sec:req-validation}
