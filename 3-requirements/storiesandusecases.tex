@@ -61,7 +61,7 @@ In this section the architectural significant use-cases will be presented.
 		}\\
 	Postcondition & The user his logged into the system and accesses his interface. \\
 	Extensions & \compactCell{
-			The username/password are incorrect
+			3a. The username/password are incorrect.\\
 			%\begin{itemize}
 			 %\item[1.]
 			 An error message is prompt. \\
@@ -90,7 +90,7 @@ In this section the architectural significant use-cases will be presented.
 			\item The system stores the energy usage data.
 			} \\ \\ 
 	Postcondition & The data is stored in the database. \\
-	Extensions & The token is unvalid. 
+	Extensions & 1a. The token is unvalid.  
 		Log and ignore the request\\
 	Related requirements & \ref{fr:receive-usage}, \ref{fr:store-usage}, \ref{fr:feedback} \\
 	}
@@ -218,7 +218,7 @@ In this section the architectural significant use-cases will be presented.
 		 \item The system invoks Map/Reduce functions or Spark and computes
 		}\\
 	Postcondition & The statistics are computed and the results available/displayed.  \\
-	Extensions & The system can't compute the statistics.
+	Extensions & The system can't compute the statistics. 
 		The error is propagated to the system in order to display it in a prompt message. \\
 	Related requirements & FR-4 FR-5 FR-6 FR-7 FR-8 FR-10 FR-16 FR-19, \ref{fr:show-accuracy}\\
 	}
