@@ -2,7 +2,138 @@
 \chapter{Software Architecture}
 \label{ch:software}
 
-\input{7-software/entire_system.tex}
+\section{Layer decomposition}
 
-\input{7-software/patterns.tex}
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.7]{7-software/images/LayersCircle.png}
+\caption{Layer decomposition}
+\label{fig:layerscircle}
+\end{figure}
+
+The system is decomposed into the following layers:
+\begin{itemize}
+\item Presentation
+\item ...
+\end{itemize}
+
+The presentation layer presents a view to the user. A user can use web browser and visit the energy monitoring website. The browser will then show a GUI to the user showing his energy statistics.\\
+
+%TODO describe each layer
+% The abc layer ...
+% form vol4:
+%%%% identify five different layers:
+%%%•
+%%% Presentation. This layer contains the interfaces to systems at the operation level of the automation pyramid, the so-called ‘north-bound gateways,’ as well as user-level applications that access the
+%%%system’s functionality directly, such as for picking and warehouse
+%%%topology management.
+%%%•
+%%% Business process. This layer provides the administrative and oper-
+%%%ational functionality the system must support, such as stock
+%%%management, order management, shipping, receiving, and material
+%%%flow control.
+%%%• Business objects. This layer comprises representations of domain-specific physical and logical entities on which the functionality in the business process layer operates. The main responsibility of this layer is to maintain and provide access to the warehouse topology.
+
+
+
+The figure below shows these layers and includes their responsibilities and concerns. The communication between the boxes is how the concerns are connected to each other. It is not how the actual flow of communication is handled, the communication flow will be discussed in detail later.
+%abc, add ref to communication layer thingy.
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.7]{7-software/images/layersflow.png}
+\caption{Functionality of the system in each layer}
+\label{fig:layersflow}
+\end{figure}
+
+Notice that the broker isn't mentioned. This is because the broker pattern is a pattern that handles the communication between the layers, which will be discussed in a later section.
+%TODO add reference
+
+\section{Data flow and transformation}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\linewidth]{7-software/images/FrontFlow.png}
+\caption{Figure showing requests are piped and dispatched}
+\label{fig:frontflow}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\linewidth]{7-software/images/FrontClasses.png}
+\caption{Class diagram of the font page controller creating the pipes and filters}
+\label{fig:frontclasses}
+\end{figure}
+
+
+\section{Data repository}
+
+There are multiple components accessing a central repository of data. They do this by creating a query object and passing this to the repository. 
+%TODO finish description
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\linewidth]{7-software/images/RepoUowBroker.png}
+\caption{Connection between domain layer and data source layer}
+\label{fig:frontclasses}
+\end{figure}
+
+\section{Interaction decoupling}
+
+As mentioned in chapter \ref{ch:analysis}, MVC pattern is applied to decouple user-interface and the logic behind it. In this way, reusability is increased because the same models or controllers can be coupled with the same view. Modifiability is also increased because it becomes easier to modify a particular user interface or data model without interfering the logic, and vice-versa. Figure \ref{fig:mvc-architecture} depicts an example of MVC implementation in the HEMS.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{7-software/images/mvc.pdf}
+	\caption{Model-view-controller pattern implementation}
+	\label{fig:mvc-architecture}
+\end{figure}
+
+\section{Component interaction}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.4]{7-software/images/Component.png}
+\caption{The Layers}
+\label{fig:layers}
+\end{figure}
+
+%TODO Possible describe client server?....
+
+%TODO is this needed?:
+%\section{Distributed communication}
+%%- Broker
+%%- RPC
+%%- Message queue
+
+
+\section{Summary}
+
+%TODO add the challanges.
+%like on posa v4 p93
+\begin{table}[H]
+	\pgfplotstabletypeset[%
+		KeyValue
+	]{%
+	key & value\\
+	\textbf{Pattern} & \textbf{Challenges} \\
+	\midrule
+	Layers & \\
+	Model-View-Controller & \\
+	Template view & \\
+	Service Layer & \\
+	Front page & \\
+	Domain model & \\
+	Unit of work & \\
+	Broker & \\
+	Data mapper & \\
+	Repository & \\
+	}
+\caption{UC-\arabic{uc}: Configuration- adding new devices}
+\label{table:patternchallenges}
+\end{table}
+
+%\input{7-software/entire_system.tex}
+%
+%\input{7-software/patterns.tex}
 

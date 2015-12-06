@@ -201,10 +201,14 @@ There will be a service for collecting the electricity usage data and computing 
 %
 %\end{description}
 
-\section{Front controller}
+
+\section{Front page}
+\manuallabel{sec:front-page}{Front page}
+
 \input{4-analysis/frontpage.tex}
 
-\section{Domain model}
+\section{Domain layer}
+\manuallabel{sec:domain-layer}{Domain layer}
 %
 %\begin{description}
 %\item [Context]
@@ -260,7 +264,6 @@ Having a script that is solely responsible for handling a specific request, woul
 
 \section{Unit of work}
 \manuallabel{sec:unitofwork}{Unit of Work}
-
 \begin{description}
 \begin{figure}[H]
 \centering
@@ -313,7 +316,6 @@ Callers editing the objects should call the \verb|commit| method on the object a
 
 \section{Broker}
 \manuallabel{sec:broker}{Broker}
-
 \begin{description}
 \item [Source]~\\
 Pattern-oriented Software Architecture - Volume 4, P.237 \cite{wiley-4}
@@ -370,6 +372,7 @@ The broker pattern will be used. The broker pattern is part of the domain layer.
 \section{Data Mapper}
 \manuallabel{sec:datamapper}{Data Mapper}
 %TODO add a figure
+
 \begin{description}
 
 \item [Source]~\\ 
@@ -452,7 +455,7 @@ A gateway of any kind leads to performance overhead, because for each call comin
 %%%Using a record set (504) turning into a unit of work (184)? P98 (lost the page:()
 
 \section{Shared Repository}
-\manuallabel{sec:repository}{Repository}
+\manuallabel{sec:repository}{Shared Repository}
 %\myworries{
 %P322:
 %"Mediates between the domain and data mapping layers using a collection-like interface for accesing domain objects."
@@ -615,6 +618,7 @@ Architectural Pattern Revisited - A Pattern Language, P.13 \cite{avgeriou2005arc
 %%\url{Potel: http://www.wildcrest.com/Potel/Portfolio/mvp.pdf}
 
 \section{Model-View-Controller}
+\manuallabel{sec:mvc-analysis}{Model-View-Controller}
 Model-View-Controller (MVC) started as a framework developed by Trygve Reenskaug for the Smalltalk platform in the late 1970s \cite{Fowler:2002:PEA:579257}. Since then it has played an influential role in most UI frameworks and in the thinking about UI design.
 
 \begin{figure}[H]
@@ -668,6 +672,7 @@ By implementing the MVC pattern, several views are created to support multiple p
 
 
 \section{Template view}
+\manuallabel{sec:template-view-analysis}{Template view}
 Template view pattern renders information into HTML by embedding markers in an HTML page \cite{Fowler:2002:PEA:579257}.
 	
 \begin{figure}[H]
